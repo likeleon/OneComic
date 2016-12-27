@@ -1,9 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using Core.Common;
+using Core.Common.Contracts;
+using System.Runtime.Serialization;
 
 namespace OneComic.Business.Entities
 {
     [DataContract]
-    public sealed class Book
+    public sealed class Book : EntityBase, IIdentifiableEntity
     {
         [DataMember]
         public int BookId { get; set; }
@@ -19,5 +21,11 @@ namespace OneComic.Business.Entities
 
         [DataMember]
         public string Translator { get; set; }
+
+        public int EntityId
+        {
+            get { return BookId; }
+            set { BookId = value; }
+        }
     }
 }
