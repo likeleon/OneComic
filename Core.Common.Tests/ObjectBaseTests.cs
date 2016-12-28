@@ -1,6 +1,7 @@
 ﻿using Core.Common.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using FluentValidation;
 
 namespace Core.Common.Tests
 {
@@ -11,6 +12,20 @@ namespace Core.Common.Tests
         {
             private string _dirtyProperty;
             private string _cleanProperty;
+            private string _propertyShouldNotEmpty;
+
+            class Validator : AbstractValidator<TestClass>
+            {
+                public Validator()
+                {
+                    RuleFor(obj => obj.PropertyShouldNotEmpty).NotEmpty();
+                }
+            }
+
+            protected override IValidator CreateValidator()
+            {
+                return new Validator();
+            }
 
             public string DirtyProperty
             {
@@ -22,6 +37,12 @@ namespace Core.Common.Tests
             {
                 get { return _cleanProperty; }
                 set { Set(ref _cleanProperty, value, makeDirty: false); }
+            }
+
+            public string PropertyShouldNotEmpty
+            {
+                get { return _propertyShouldNotEmpty; }
+                set { Set(ref _propertyShouldNotEmpty, value); }
             }
 
             public class ChildClass : ObjectBase
@@ -85,6 +106,19 @@ namespace Core.Common.Tests
 
             obj.CleanDirtyObjects();
             Assert.IsFalse(obj.GetDirtyObjects().Any());
+        }
+
+        [TestMethod]
+        public void ObjectValidation()
+        {
+            var obj = new TestClass();
+            Assert.IsTrue(obj.HasErrors);
+            Assert.AreEqual(
+                "'Property Should Not Empty' should not be empty.", 
+                obj.GetErrors(nameof(TestClass.PropertyShouldNotEmpty)).Cast<string>().Single());
+
+            obj.PropertyShouldNotEmpty = "Some Value";
+            Assert.IsFalse(obj.HasErrors);
         }
     }
 }
