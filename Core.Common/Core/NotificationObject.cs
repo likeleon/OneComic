@@ -24,7 +24,7 @@ namespace Core.Common.Core
             }
         }
 
-        public bool Set<T>(ref T currentValue, T newValue, [CallerMemberName] string propertyName = "")
+        public virtual bool Set<T>(ref T currentValue, T newValue, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(currentValue, newValue))
                 return false;
