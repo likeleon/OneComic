@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Core.Common
+namespace Core.Common.Core
 {
     [DataContract]
     public abstract class EntityBase : IExtensibleDataObject

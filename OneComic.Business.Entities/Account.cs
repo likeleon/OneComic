@@ -1,5 +1,5 @@
-﻿using Core.Common;
-using Core.Common.Contracts;
+﻿using Core.Common.Contracts;
+using Core.Common.Core;
 using System.Runtime.Serialization;
 
 namespace OneComic.Business.Entities
