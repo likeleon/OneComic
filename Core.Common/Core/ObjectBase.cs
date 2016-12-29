@@ -1,4 +1,5 @@
 ﻿using Core.Common.Contracts;
+using Core.Common.Extensions;
 using FluentValidation;
 using System;
 using System.Collections;
@@ -72,17 +73,22 @@ namespace Core.Common.Core
             if (_validator == null)
                 return;
 
-            _errors = _validator.Validate(this).Errors?
+            var oldErrors = _errors;
+            _errors = _validator.Validate(this).Errors
                 .GroupBy(e => e.PropertyName)
                 .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
+
+            var changedProperties = DictionaryExtensions.GetDiffKeys(oldErrors ?? new Dictionary<string, string[]>(), _errors);
+            foreach (var propertyName in changedProperties)
+                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        public bool HasErrors => _errors?.Count > 0;
+        public bool HasErrors => _errors.Count > 0;
 
         public IEnumerable GetErrors(string propertyName)
         {
-            string[] errors = null;
-            _errors?.TryGetValue(propertyName, out errors);
+            string[] errors;
+            _errors.TryGetValue(propertyName, out errors);
             return errors;
         }
         #endregion

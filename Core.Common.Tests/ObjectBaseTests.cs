@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using FluentValidation;
+using System.Collections.Generic;
 
 namespace Core.Common.Tests
 {
@@ -112,6 +113,9 @@ namespace Core.Common.Tests
         public void ObjectValidation()
         {
             var obj = new TestClass();
+            var errorsChangedPropertyNames = new List<string>();
+            obj.ErrorsChanged += (_, e) => errorsChangedPropertyNames.Add(e.PropertyName);
+
             Assert.IsTrue(obj.HasErrors);
             Assert.AreEqual(
                 "'Property Should Not Empty' should not be empty.", 
@@ -119,6 +123,7 @@ namespace Core.Common.Tests
 
             obj.PropertyShouldNotEmpty = "Some Value";
             Assert.IsFalse(obj.HasErrors);
+            CollectionAssert.AreEqual(new[] { nameof(TestClass.PropertyShouldNotEmpty) }, errorsChangedPropertyNames);
         }
     }
 }
