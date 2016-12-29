@@ -55,7 +55,7 @@ namespace Core.Common.Data
         public IEnumerable<T> Get()
         {
             using (var context = new U())
-                return (GetEntities(context)).ToArray();
+                return (GetEntities(context)).ToList();
         }
 
         public T Get(int id)

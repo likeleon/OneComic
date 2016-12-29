@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data Repositories\AccountRepository.cs" />
+    <Compile Include="Data Repositories\BookmarkRepository.cs" />
+    <Compile Include="Data Repositories\BookRepository.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="OneComicContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

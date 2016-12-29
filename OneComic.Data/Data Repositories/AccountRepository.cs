@@ -1,14 +1,14 @@
 ﻿using OneComic.Business.Entities;
-using OneComic.Data.Contracts.Repository_Interfaces;
+using OneComic.Data.Contracts;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 
-namespace OneComic.Data.Data_Repositories
+namespace OneComic.Data
 {
     [Export(typeof(IAccountRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AccountRepository : DataRepository<Account>, IAccountRepository
+    public sealed class AccountRepository : DataRepository<Account>, IAccountRepository
     {
         protected override Account AddEntity(OneComicContext context, Account entity)
         {

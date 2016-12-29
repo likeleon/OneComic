@@ -1,7 +1,7 @@
 ﻿using Core.Common.Contracts;
 using OneComic.Business.Entities;
 
-namespace OneComic.Data.Contracts.Repository_Interfaces
+namespace OneComic.Data.Contracts
 {
     public interface IAccountRepository : IDataRepository<Account>
     {

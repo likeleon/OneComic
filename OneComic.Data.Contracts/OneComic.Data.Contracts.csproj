@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository Interfaces\IAccountRepository.cs" />
+    <Compile Include="Repository Interfaces\IBookmarkRepository.cs" />
+    <Compile Include="Repository Interfaces\IBookRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
