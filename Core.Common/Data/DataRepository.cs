@@ -43,7 +43,7 @@ namespace Core.Common.Data
         {
             using (var context = new U())
             {
-                var existingEntity = UpdateEntity(context, entity);
+                var existingEntity = GetEntity(context, entity.EntityId);
 
                 SimpleMapper.PropertyMap(entity, existingEntity);
 
@@ -65,7 +65,6 @@ namespace Core.Common.Data
         }
 
         protected abstract T AddEntity(U context, T entity);
-        protected abstract T UpdateEntity(U context, T entity);
         protected abstract IEnumerable<T> GetEntities(U context);
         protected abstract T GetEntity(U context, int id);
     }
