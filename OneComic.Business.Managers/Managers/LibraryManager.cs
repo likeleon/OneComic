@@ -18,8 +18,9 @@ namespace OneComic.Business.Managers.Managers
 #pragma warning disable 0649
         [Import]
         IDataRepositoryFactory _dataRepositoryFactory;
+
 #pragma warning restore 0649
-        
+
         public Comic[] GetAllComics()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -41,6 +42,29 @@ namespace OneComic.Business.Managers.Managers
                     throw new FaultException<NotFoundException>(ex, ex.Message);
                 }
                 return comic;
+            });
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public Comic UpdateComic(Comic comic)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var comicRepository = _dataRepositoryFactory.GetDataRepository<IComicRepository>();
+                if (comic.ComicId == 0)
+                    return comicRepository.Add(comic);
+                else
+                    return comicRepository.Update(comic);
+            });
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public void DeleteComic(int comicId)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                var comicRepository = _dataRepositoryFactory.GetDataRepository<IComicRepository>();
+                comicRepository.Remove(comicId);
             });
         }
     }

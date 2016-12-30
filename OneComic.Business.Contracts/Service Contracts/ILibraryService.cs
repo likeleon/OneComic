@@ -13,5 +13,13 @@ namespace OneComic.Business.Contracts
 
         [OperationContract]
         Comic[] GetAllComics();
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        Comic UpdateComic(Comic comic);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void DeleteComic(int comicId);
     }
 }

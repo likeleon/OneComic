@@ -28,5 +28,21 @@ namespace OneComic.Business.Managers
                 throw new FaultException(ex.Message);
             }
         }
+
+        protected void ExecuteFaultHandledOperation(Action action)
+        {
+            try
+            {
+                action.Invoke();
+            }
+            catch (NotFoundException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException(ex.Message);
+            }
+        }
     }
 }
