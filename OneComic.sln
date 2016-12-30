@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Data.Tests", "OneC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Business.Bootstrapper", "OneComic.Business.Bootstrapper\OneComic.Business.Bootstrapper.csproj", "{3A8BF54C-20E6-440B-B3C8-1A94495469B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Business.Contracts", "OneComic.Business.Contracts\OneComic.Business.Contracts.csproj", "{241E5522-82A0-4499-AFBE-A113B788324B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Business.Managers", "OneComic.Business.Managers\OneComic.Business.Managers.csproj", "{1DF0D5DA-A65C-4360-9D23-149C41A36F41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,14 @@ Global
 		{3A8BF54C-20E6-440B-B3C8-1A94495469B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A8BF54C-20E6-440B-B3C8-1A94495469B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A8BF54C-20E6-440B-B3C8-1A94495469B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{241E5522-82A0-4499-AFBE-A113B788324B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241E5522-82A0-4499-AFBE-A113B788324B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241E5522-82A0-4499-AFBE-A113B788324B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241E5522-82A0-4499-AFBE-A113B788324B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DF0D5DA-A65C-4360-9D23-149C41A36F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF0D5DA-A65C-4360-9D23-149C41A36F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF0D5DA-A65C-4360-9D23-149C41A36F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF0D5DA-A65C-4360-9D23-149C41A36F41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +99,7 @@ Global
 		{EA7FEA03-3817-4107-B70B-A218CE1399CD} = {AE3591AB-3FE4-436E-BA60-F0E8CC24A297}
 		{E31ECC17-8DFA-43E9-A639-D77169B5C7E8} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
 		{3A8BF54C-20E6-440B-B3C8-1A94495469B4} = {72E0DA8D-5E39-47E7-829B-1763A5D33AFB}
+		{241E5522-82A0-4499-AFBE-A113B788324B} = {72E0DA8D-5E39-47E7-829B-1763A5D33AFB}
+		{1DF0D5DA-A65C-4360-9D23-149C41A36F41} = {72E0DA8D-5E39-47E7-829B-1763A5D33AFB}
 	EndGlobalSection
 EndGlobal

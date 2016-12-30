@@ -62,6 +62,7 @@
     <Compile Include="Core\ObjectBase.cs" />
     <Compile Include="Core\ObjectGraph.cs" />
     <Compile Include="Data\DataRepository.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Cache.cs" />

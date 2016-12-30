@@ -15,6 +15,7 @@ namespace OneComic.Data
         }
 
         public DbSet<Account> AccountSet { get; set; }
+        public DbSet<Comic> ComicSet { get; set; }
         public DbSet<Book> BookSet { get; set; }
         public DbSet<Bookmark> BookmarkSet { get; set; }
 
@@ -26,6 +27,7 @@ namespace OneComic.Data
             modelBuilder.Ignore<IIdentifiableEntity>();
 
             modelBuilder.Entity<Account>().HasKey(a => a.AccountId).Ignore(a => a.EntityId);
+            modelBuilder.Entity<Comic>().HasKey(c => c.ComicId).Ignore(c => c.EntityId);
             modelBuilder.Entity<Book>().HasKey(b => b.BookId).Ignore(b => b.EntityId);
             modelBuilder.Entity<Bookmark>().HasKey(b => b.BookmarkId).Ignore(b => b.EntityId);
         }

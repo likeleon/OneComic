@@ -54,6 +54,7 @@
     <Compile Include="Data Repositories\AccountRepository.cs" />
     <Compile Include="Data Repositories\BookmarkRepository.cs" />
     <Compile Include="Data Repositories\BookRepository.cs" />
+    <Compile Include="Data Repositories\ComicRepository.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
     <Compile Include="OneComicContext.cs" />

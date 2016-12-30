@@ -11,6 +11,9 @@ namespace OneComic.Business.Entities
         public int BookId { get; set; }
 
         [DataMember]
+        public int ComicId { get; set; }
+
+        [DataMember]
         public string Title { get; set; }
 
         [DataMember]
