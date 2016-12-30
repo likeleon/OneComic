@@ -37,7 +37,7 @@ namespace OneComic.Data
                             {
                                 Account = account,
                                 Book = book,
-                                Bookmark = bookmark,
+                                Bookmark = bookmark
                             };
                 return query.ToList();
             }

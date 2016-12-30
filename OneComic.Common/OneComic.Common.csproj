@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1DF0D5DA-A65C-4360-9D23-149C41A36F41}</ProjectGuid>
+    <ProjectGuid>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OneComic.Business.Managers</RootNamespace>
-    <AssemblyName>OneComic.Business.Managers</AssemblyName>
+    <RootNamespace>OneComic.Common</RootNamespace>
+    <AssemblyName>OneComic.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,41 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Manager.cs" />
-    <Compile Include="Managers\AccountManager.cs" />
-    <Compile Include="Managers\BookmarkManager.cs" />
-    <Compile Include="Managers\LibraryManager.cs" />
+    <Compile Include="OutOfRangePageNumberException.cs" />
+    <Compile Include="AuthorizationValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
-      <Project>{1D3FC099-5A43-4811-A665-83D2F29EA530}</Project>
-      <Name>Core.Common.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{EF8C59F4-92BE-4B83-8A02-EED03C93C8FE}</Project>
-      <Name>Core.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Business.Common\OneComic.Business.Common.csproj">
-      <Project>{4616807B-623D-4960-8985-034E815A4BA6}</Project>
-      <Name>OneComic.Business.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Business.Contracts\OneComic.Business.Contracts.csproj">
-      <Project>{241E5522-82A0-4499-AFBE-A113B788324B}</Project>
-      <Name>OneComic.Business.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
-      <Project>{387adb00-4f5d-4076-9a70-df67d49daa00}</Project>
-      <Name>OneComic.Business.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
-      <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
-      <Name>OneComic.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
-      <Project>{EA7FEA03-3817-4107-B70B-A218CE1399CD}</Project>
-      <Name>OneComic.Data.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

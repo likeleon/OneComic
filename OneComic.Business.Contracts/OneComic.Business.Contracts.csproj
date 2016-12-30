@@ -42,10 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Contracts\AccountBookmarkData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service Contracts\IAccountService.cs" />
+    <Compile Include="Service Contracts\IBookmarkService.cs" />
     <Compile Include="Service Contracts\ILibraryService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common.ServiceModel\Core.Common.ServiceModel.csproj">
+      <Project>{c368a5e0-f5e5-4ac9-b166-211e9b0d90b9}</Project>
+      <Name>Core.Common.ServiceModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.csproj">
       <Project>{EF8C59F4-92BE-4B83-8A02-EED03C93C8FE}</Project>
       <Name>Core.Common</Name>
@@ -53,6 +60,10 @@
     <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
       <Project>{387ADB00-4F5D-4076-9A70-DF67D49DAA00}</Project>
       <Name>OneComic.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
+      <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
+      <Name>OneComic.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

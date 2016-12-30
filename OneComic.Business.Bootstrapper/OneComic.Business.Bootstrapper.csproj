@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OneComic.Business\OneComic.Business.csproj">
+      <Project>{880306FA-AB27-4AB5-940D-D82CC8620BF2}</Project>
+      <Name>OneComic.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OneComic.Data\OneComic.Data.csproj">
       <Project>{0CBE9DAA-0E5B-47B4-B8E3-7D3CECA27006}</Project>
       <Name>OneComic.Data</Name>

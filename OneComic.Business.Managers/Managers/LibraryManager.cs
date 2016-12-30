@@ -17,8 +17,7 @@ namespace OneComic.Business.Managers.Managers
     {
 #pragma warning disable 0649
         [Import]
-        IDataRepositoryFactory _dataRepositoryFactory;
-
+        private IDataRepositoryFactory _dataRepositoryFactory;
 #pragma warning restore 0649
 
         public Comic[] GetAllComics()

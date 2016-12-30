@@ -8,7 +8,9 @@ namespace OneComic.Business.Bootstrapper
         public static CompositionContainer Init()
         {
             var catalog = new AggregateCatalog();
+
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountRepository).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(OneComicEngine).Assembly));
 
             return new CompositionContainer(catalog);
         }
