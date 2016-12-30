@@ -11,6 +11,10 @@ using System.ServiceModel;
 
 namespace OneComic.Business.Managers.Managers
 {
+    [ServiceBehavior(
+        InstanceContextMode = InstanceContextMode.PerCall,
+        ConcurrencyMode = ConcurrencyMode.Multiple,
+        ReleaseServiceInstanceOnTransactionComplete = false)]
     public sealed class LibraryManager : ILibraryService
     {
 #pragma warning disable 0649
