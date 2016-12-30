@@ -6,6 +6,7 @@ using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.ServiceModel;
 
 namespace OneComic.Business.Managers.Managers
@@ -24,7 +25,15 @@ namespace OneComic.Business.Managers.Managers
 
         public Comic[] GetAllComics()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var comicRepository = _dataRepositoryFactory.GetDataRepository<IComicRepository>();
+                return comicRepository.Get().ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException(ex.Message);
+            }
         }
 
         public Comic GetComic(int comicId)
