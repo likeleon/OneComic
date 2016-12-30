@@ -1,4 +1,5 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Exceptions;
+using OneComic.Business.Entities;
 using System.ServiceModel;
 
 namespace OneComic.Business.Contracts
@@ -7,6 +8,7 @@ namespace OneComic.Business.Contracts
     public interface ILibraryService
     {
         [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
         Comic GetComic(int comicId);
 
         [OperationContract]
