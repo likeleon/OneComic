@@ -26,15 +26,10 @@ namespace OneComic.Business
             return true;
         }
 
-        public Bookmark AddBookmark(string loginEmail, int bookId, int pageNumber)
+        public Bookmark AddBookmark(Account account, int bookId, int pageNumber)
         {
             if (!IsPageNumberInRange(bookId, pageNumber))
                 throw new NotFoundException($"Page number '{pageNumber} is out of range in book id '{bookId}'.");
-
-            var accountRepository = _dataRepositoryFactory.GetDataRepository<IAccountRepository>();
-            var account = accountRepository.GetByLoginEmail(loginEmail);
-            if (account == null)
-                throw new NotFoundException($"No account found for login email '{loginEmail}'.");
 
             var bookmark = new Bookmark
             {

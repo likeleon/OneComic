@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace OneComic.Business.Entities
 {
     [DataContract]
-    public sealed class Account : EntityBase, IIdentifiableEntity
+    public sealed class Account : EntityBase, IIdentifiableEntity, IAccountOwnedEntity
     {
         [DataMember]
         public int AccountId { get; set; }
@@ -18,5 +18,7 @@ namespace OneComic.Business.Entities
             get { return AccountId; }
             set { AccountId = value; }
         }
+
+        public int OwnerAccountId => AccountId;
     }
 }

@@ -21,6 +21,11 @@ namespace OneComic.Business.Managers.Managers
         private IDataRepositoryFactory _dataRepositoryFactory;
 #pragma warning restore 0649
 
+        protected override Account AuthorizeAccount(string loginName)
+        {
+            return AccountAuthorization.Authorize(_dataRepositoryFactory, loginName);
+        }
+
         [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
         [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public Account GetAccount(string loginEmail)
@@ -34,6 +39,9 @@ namespace OneComic.Business.Managers.Managers
                     var ex = new NotFoundException($"Account with login {loginEmail} is not in database");
                     throw new FaultException<NotFoundException>(ex, ex.Message);
                 }
+
+                ValidateAuthorization(account);
+
                 return account;
             });
         }
@@ -45,6 +53,8 @@ namespace OneComic.Business.Managers.Managers
         {
             ExecuteFaultHandledOperation(() =>
             {
+                ValidateAuthorization(account);
+
                 var accountRepository = _dataRepositoryFactory.GetDataRepository<IAccountRepository>();
                 accountRepository.Update(account);
             });
