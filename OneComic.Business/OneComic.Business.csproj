@@ -62,6 +62,10 @@
       <Project>{387adb00-4f5d-4076-9a70-df67d49daa00}</Project>
       <Name>OneComic.Business.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
+      <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
+      <Name>OneComic.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
       <Project>{EA7FEA03-3817-4107-B70B-A218CE1399CD}</Project>
       <Name>OneComic.Data.Contracts</Name>

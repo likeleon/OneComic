@@ -33,13 +33,13 @@ namespace OneComic.Business.Managers
             Global.Container?.SatisfyImportsOnce(this);
 
             if (!LoginEmail.IsNullOrWhiteSpace())
-                AuthorizedAccount = AuthorizeAccount(LoginEmail);
+                AuthorizationAccount = GetAuthorizationValidationAccount(LoginEmail);
         }
 
         protected string LoginEmail { get; }
-        protected Account AuthorizedAccount { get; }
+        protected Account AuthorizationAccount { get; }
 
-        protected virtual Account AuthorizeAccount(string loginEmail)
+        protected virtual Account GetAuthorizationValidationAccount(string loginEmail)
         {
             return null;
         }
@@ -49,10 +49,10 @@ namespace OneComic.Business.Managers
             if (Thread.CurrentPrincipal.IsInRole(Security.OneComicAdminRole))
                 return;
 
-            if (AuthorizedAccount == null)
+            if (AuthorizationAccount == null)
                 return;
 
-            if (LoginEmail.IsNullOrEmpty() || entity.OwnerAccountId == AuthorizedAccount.AccountId)
+            if (LoginEmail.IsNullOrEmpty() || entity.OwnerAccountId == AuthorizationAccount.AccountId)
                 return;
 
             var ex = new AuthorizationValidationException("Attempt to access a secure record with improper user authorization validation.");

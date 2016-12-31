@@ -11,7 +11,7 @@ namespace OneComic.Business.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         [FaultContract(typeof(NotFoundException))]
-        [FaultContract(typeof(OutOfRangePageNumberException))]
+        [FaultContract(typeof(PageNumberOutOfRangeException))]
         [FaultContract(typeof(AuthorizationValidationException))]
         Bookmark AddBookmark(string loginEmail, int bookId, int pageNumber);
 

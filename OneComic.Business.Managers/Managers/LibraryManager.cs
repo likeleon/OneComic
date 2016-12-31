@@ -22,9 +22,9 @@ namespace OneComic.Business.Managers.Managers
         private IDataRepositoryFactory _dataRepositoryFactory;
 #pragma warning restore 0649
 
-        protected override Account AuthorizeAccount(string loginName)
+        protected override Account GetAuthorizationValidationAccount(string loginName)
         {
-            return AccountAuthorization.Authorize(_dataRepositoryFactory, loginName);
+            return AccountAuthorization.GetAccount(_dataRepositoryFactory, loginName);
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]

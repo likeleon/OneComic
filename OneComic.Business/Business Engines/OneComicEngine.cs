@@ -1,7 +1,7 @@
 ﻿using Core.Common.Contracts;
-using Core.Common.Exceptions;
 using OneComic.Business.Common;
 using OneComic.Business.Entities;
+using OneComic.Common;
 using OneComic.Data.Contracts;
 using System;
 using System.ComponentModel.Composition;
@@ -29,7 +29,7 @@ namespace OneComic.Business
         public Bookmark AddBookmark(Account account, int bookId, int pageNumber)
         {
             if (!IsPageNumberInRange(bookId, pageNumber))
-                throw new NotFoundException($"Page number '{pageNumber} is out of range in book id '{bookId}'.");
+                throw new PageNumberOutOfRangeException($"Page number '{pageNumber} is out of range in book id '{bookId}'.");
 
             var bookmark = new Bookmark
             {

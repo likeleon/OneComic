@@ -26,9 +26,9 @@ namespace OneComic.Business.Managers.Managers
         private IBusinessEngineFactory _businessEngineFactory;
 #pragma warning restore 0649
 
-        protected override Account AuthorizeAccount(string loginName)
+        protected override Account GetAuthorizationValidationAccount(string loginName)
         {
-            return AccountAuthorization.Authorize(_dataRepositoryFactory, loginName);
+            return AccountAuthorization.GetAccount(_dataRepositoryFactory, loginName);
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
@@ -41,7 +41,10 @@ namespace OneComic.Business.Managers.Managers
                 var accountRepository = _dataRepositoryFactory.GetDataRepository<IAccountRepository>();
                 var account = accountRepository.GetByLoginEmail(loginEmail);
                 if (account == null)
-                    throw new NotFoundException($"No account found for login email '{loginEmail}'.");
+                {
+                    var ex = new NotFoundException($"No account found for login email '{loginEmail}'.");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
 
                 ValidateAuthorization(account);
 
@@ -50,13 +53,9 @@ namespace OneComic.Business.Managers.Managers
                 {
                     return oneComicEngine.AddBookmark(account, bookId, pageNumber);
                 }
-                catch (OutOfRangePageNumberException ex)
+                catch (PageNumberOutOfRangeException ex)
                 {
-                    throw new FaultException<OutOfRangePageNumberException>(ex, ex.Message);
-                }
-                catch (NotFoundException ex)
-                {
-                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                    throw new FaultException<PageNumberOutOfRangeException>(ex, ex.Message);
                 }
             });
         }
