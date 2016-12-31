@@ -7,6 +7,7 @@ using OneComic.Common;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Security.Permissions;
 using System.ServiceModel;
 
 namespace OneComic.Business.Managers.Managers
@@ -26,6 +27,8 @@ namespace OneComic.Business.Managers.Managers
 #pragma warning restore 0649
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public Bookmark AddBookmark(string loginEmail, int bookId, int pageNumber)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -47,6 +50,8 @@ namespace OneComic.Business.Managers.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public void RemoveBookmark(int bookmarkId)
         {
             ExecuteFaultHandledOperation(() =>
@@ -62,6 +67,8 @@ namespace OneComic.Business.Managers.Managers
             });
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public AccountBookmarkData[] GetBookmarks(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>

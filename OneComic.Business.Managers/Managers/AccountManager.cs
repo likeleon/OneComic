@@ -2,8 +2,10 @@
 using Core.Common.Exceptions;
 using OneComic.Business.Contracts;
 using OneComic.Business.Entities;
+using OneComic.Common;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
+using System.Security.Permissions;
 using System.ServiceModel;
 
 namespace OneComic.Business.Managers.Managers
@@ -19,6 +21,8 @@ namespace OneComic.Business.Managers.Managers
         private IDataRepositoryFactory _dataRepositoryFactory;
 #pragma warning restore 0649
 
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public Account GetAccount(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -35,6 +39,8 @@ namespace OneComic.Business.Managers.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public void UpdateAccount(Account account)
         {
             ExecuteFaultHandledOperation(() =>

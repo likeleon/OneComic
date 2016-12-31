@@ -2,9 +2,11 @@
 using Core.Common.Exceptions;
 using OneComic.Business.Contracts;
 using OneComic.Business.Entities;
+using OneComic.Common;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Security.Permissions;
 using System.ServiceModel;
 
 namespace OneComic.Business.Managers.Managers
@@ -20,6 +22,8 @@ namespace OneComic.Business.Managers.Managers
         private IDataRepositoryFactory _dataRepositoryFactory;
 #pragma warning restore 0649
 
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public Comic[] GetAllComics()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -29,6 +33,8 @@ namespace OneComic.Business.Managers.Managers
             });
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.OneComicUser)]
         public Comic GetComic(int comicId)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -45,6 +51,7 @@ namespace OneComic.Business.Managers.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
         public Comic UpdateComic(Comic comic)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -58,6 +65,7 @@ namespace OneComic.Business.Managers.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.OneComicAdminRole)]
         public void DeleteComic(int comicId)
         {
             ExecuteFaultHandledOperation(() =>
