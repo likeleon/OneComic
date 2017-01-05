@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using OneComic.Business.Bootstrapper;
 using OneComic.Business.Entities;
-using OneComic.Data;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 
