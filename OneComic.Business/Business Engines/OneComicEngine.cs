@@ -1,4 +1,5 @@
 ﻿using Core.Common.Contracts;
+using Core.Common.Exceptions;
 using OneComic.Business.Common;
 using OneComic.Business.Entities;
 using OneComic.Common;
@@ -22,8 +23,12 @@ namespace OneComic.Business
 
         public bool IsPageNumberInRange(int bookId, int pageNumber)
         {
-            // TODO: Implement
-            return true;
+            var bookRepository = _dataRepositoryFactory.GetDataRepository<IBookRepository>();
+            var book = bookRepository.Get(bookId);
+            if (book == null)
+                throw new NotFoundException($"No book found for book id '{bookId}'.");
+
+            return pageNumber < book.PageCount;
         }
 
         public Bookmark AddBookmark(Account account, int bookId, int pageNumber)

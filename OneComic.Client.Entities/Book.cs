@@ -10,6 +10,7 @@ namespace OneComic.Client.Entities
         private string _description;
         private string _author;
         private string _translator;
+        private int _pageCount;
 
         public int BookId
         {
@@ -41,11 +42,18 @@ namespace OneComic.Client.Entities
             set { Set(ref _translator, value); }
         }
 
+        public int PageCount
+        {
+            get { return _pageCount; }
+            set { Set(ref _pageCount, value); }
+        }
+
         private class BookValidator : AbstractValidator<Book>
         {
             public BookValidator()
             {
                 RuleFor(b => b.Title).NotEmpty();
+                RuleFor(b => b.PageCount).GreaterThan(0);
             }
         };
 

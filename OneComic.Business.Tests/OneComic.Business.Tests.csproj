@@ -66,6 +66,10 @@
       <Project>{1D3FC099-5A43-4811-A665-83D2F29EA530}</Project>
       <Name>Core.Common.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{EF8C59F4-92BE-4B83-8A02-EED03C93C8FE}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
       <Project>{387ADB00-4F5D-4076-9A70-DF67D49DAA00}</Project>
       <Name>OneComic.Business.Entities</Name>

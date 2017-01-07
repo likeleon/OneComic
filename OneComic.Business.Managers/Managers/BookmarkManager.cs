@@ -53,6 +53,10 @@ namespace OneComic.Business.Managers.Managers
                 {
                     return oneComicEngine.AddBookmark(account, bookId, pageNumber);
                 }
+                catch (NotFoundException ex)
+                {
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
                 catch (PageNumberOutOfRangeException ex)
                 {
                     throw new FaultException<PageNumberOutOfRangeException>(ex, ex.Message);

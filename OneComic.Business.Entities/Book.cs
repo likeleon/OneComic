@@ -25,6 +25,9 @@ namespace OneComic.Business.Entities
         [DataMember]
         public string Translator { get; set; }
 
+        [DataMember]
+        public int PageCount { get; set; }
+
         public int EntityId
         {
             get { return BookId; }
