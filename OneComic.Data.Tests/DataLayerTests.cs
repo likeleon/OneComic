@@ -1,10 +1,10 @@
 ﻿using Core.Common.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using OneComic.Business.Bootstrapper;
 using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 
 namespace OneComic.Data.Tests
 {
@@ -14,7 +14,7 @@ namespace OneComic.Data.Tests
         [TestInitialize]
         public void Initialize()
         {
-            Global.Container = MefLoader.Init();
+            Global.Container = new CompositionContainer();
         }
 
         [TestMethod]

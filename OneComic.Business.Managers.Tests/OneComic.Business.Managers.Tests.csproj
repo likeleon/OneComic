@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E31ECC17-8DFA-43E9-A639-D77169B5C7E8}</ProjectGuid>
+    <ProjectGuid>{91766D2E-232C-4404-A56E-94458803D127}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OneComic.Data.Tests</RootNamespace>
-    <AssemblyName>OneComic.Data.Tests</AssemblyName>
+    <RootNamespace>OneComic.Business.Managers.Tests</RootNamespace>
+    <AssemblyName>OneComic.Business.Managers.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -59,34 +59,45 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DataLayerTests.cs" />
+    <Compile Include="BookmarkManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
-      <Project>{1d3fc099-5a43-4811-a665-83d2f29ea530}</Project>
+      <Project>{1D3FC099-5A43-4811-A665-83D2F29EA530}</Project>
       <Name>Core.Common.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.csproj">
       <Project>{EF8C59F4-92BE-4B83-8A02-EED03C93C8FE}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OneComic.Business.Common\OneComic.Business.Common.csproj">
+      <Project>{4616807B-623D-4960-8985-034E815A4BA6}</Project>
+      <Name>OneComic.Business.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
-      <Project>{387adb00-4f5d-4076-9a70-df67d49daa00}</Project>
+      <Project>{387ADB00-4F5D-4076-9A70-DF67D49DAA00}</Project>
       <Name>OneComic.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Business.Managers\OneComic.Business.Managers.csproj">
+      <Project>{1DF0D5DA-A65C-4360-9D23-149C41A36F41}</Project>
+      <Name>OneComic.Business.Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Business\OneComic.Business.csproj">
+      <Project>{880306fa-ab27-4ab5-940d-d82cc8620bf2}</Project>
+      <Name>OneComic.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
+      <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
+      <Name>OneComic.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
       <Project>{EA7FEA03-3817-4107-B70B-A218CE1399CD}</Project>
       <Name>OneComic.Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OneComic.Data\OneComic.Data.csproj">
-      <Project>{0CBE9DAA-0E5B-47B4-B8E3-7D3CECA27006}</Project>
-      <Name>OneComic.Data</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

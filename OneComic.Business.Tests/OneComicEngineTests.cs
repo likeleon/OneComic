@@ -11,7 +11,7 @@ namespace OneComic.Business.Tests
     public class OneComicEngineTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AddBookmark()
         {
             var mockBookmarkRepository = new Mock<IBookmarkRepository>();
             mockBookmarkRepository

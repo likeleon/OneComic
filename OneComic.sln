@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.ServiceModel", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Business.Tests", "OneComic.Business.Tests\OneComic.Business.Tests.csproj", "{30C79259-FB19-4C6C-98DB-4DDBEFDFADF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Business.Managers.Tests", "OneComic.Business.Managers.Tests\OneComic.Business.Managers.Tests.csproj", "{91766D2E-232C-4404-A56E-94458803D127}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{30C79259-FB19-4C6C-98DB-4DDBEFDFADF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30C79259-FB19-4C6C-98DB-4DDBEFDFADF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30C79259-FB19-4C6C-98DB-4DDBEFDFADF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91766D2E-232C-4404-A56E-94458803D127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91766D2E-232C-4404-A56E-94458803D127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91766D2E-232C-4404-A56E-94458803D127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91766D2E-232C-4404-A56E-94458803D127}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,5 +144,6 @@ Global
 		{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18} = {C5347581-AFAD-4B8F-A6B0-46037BD97E13}
 		{C368A5E0-F5E5-4AC9-B166-211E9B0D90B9} = {6C72D5F1-534D-49DA-BAC0-78ADD07E102C}
 		{30C79259-FB19-4C6C-98DB-4DDBEFDFADF8} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
+		{91766D2E-232C-4404-A56E-94458803D127} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
 	EndGlobalSection
 EndGlobal
