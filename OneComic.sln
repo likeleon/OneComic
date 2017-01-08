@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.ServiceHost.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Client.Contracts", "OneComic.Client.Contracts\OneComic.Client.Contracts.csproj", "{8C46CE3C-222A-4627-A979-F4D5982ACA86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Client.Proxies", "OneComic.Client.Proxies\OneComic.Client.Proxies.csproj", "{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,10 @@ Global
 		{8C46CE3C-222A-4627-A979-F4D5982ACA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C46CE3C-222A-4627-A979-F4D5982ACA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C46CE3C-222A-4627-A979-F4D5982ACA86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -168,5 +174,6 @@ Global
 		{ACF3D06B-1131-4EC4-BE44-C0383608E49C} = {057894F6-49A4-4A2C-9E0D-C2979A579475}
 		{83DC9535-B72A-4B82-98E1-E0EA2EC8270F} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
 		{8C46CE3C-222A-4627-A979-F4D5982ACA86} = {05EFAE4E-AE10-4BE1-A13D-57450DEBC28B}
+		{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28} = {05EFAE4E-AE10-4BE1-A13D-57450DEBC28B}
 	EndGlobalSection
 EndGlobal
