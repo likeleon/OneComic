@@ -1,10 +1,13 @@
 ﻿using OneComic.Client.Contracts;
 using OneComic.Client.Entities;
+using System.ComponentModel.Composition;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace OneComic.Client.Proxies
 {
+    [Export(typeof(ILibraryService))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LibraryClient : ClientBase<ILibraryService>, ILibraryService
     {
         public void DeleteComic(int comicId) => Channel.DeleteComic(comicId);
