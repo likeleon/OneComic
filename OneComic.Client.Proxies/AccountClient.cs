@@ -1,14 +1,14 @@
-﻿using OneComic.Client.Contracts;
+﻿using Core.Common.ServiceModel;
+using OneComic.Client.Contracts;
 using OneComic.Client.Entities;
 using System.ComponentModel.Composition;
-using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace OneComic.Client.Proxies
 {
     [Export(typeof(IAccountService))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AccountClient : ClientBase<IAccountService>, IAccountService
+    public class AccountClient : UserClientBase<IAccountService>, IAccountService
     {
         public Account GetAccount(string loginEmail) => Channel.GetAccount(loginEmail);
 

@@ -52,6 +52,10 @@
       <Project>{1D3FC099-5A43-4811-A665-83D2F29EA530}</Project>
       <Name>Core.Common.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Common.ServiceModel\Core.Common.ServiceModel.csproj">
+      <Project>{C368A5E0-F5E5-4AC9-B166-211E9B0D90B9}</Project>
+      <Name>Core.Common.ServiceModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OneComic.Client.Contracts\OneComic.Client.Contracts.csproj">
       <Project>{8C46CE3C-222A-4627-A979-F4D5982ACA86}</Project>
       <Name>OneComic.Client.Contracts</Name>

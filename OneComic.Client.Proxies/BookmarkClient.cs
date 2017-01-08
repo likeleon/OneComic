@@ -1,14 +1,14 @@
-﻿using OneComic.Client.Contracts;
+﻿using Core.Common.ServiceModel;
+using OneComic.Client.Contracts;
 using OneComic.Client.Entities;
 using System.ComponentModel.Composition;
-using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace OneComic.Client.Proxies
 {
     [Export(typeof(IBookmarkService))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class BookmarkClient : ClientBase<IBookmarkService>, IBookmarkService
+    public class BookmarkClient : UserClientBase<IBookmarkService>, IBookmarkService
     {
         public Bookmark AddBookmark(string loginEmail, int bookId, int pageNumber) 
             => Channel.AddBookmark(loginEmail, bookId, pageNumber);
