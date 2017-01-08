@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{0578
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.ServiceHost.Console", "OneComic.ServiceHost.Console\OneComic.ServiceHost.Console.csproj", "{ACF3D06B-1131-4EC4-BE44-C0383608E49C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.ServiceHost.Tests", "OneComic.ServiceHost.Tests\OneComic.ServiceHost.Tests.csproj", "{83DC9535-B72A-4B82-98E1-E0EA2EC8270F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{ACF3D06B-1131-4EC4-BE44-C0383608E49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACF3D06B-1131-4EC4-BE44-C0383608E49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACF3D06B-1131-4EC4-BE44-C0383608E49C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83DC9535-B72A-4B82-98E1-E0EA2EC8270F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83DC9535-B72A-4B82-98E1-E0EA2EC8270F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83DC9535-B72A-4B82-98E1-E0EA2EC8270F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83DC9535-B72A-4B82-98E1-E0EA2EC8270F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,5 +160,6 @@ Global
 		{30C79259-FB19-4C6C-98DB-4DDBEFDFADF8} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
 		{91766D2E-232C-4404-A56E-94458803D127} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
 		{ACF3D06B-1131-4EC4-BE44-C0383608E49C} = {057894F6-49A4-4A2C-9E0D-C2979A579475}
+		{83DC9535-B72A-4B82-98E1-E0EA2EC8270F} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
 	EndGlobalSection
 EndGlobal
