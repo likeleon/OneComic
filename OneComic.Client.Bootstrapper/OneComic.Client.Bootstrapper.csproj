@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}</ProjectGuid>
+    <ProjectGuid>{9FED08C3-BB4A-46FF-85BB-3DE12CD473F3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OneComic.Client.Proxies</RootNamespace>
-    <AssemblyName>OneComic.Client.Proxies</AssemblyName>
+    <RootNamespace>OneComic.Client.Bootstrapper</RootNamespace>
+    <AssemblyName>OneComic.Client.Bootstrapper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,7 +33,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,32 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service Proxies\AccountClient.cs" />
-    <Compile Include="Service Proxies\BookmarkClient.cs" />
-    <Compile Include="Service Proxies\LibraryClient.cs" />
+    <Compile Include="MefLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
-      <Project>{1D3FC099-5A43-4811-A665-83D2F29EA530}</Project>
-      <Name>Core.Common.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common.ServiceModel\Core.Common.ServiceModel.csproj">
-      <Project>{C368A5E0-F5E5-4AC9-B166-211E9B0D90B9}</Project>
-      <Name>Core.Common.ServiceModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{EF8C59F4-92BE-4B83-8A02-EED03C93C8FE}</Project>
-      <Name>Core.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Client.Contracts\OneComic.Client.Contracts.csproj">
-      <Project>{8C46CE3C-222A-4627-A979-F4D5982ACA86}</Project>
-      <Name>OneComic.Client.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Client.Entities\OneComic.Client.Entities.csproj">
-      <Project>{88a83181-a4eb-409e-87e7-9d015a46c002}</Project>
-      <Name>OneComic.Client.Entities</Name>
+    <ProjectReference Include="..\OneComic.Client.Proxies\OneComic.Client.Proxies.csproj">
+      <Project>{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}</Project>
+      <Name>OneComic.Client.Proxies</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
