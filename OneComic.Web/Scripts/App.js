@@ -10,7 +10,7 @@ var appMainModule = angular.module('appMain', ['common']);
 // Services attached to the commonModule will be available to all other Angular modules.
 
 commonModule.factory('viewModelHelper', function ($http, $q) {
-    return CarRental.viewModelHelper($http, $q);
+    return OneComic.viewModelHelper($http, $q);
 });
 
 commonModule.factory('validator', function () {
@@ -29,7 +29,7 @@ commonModule.factory('validator', function () {
         self.apiGet = function (uri, data, success, failure, always) {
             self.isLoading = true;
             self.modelIsValid = true;
-            $http.get(CarRental.rootPath + uri, data)
+            $http.get(OneComic.rootPath + uri, data)
                 .then(function (result) {
                     success(result);
                     if (always != null)
@@ -54,7 +54,7 @@ commonModule.factory('validator', function () {
         self.apiPost = function (uri, data, success, failure, always) {
             self.isLoading = true;
             self.modelIsValid = true;
-            $http.post(CarRental.rootPath + uri, data)
+            $http.post(OneComic.rootPath + uri, data)
                 .then(function (result) {
                     success(result);
                     if (always != null)
@@ -79,14 +79,14 @@ commonModule.factory('validator', function () {
         return this;
     }
     cr.viewModelHelper = viewModelHelper;
-}(window.CarRental));
+}(window.OneComic));
 
 (function (cr) {
     var mustEqual = function (value, other) {
         return value == other;
     }
     cr.mustEqual = mustEqual;
-}(window.CarRental));
+}(window.OneComic));
 
 // ***************** validation *****************
 
