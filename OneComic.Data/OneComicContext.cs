@@ -1,5 +1,6 @@
 ﻿using Core.Common.Contracts;
 using OneComic.Business.Entities;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Runtime.Serialization;
@@ -23,6 +24,7 @@ namespace OneComic.Data
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
+            modelBuilder.Ignore<PropertyChangedEventHandler>();
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
 

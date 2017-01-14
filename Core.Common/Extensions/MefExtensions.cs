@@ -9,8 +9,6 @@ namespace Core.Common.Extensions
 {
     public static class MefExtensions
     {
-        public static CompositionContainer _container;
-
         public static object GetExportedValueByType(this CompositionContainer container, Type type)
         {
             if (!container.ContainsAnyExportDefinitionMatches(type))

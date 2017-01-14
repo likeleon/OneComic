@@ -1,8 +1,11 @@
 ﻿using OneComic.Web.Core;
+using System.ComponentModel.Composition;
 using WebMatrix.WebData;
 
 namespace OneComic.Web.Adapters
 {
+    [Export(typeof(ISecurityAdapter))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class SecurityAdapter : ISecurityAdapter
     {
         public void Initialize()
