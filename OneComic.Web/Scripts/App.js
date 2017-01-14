@@ -17,7 +17,7 @@ commonModule.factory('validator', function () {
     return valJs.validator();
 });
 
-(function (cr) {
+(function (oc) {
     var viewModelHelper = function ($http, $q) {
         
         var self = this;
@@ -78,14 +78,14 @@ commonModule.factory('validator', function () {
 
         return this;
     }
-    cr.viewModelHelper = viewModelHelper;
+    oc.viewModelHelper = viewModelHelper;
 }(window.OneComic));
 
-(function (cr) {
+(function (oc) {
     var mustEqual = function (value, other) {
         return value == other;
     }
-    cr.mustEqual = mustEqual;
+    oc.mustEqual = mustEqual;
 }(window.OneComic));
 
 // ***************** validation *****************

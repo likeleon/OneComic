@@ -37,6 +37,10 @@
 @asbestos:				#7f8c8d;
 
 
+@brand-success:         @emerald;
+@brand-info:            @peter-river;
+@brand-warning:         @sun-flower;
+@brand-danger:          @alizarin;
 
 
 // Typography
@@ -89,7 +93,7 @@
 // Inverted navbar links
 @navbar-inverse-link-color:                 @white;
 @navbar-inverse-link-hover-color:           @white;
-@navbar-inverse-link-hover-bg:              transparent;
+@navbar-inverse-link-hover-bg:              @gray;
 @navbar-inverse-link-active-color:          @navbar-inverse-link-hover-color;
 @navbar-inverse-link-active-bg:             @peter-river;
 @navbar-inverse-link-disabled-color:        #444;
@@ -98,8 +102,22 @@
 
 // Tiles
 // -----------------------
-@tileWidth:            130px;
+@tile-border:            4px;
+@tile-border-bg:		@white;
+@tile-bg:            	@blue;
+@tile-text-color:		@white;
+@tile-light-text-color: @wet-asphalt;
 
+@tile-success-bg:            @state-success-bg;
+@tile-info-bg:               @state-info-bg;
+@tile-warning-bg:            @state-warning-bg;
+@tile-danger-bg:             @state-danger-bg;
+
+
+@tile-font-size-h1:            @font-size-h1; 
+@tile-font-size-h2:            @font-size-h2; 
+@tile-font-size-h3:            @font-size-h3; 
+@tile-font-size-h4:            @font-size-h4;
 
 
 // Pager
@@ -112,3 +130,19 @@
 // Badges
 // -------------------------
 @badge-border-radius:         0px;
+
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+
+@state-success-bg:               @brand-success;
+@state-success-border:           darken(spin(@state-success-bg, -10), 5%);
+
+@state-info-bg:                  @brand-info;
+@state-info-border:              darken(spin(@state-info-bg, -10), 7%);
+
+@state-warning-bg:               @brand-warning;
+@state-warning-border:           darken(spin(@state-warning-bg, -10), 5%);
+
+@state-danger-bg:                @brand-danger;
+@state-danger-border:            darken(spin(@state-danger-bg, -10), 5%);
