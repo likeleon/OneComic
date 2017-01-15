@@ -57,6 +57,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -144,11 +145,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\AccountApiController.cs" />
     <Compile Include="Controllers\MVC\AccountController.cs" />
     <Compile Include="Controllers\MVC\HomeController.cs" />
+    <Compile Include="Core\ApiControllerBase.cs" />
     <Compile Include="Core\ISecurityAdapter.cs" />
+    <Compile Include="Core\IServiceAwareController.cs" />
     <Compile Include="Core\MefAPIDependencyResolver.cs" />
     <Compile Include="Core\MefDependencyResolver.cs" />
+    <Compile Include="Core\UserDisposableServiceAttribute.cs" />
     <Compile Include="Core\ViewControllerBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1141,6 +1146,10 @@
     <ProjectReference Include="..\OneComic.Client.Bootstrapper\OneComic.Client.Bootstrapper.csproj">
       <Project>{9FED08C3-BB4A-46FF-85BB-3DE12CD473F3}</Project>
       <Name>OneComic.Client.Bootstrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
+      <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
+      <Name>OneComic.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
