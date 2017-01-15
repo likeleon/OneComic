@@ -24,6 +24,11 @@ namespace OneComic.Web.Adapters
             return WebSecurity.Login(loginEmail, password, persistCookie: rememberMe);
         }
 
+        public void Logout()
+        {
+            WebSecurity.Logout();
+        }
+
         public bool ChangePassword(string loginEmail, string oldPassword, string newPassword)
         {
             return WebSecurity.ChangePassword(loginEmail, oldPassword, newPassword);

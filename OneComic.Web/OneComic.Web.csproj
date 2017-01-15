@@ -159,11 +159,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountLoginModel.cs" />
+    <Compile Include="Models\AccountRegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binding\Models\AccountLoginModel.js" />
+    <Content Include="Binding\Models\AccountRegisterModel.js" />
     <Content Include="Binding\ViewModels\AccountLoginViewModel.js" />
+    <Content Include="Binding\ViewModels\AccountRegisterViewModel.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1104,6 +1107,7 @@
     <Content Include="Views\Shared\_TopBar.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_ValidationErrors.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

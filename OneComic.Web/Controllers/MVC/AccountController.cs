@@ -25,5 +25,21 @@ namespace OneComic.Web.Controllers
             _securityAdapter.Initialize();
             return View(new AccountLoginModel { ReturnUrl = returnUrl });
         }
+
+        [HttpGet]
+        [Route("logout")]
+        public ActionResult Logout()
+        {
+            _securityAdapter.Logout();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        // This route is defined in RouteConfig
+        public ActionResult Register()
+        {
+            _securityAdapter.Initialize();
+            return View();
+        }
     }
 }
