@@ -9,6 +9,16 @@ namespace OneComic.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "accountRegisterRoot",
+                url: "account/register",
+                defaults: new { controller = "Account", action = "Register" });
+
+            routes.MapRoute(
+                name: "accountRegister",
+                url: "account/register/{*catchall}",
+                defaults: new { controller = "Account", action = "Register" });
+
             routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
