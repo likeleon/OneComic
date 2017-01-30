@@ -5,10 +5,8 @@
   <title>@ViewBag.Title - One Comic</title>
   <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
   <link href="~/Content/loading-placeholder.css" rel="stylesheet" media="screen">
-  <link href="~/Content/Layout.css" rel="stylesheet" media="screen">
   <meta name="viewport" content="width=device-width" />
   @Styles.Render("~/Content/css")
-  @Styles.Render("~/Content/themes/base/css")
 </head>
 <body data-ng-app="appMain">
   @Html.Partial("~/Views/Shared/_TopBar.cshtml")
@@ -47,7 +45,6 @@
 
   @Scripts.Render("~/bundles/modernizr")
   @Scripts.Render("~/bundles/jquery")
-  @Scripts.Render("~/bundles/jqueryui")
   @Scripts.Render("~/bundles/bootstrap")
 
   <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
