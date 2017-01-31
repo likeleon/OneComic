@@ -2,28 +2,21 @@
     ViewBag.Name = "Home";
 }
 
-<br />
-<div class="page-header" style="color: steelblue">
-  <h2>Building End-to-End Multi-Client Service Oriented Applications</h2>
-</div>
-<div class="alert alert-info">
-  <div class="alert-heading" style="font-size: 24px;">
-    <p>
-      Welcome to the most important course you'll ever watch!
-    </p>
-  </div>
-  <div style="font-family: 'Segoe UI'; font-size: 18px;">
-    <p>
-      This course walks through the design and building of a complete
-      service oriented application from beginning to end.
-    </p>
-    <p>
-      Prepare to have some fun because I'm gonna take all of your favorite
-      technologies and put them all together using some very cool implementation
-      patterns and techniques.
-    </p>
-    <p>
-      So get ready and pay attention, you'll be a better person for it :) !
-    </p>
+@section scripts
+{
+  <script src="@Url.Content("~/Binding/ViewModels/ComicListViewModel.js")" type="text/javascript"></script>
+}
+
+<div data-ng-controller="ComicListViewModel">
+  <div class="row">
+    <div class="card-group">
+      <div class="card" data-ng-repeat="comic in comics">
+        <img class="card-img-top" ng-src="{{comic.CoverImage}}" alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title">{{comic.Title}}</h4>
+          <p class="card-text">{{comic.Description}}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
