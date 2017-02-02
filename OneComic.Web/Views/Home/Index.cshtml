@@ -8,13 +8,15 @@
 }
 
 <div data-ng-controller="ComicListViewModel">
+  <h1>Browse Comics</h1>
   <div class="row">
-    <div class="card-group">
-      <div class="card" data-ng-repeat="comic in comics">
-        <img class="card-img-top" ng-src="{{comic.CoverImage}}" alt="Card image cap">
-        <div class="card-block">
-          <h4 class="card-title">{{comic.Title}}</h4>
-          <p class="card-text">{{comic.Description}}</p>
+    <div class="comic-cards-wrapper">
+      <div data-ng-repeat="comic in comics">
+        <div class="comic-card">
+          <a href="">
+            <img class="" ng-src="{{ comic.CoverImage }}" alt="{{ comic.Title }}">
+            <p class="comic-card-title">{{ comic.Title }}</p>
+          </a>
         </div>
       </div>
     </div>

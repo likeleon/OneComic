@@ -23,7 +23,8 @@ namespace OneComic.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.cyborg.css"));
+                      "~/Content/bootstrap.cyborg.css",
+                      "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
