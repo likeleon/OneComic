@@ -8,8 +8,8 @@
 }
 
 <div data-ng-controller="ComicListViewModel">
-  <h1>Browse Comics</h1>
-  <div class="row">
+  <h2>BROWSE COMICS</h2>
+  <div ng-show="init && comics.length > 0" class="row">
     <div class="comic-cards-wrapper">
       <div data-ng-repeat="comic in comics">
         <div class="comic-card">
@@ -20,5 +20,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div ng-show="init && comics.length <= 0">
+    <h3>NO RESULTS FOUND.</h3>
   </div>
 </div>

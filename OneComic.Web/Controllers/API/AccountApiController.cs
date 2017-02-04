@@ -27,16 +27,12 @@ namespace OneComic.Web.Controllers
         {
             return GetHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
-
                 bool success = _securityAdapter.Login(accountModel.LoginEmail, accountModel.Password, accountModel.RememberMe);
 
                 if (success)
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    return request.CreateResponse(HttpStatusCode.OK);
                 else
-                    response = request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Unauthorized login.");
-
-                return response;
+                    return request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Unauthorized login.");
             });
         }
 
