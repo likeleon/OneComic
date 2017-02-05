@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.ServiceModel;
+using System.Threading;
 using SM = System.ServiceModel;
 
 namespace OneComic.ServiceHost.Azure.WorkerRole
@@ -22,11 +23,16 @@ namespace OneComic.ServiceHost.Azure.WorkerRole
         {
             Trace.TraceInformation($"{WorkerName} is running");
 
-            Global.Container = MefLoader.Init();
+            while (true)
+            {
+                Trace.TraceInformation("Working");
+                Thread.Sleep(10000);
+            }
         }
 
         public override bool OnStart()
         {
+            Global.Container = MefLoader.Init();
             ServicePointManager.DefaultConnectionLimit = 12;
 
             Trace.TraceInformation($"{WorkerName} is starting");
