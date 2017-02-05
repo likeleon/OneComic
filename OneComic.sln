@@ -65,6 +65,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Client.Proxies.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Web", "OneComic.Web\OneComic.Web.csproj", "{6DDA7EF5-0A60-48DA-8A16-ED8AEC203184}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "OneComic.ServiceHost.Azure", "OneComic.ServiceHost.Azure\OneComic.ServiceHost.Azure.ccproj", "{404FB29D-B564-406B-B03C-C55555DC1CCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.ServiceHost.Azure.WorkerRole", "OneComic.ServiceHost.Azure.WorkerRole\OneComic.ServiceHost.Azure.WorkerRole.csproj", "{1F2B58FA-41EA-415E-9BCE-D5DB741043D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +171,14 @@ Global
 		{6DDA7EF5-0A60-48DA-8A16-ED8AEC203184}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DDA7EF5-0A60-48DA-8A16-ED8AEC203184}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DDA7EF5-0A60-48DA-8A16-ED8AEC203184}.Release|Any CPU.Build.0 = Release|Any CPU
+		{404FB29D-B564-406B-B03C-C55555DC1CCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{404FB29D-B564-406B-B03C-C55555DC1CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{404FB29D-B564-406B-B03C-C55555DC1CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{404FB29D-B564-406B-B03C-C55555DC1CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F2B58FA-41EA-415E-9BCE-D5DB741043D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F2B58FA-41EA-415E-9BCE-D5DB741043D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F2B58FA-41EA-415E-9BCE-D5DB741043D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F2B58FA-41EA-415E-9BCE-D5DB741043D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,5 +208,7 @@ Global
 		{9FED08C3-BB4A-46FF-85BB-3DE12CD473F3} = {05EFAE4E-AE10-4BE1-A13D-57450DEBC28B}
 		{30CB471E-C95C-409F-9142-F033DA4D7672} = {BAC7D729-152B-4DFC-B660-20F1C22957ED}
 		{6DDA7EF5-0A60-48DA-8A16-ED8AEC203184} = {057894F6-49A4-4A2C-9E0D-C2979A579475}
+		{404FB29D-B564-406B-B03C-C55555DC1CCB} = {057894F6-49A4-4A2C-9E0D-C2979A579475}
+		{1F2B58FA-41EA-415E-9BCE-D5DB741043D0} = {057894F6-49A4-4A2C-9E0D-C2979A579475}
 	EndGlobalSection
 EndGlobal
