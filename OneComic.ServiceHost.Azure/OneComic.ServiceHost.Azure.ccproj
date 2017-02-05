@@ -45,12 +45,22 @@
       <RoleName>OneComic.ServiceHost.Azure.WorkerRole</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
+    <ProjectReference Include="..\OneComic.Web\OneComic.Web.csproj">
+      <Name>OneComic.Web</Name>
+      <Project>{6dda7ef5-0a60-48da-8a16-ed8aec203184}</Project>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <RoleName>OneComic.Web</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="OneComic.ServiceHost.Azure.WorkerRoleContent\" />
+    <Folder Include="OneComic.WebContent\" />
   </ItemGroup>
   <ItemGroup>
     <DiagnosticsConfiguration Include="OneComic.ServiceHost.Azure.WorkerRoleContent\diagnostics.wadcfgx" />
+    <DiagnosticsConfiguration Include="OneComic.WebContent\diagnostics.wadcfgx" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
