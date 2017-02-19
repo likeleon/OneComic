@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace OneComic.Business.Entities
 {
     [DataContract]
-    public sealed class Bookmark : EntityBase, IIdentifiableEntity, IAccountOwnedEntity
+    public class Bookmark : EntityBase, IIdentifiableEntity, IAccountOwnedEntity
     {
         [DataMember]
         public int BookmarkId { get; set; }
@@ -14,8 +14,12 @@ namespace OneComic.Business.Entities
         [DataMember]
         public int AccountId { get; set; }
 
+        public virtual Account Account { get; set; }
+
         [DataMember]
         public int BookId { get; set; }
+
+        public virtual Book Book { get; set; }
 
         [DataMember]
         public int PageNumber { get; set; }

@@ -5,13 +5,15 @@ using System.Runtime.Serialization;
 namespace OneComic.Business.Entities
 {
     [DataContract]
-    public sealed class Book : EntityBase, IIdentifiableEntity
+    public class Book : EntityBase, IIdentifiableEntity
     {
         [DataMember]
         public int BookId { get; set; }
 
         [DataMember]
         public int ComicId { get; set; }
+
+        public virtual Comic Comic { get; set; }
 
         [DataMember]
         public string Title { get; set; }
