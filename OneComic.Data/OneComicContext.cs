@@ -13,6 +13,8 @@ namespace OneComic.Data
             : base("name=OneComic")
         {
             Database.SetInitializer<OneComicContext>(null);
+
+            Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Account> AccountSet { get; set; }
@@ -28,10 +30,31 @@ namespace OneComic.Data
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
 
-            modelBuilder.Entity<Account>().HasKey(a => a.AccountId).Ignore(a => a.EntityId);
-            modelBuilder.Entity<Comic>().HasKey(c => c.ComicId).Ignore(c => c.EntityId);
-            modelBuilder.Entity<Book>().HasKey(b => b.BookId).Ignore(b => b.EntityId);
-            modelBuilder.Entity<Bookmark>().HasKey(b => b.BookmarkId).Ignore(b => b.EntityId);
+            modelBuilder.Entity<Account>()
+                .HasKey(account => account.AccountId)
+                .Ignore(account => account.EntityId);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(account => account.Bookmarks)
+                .WithRequired(bookmark => bookmark.Account)
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<Comic>()
+                .HasKey(comic => comic.ComicId)
+                .Ignore(comic => comic.EntityId);
+
+            modelBuilder.Entity<Comic>()
+                .HasMany(comic => comic.Books)
+                .WithRequired(book => book.Comic)
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<Book>()
+                .HasKey(book => book.BookId)
+                .Ignore(book => book.EntityId);
+
+            modelBuilder.Entity<Bookmark>()
+                .HasKey(bookmark => bookmark.BookmarkId)
+                .Ignore(bookmark => bookmark.EntityId);
         }
     }
 }
