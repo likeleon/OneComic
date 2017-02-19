@@ -1,6 +1,5 @@
 ﻿using Core.Common.Contracts;
 using Core.Common.Utilities;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -52,10 +51,10 @@ namespace Core.Common.Data
             }
         }
 
-        public IEnumerable<T> Get()
+        public IQueryable<T> Get()
         {
             using (var context = new U())
-                return (GetEntities(context)).ToList();
+                return GetEntities(context);
         }
 
         public T Get(int id)
@@ -65,7 +64,7 @@ namespace Core.Common.Data
         }
 
         protected abstract T AddEntity(U context, T entity);
-        protected abstract IEnumerable<T> GetEntities(U context);
+        protected abstract IQueryable<T> GetEntities(U context);
         protected abstract T GetEntity(U context, int id);
     }
 }

@@ -30,10 +30,6 @@ namespace OneComic.Business.Entities
         [DataMember]
         public int PageCount { get; set; }
 
-        public int EntityId
-        {
-            get { return BookId; }
-            set { BookId = value; }
-        }
+        public int EntityId => BookId;
     }
 }

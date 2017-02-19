@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace Core.Common.Contracts
 {
@@ -16,7 +16,7 @@ namespace Core.Common.Contracts
 
         T Update(T entity);
 
-        IEnumerable<T> Get();
+        IQueryable<T> Get();
         T Get(int id);
     }
 }

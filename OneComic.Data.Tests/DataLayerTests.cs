@@ -5,6 +5,7 @@ using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.Linq;
 
 namespace OneComic.Data.Tests
 {
@@ -28,7 +29,7 @@ namespace OneComic.Data.Tests
                 new Account { AccountId = 1, LoginEmail = "a@a.a" },
                 new Account { AccountId = 2, LoginEmail = "b@b.b" }
             };
-            mockAccountRepository.Setup(r => r.Get()).Returns(accounts);
+            mockAccountRepository.Setup(r => r.Get()).Returns(accounts.AsQueryable());
 
             var repositoryFactory = new DataRepositoryFactory();
             Assert.AreEqual(accounts, repositoryFactory.GetDataRepository<IAccountRepository>().Get());

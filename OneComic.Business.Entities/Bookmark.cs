@@ -27,12 +27,7 @@ namespace OneComic.Business.Entities
         [DataMember]
         public DateTime DateCreated { get; set; }
 
-        public int EntityId
-        {
-            get { return BookmarkId; }
-            set { BookmarkId = value; }
-        }
-
+        public int EntityId => BookmarkId;
         int IAccountOwnedEntity.OwnerAccountId => AccountId;
     }
 }

@@ -58,6 +58,10 @@
     <Compile Include="Data Repositories\ComicRepository.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
+    <Compile Include="Mappers\ComicMapper.cs" />
+    <Compile Include="Mappers\BookmarkMapper.cs" />
+    <Compile Include="Mappers\BookMapper.cs" />
+    <Compile Include="Mappers\AccountMapper.cs" />
     <Compile Include="OneComicContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,8 +83,12 @@
       <Name>OneComic.Business.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
-      <Project>{EA7FEA03-3817-4107-B70B-A218CE1399CD}</Project>
+      <Project>{ea7fea03-3817-4107-b70b-a218ce1399cd}</Project>
       <Name>OneComic.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
+      <Project>{6209e8e4-52f0-41ce-9157-77d32a085755}</Project>
+      <Name>OneComic.Data.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

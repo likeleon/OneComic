@@ -1,11 +1,11 @@
 ﻿using Core.Common.Contracts;
 using OneComic.Business.Entities;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace OneComic.Data.Contracts
 {
     public interface IBookmarkRepository : IDataRepository<Bookmark>
     {
-        IEnumerable<AccountBookmarkInfo> GetAccountBookmarkInfo(int accountId);
+        IQueryable<Bookmark> GetByAccountId(int accountId);
     }
 }

@@ -15,7 +15,7 @@ namespace OneComic.Data
             return context.BookmarkSet.Add(entity);
         }
 
-        protected override IEnumerable<Bookmark> GetEntities(OneComicContext context)
+        protected override IQueryable<Bookmark> GetEntities(OneComicContext context)
         {
             return context.BookmarkSet;
         }
@@ -25,22 +25,10 @@ namespace OneComic.Data
             return context.BookmarkSet.FirstOrDefault(b => b.BookId == id);
         }
 
-        public IEnumerable<AccountBookmarkInfo> GetAccountBookmarkInfo(int accountId)
+        public IQueryable<Bookmark> GetByAccountId(int accountId)
         {
             using (var context = new OneComicContext())
-            {
-                var query = from bookmark in context.BookmarkSet
-                            join account in context.AccountSet on bookmark.AccountId equals account.AccountId
-                            join book in context.BookSet on bookmark.BookId equals book.BookId
-                            where bookmark.AccountId == accountId
-                            select new AccountBookmarkInfo
-                            {
-                                Account = account,
-                                Book = book,
-                                Bookmark = bookmark
-                            };
-                return query.ToList();
-            }
+                return context.BookmarkSet.Where(bookmark => bookmark.AccountId == accountId);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using OneComic.Client.Proxies;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
@@ -16,8 +15,6 @@ namespace OneComic.Client.Bootstrapper
         public static CompositionContainer Init(IEnumerable<ComposablePartCatalog> catalogParts)
         {
             var catalog = new AggregateCatalog();
-
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(LibraryClient).Assembly));
 
             foreach (var part in catalogParts)
                 catalog.Catalogs.Add(part);

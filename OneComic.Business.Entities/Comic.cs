@@ -16,10 +16,6 @@ namespace OneComic.Business.Entities
 
         public virtual ICollection<Book> Books { get; set; }
 
-        public int EntityId
-        {
-            get { return ComicId; }
-            set { ComicId = value; }
-        }
+        public int EntityId => ComicId;
     }
 }

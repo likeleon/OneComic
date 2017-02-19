@@ -2,6 +2,6 @@
 {
     public interface IIdentifiableEntity
     {
-        int EntityId { get; set; }
+        int EntityId { get; }
     }
 }

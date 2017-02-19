@@ -45,12 +45,6 @@
     <Compile Include="MefLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OneComic.Client.Proxies\OneComic.Client.Proxies.csproj">
-      <Project>{8B7824AA-BEB4-41D1-8EAA-4F832BF44F28}</Project>
-      <Name>OneComic.Client.Proxies</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

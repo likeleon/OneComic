@@ -1,6 +1,5 @@
 ﻿using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 
@@ -15,7 +14,7 @@ namespace OneComic.Data
             return context.AccountSet.Add(entity);
         }
 
-        protected override IEnumerable<Account> GetEntities(OneComicContext context)
+        protected override IQueryable<Account> GetEntities(OneComicContext context)
         {
             return context.AccountSet;
         }

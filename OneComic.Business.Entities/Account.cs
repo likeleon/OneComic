@@ -16,12 +16,7 @@ namespace OneComic.Business.Entities
 
         public virtual ICollection<Bookmark> Bookmarks { get; set; }
 
-        public int EntityId
-        {
-            get { return AccountId; }
-            set { AccountId = value; }
-        }
-
+        public int EntityId => AccountId;
         public int OwnerAccountId => AccountId;
     }
 }

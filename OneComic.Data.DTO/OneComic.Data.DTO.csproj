@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="Bookmark.cs" />
     <Compile Include="Comic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
