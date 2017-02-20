@@ -10,7 +10,7 @@ namespace OneComic.Data
     public class OneComicContext : DbContext
     {
         public OneComicContext()
-            : base("name=OneComic")
+            : base("name=OneComicContext")
         {
             Database.SetInitializer<OneComicContext>(null);
 

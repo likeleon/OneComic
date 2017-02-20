@@ -62,6 +62,11 @@
     <Compile Include="Mappers\BookmarkMapper.cs" />
     <Compile Include="Mappers\BookMapper.cs" />
     <Compile Include="Mappers\AccountMapper.cs" />
+    <Compile Include="Migrations\201702201359047_InitialCreate.cs" />
+    <Compile Include="Migrations\201702201359047_InitialCreate.Designer.cs">
+      <DependentUpon>201702201359047_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OneComicContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,7 +96,11 @@
       <Name>OneComic.Data.DTO</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702201359047_InitialCreate.resx">
+      <DependentUpon>201702201359047_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
