@@ -183,7 +183,6 @@
     <Compile Include="Core\ApiControllerBase.cs" />
     <Compile Include="Core\ISecurityAdapter.cs" />
     <Compile Include="Core\IServiceAwareController.cs" />
-    <Compile Include="Core\MefAPIDependencyResolver.cs" />
     <Compile Include="Core\MefDependencyResolver.cs" />
     <Compile Include="Core\UserDisposableServiceAttribute.cs" />
     <Compile Include="Core\ViewControllerBase.cs" />
@@ -1113,6 +1112,10 @@
     <Content Include="Scripts\jquery-1.12.4.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common.API\Core.Common.API.csproj">
+      <Project>{29CFA744-A09D-44F4-8DD2-949B8FD6F6E2}</Project>
+      <Name>Core.Common.API</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{1D3FC099-5A43-4811-A665-83D2F29EA530}</Project>
       <Name>Core.Common.Contracts</Name>

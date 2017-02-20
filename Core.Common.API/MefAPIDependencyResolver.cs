@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Web.Http.Dependencies;
 
-namespace OneComic.Web.Core
+namespace Core.Common.API
 {
     public sealed class MefAPIDependencyResolver : IDependencyResolver
     {
