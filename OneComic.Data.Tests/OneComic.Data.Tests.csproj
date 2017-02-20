@@ -81,7 +81,7 @@
       <Name>OneComic.Business.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
-      <Project>{EA7FEA03-3817-4107-B70B-A218CE1399CD}</Project>
+      <Project>{ea7fea03-3817-4107-b70b-a218ce1399cd}</Project>
       <Name>OneComic.Data.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\OneComic.Data\OneComic.Data.csproj">

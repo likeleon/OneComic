@@ -25,10 +25,10 @@ namespace OneComic.Data
             return context.BookmarkSet.FirstOrDefault(b => b.BookId == id);
         }
 
-        public IQueryable<Bookmark> GetByAccountId(int accountId)
+        public IReadOnlyList<Bookmark> GetByAccountId(int accountId)
         {
             using (var context = new OneComicContext())
-                return context.BookmarkSet.Where(bookmark => bookmark.AccountId == accountId);
+                return context.BookmarkSet.Where(bookmark => bookmark.AccountId == accountId).ToList();
         }
     }
 }

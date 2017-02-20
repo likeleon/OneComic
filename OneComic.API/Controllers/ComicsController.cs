@@ -24,7 +24,7 @@ namespace OneComic.API.Controllers
         {
             try
             {
-                var comics = _repository.Get().ToList().Select(_mapper.ToDTO);
+                var comics = _repository.Get().Select(_mapper.ToDTO);
                 return Ok(comics);
             }
             catch (Exception)

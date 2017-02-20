@@ -1,5 +1,6 @@
 ﻿using Core.Common.Contracts;
 using Core.Common.Utilities;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -51,10 +52,10 @@ namespace Core.Common.Data
             }
         }
 
-        public IQueryable<T> Get()
+        public IReadOnlyList<T> Get()
         {
             using (var context = new U())
-                return GetEntities(context);
+                return GetEntities(context).ToList();
         }
 
         public T Get(int id)

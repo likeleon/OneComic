@@ -17,7 +17,7 @@
     <AssemblyName>OneComic.API</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44304</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -108,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\OneComicDB.mdf" />
+    <Content Include="App_Data\OneComicDB_log.ldf">
+      <DependentUpon>OneComicDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -161,6 +164,10 @@
       <Project>{6209E8E4-52F0-41CE-9157-77D32A085755}</Project>
       <Name>OneComic.Data.DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OneComic.Data\OneComic.Data.csproj">
+      <Project>{0cbe9daa-0e5b-47b4-b8e3-7d3ceca27006}</Project>
+      <Name>OneComic.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -177,7 +184,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3042</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1671/</IISUrl>
+          <IISUrl>https://localhost:44304/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

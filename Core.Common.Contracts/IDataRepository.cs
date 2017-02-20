@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Core.Common.Contracts
 {
@@ -16,7 +16,7 @@ namespace Core.Common.Contracts
 
         T Update(T entity);
 
-        IQueryable<T> Get();
+        IReadOnlyList<T> Get();
         T Get(int id);
     }
 }
