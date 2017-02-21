@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Web.Http;
 
 namespace OneComic.API
 {
@@ -11,6 +13,12 @@ namespace OneComic.API
             config.Routes.MapHttpRoute(name: "DefaultRouting",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
+
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
+            var jsonSerializerSettings = config.Formatters.JsonFormatter.SerializerSettings;
+            jsonSerializerSettings.Formatting = Formatting.Indented;
+            jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }

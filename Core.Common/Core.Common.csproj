@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\EntityBase.cs" />
     <Compile Include="Core\EnumerableExtensions.cs" />
     <Compile Include="Core\Global.cs" />
     <Compile Include="Core\NotificationObject.cs" />

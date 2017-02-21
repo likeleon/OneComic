@@ -32,5 +32,21 @@ namespace OneComic.API.Controllers
                 return InternalServerError();
             }
         }
+
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                var comic = _repository.Get(id);
+                if (comic == null)
+                    return NotFound();
+
+                return Ok(_mapper.ToDTO(comic));
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+        }
     }
 }
