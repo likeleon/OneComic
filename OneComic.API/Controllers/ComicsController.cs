@@ -48,5 +48,26 @@ namespace OneComic.API.Controllers
                 return InternalServerError();
             }
         }
+
+        [HttpPost]
+        public IHttpActionResult Post([FromBody]Data.DTO.Comic comicDto)
+        {
+            try
+            {
+                if (comicDto == null)
+                    return BadRequest();
+
+                var comic = _repository.Add(_mapper.ToEntity(comicDto));
+                if (comic == null)
+                    return BadRequest();
+
+                var locationUri = new Uri(Request.RequestUri, comic.ComicId.ToString());
+                return Created(locationUri, _mapper.ToDTO(comic));
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+        }
     }
 }
