@@ -9,12 +9,12 @@ namespace Core.Common.Contracts
     public interface IDataRepository<T> : IDataRepository
         where T : class, IIdentifiableEntity, new()
     {
-        T Add(T entity);
+        RepositoryActionResult<T> Add(T entity);
 
-        void Remove(T entity);
-        void Remove(int id);
+        RepositoryActionResult<T> Remove(T entity);
+        RepositoryActionResult<T> Remove(int id);
 
-        T Update(T entity);
+        RepositoryActionResult<T> Update(T entity);
 
         IReadOnlyList<T> Get();
         T Get(int id);

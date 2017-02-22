@@ -1,4 +1,5 @@
-﻿using OneComic.Data.Contracts;
+﻿using Core.Common.Contracts;
+using OneComic.Data.Contracts;
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -57,12 +58,12 @@ namespace OneComic.API.Controllers
                 if (comicDto == null)
                     return BadRequest();
 
-                var comic = _repository.Add(_mapper.ToEntity(comicDto));
-                if (comic == null)
+                var result = _repository.Add(_mapper.ToEntity(comicDto));
+                if (result.State != RepositoryActionState.Created)
                     return BadRequest();
 
-                var locationUri = new Uri(Request.RequestUri, comic.ComicId.ToString());
-                return Created(locationUri, _mapper.ToDTO(comic));
+                var locationUri = new Uri(Request.RequestUri, result.Entity.ComicId.ToString());
+                return Created(locationUri, _mapper.ToDTO(result.Entity));
             }
             catch (Exception)
             {

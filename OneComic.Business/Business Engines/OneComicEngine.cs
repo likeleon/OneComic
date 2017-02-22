@@ -45,7 +45,7 @@ namespace OneComic.Business
             };
 
             var bookmarkRepository = _dataRepositoryFactory.GetDataRepository<IBookmarkRepository>();
-            return bookmarkRepository.Add(bookmark);
+            return bookmarkRepository.Add(bookmark).Entity;
         }
     }
 }

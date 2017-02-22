@@ -34,7 +34,7 @@ namespace OneComic.Business.Tests
             mockBookmarkRepository
                 .Setup(obj => obj.Add(It.IsAny<Bookmark>()))
                 .Callback<Bookmark>(b => b.BookmarkId = 100)
-                .Returns<Bookmark>(b => b);
+                .Returns<Bookmark>(b => new RepositoryActionResult<Bookmark>(b, RepositoryActionState.Created));
             mockRepositoryFactory
                 .Setup(obj => obj.GetDataRepository<IBookmarkRepository>())
                 .Returns(mockBookmarkRepository.Object);
