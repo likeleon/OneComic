@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace OneComic.API
@@ -15,6 +16,9 @@ namespace OneComic.API
                 defaults: new { id = RouteParameter.Optional });
 
             config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/json-patch+json"));
 
             var jsonSerializerSettings = config.Formatters.JsonFormatter.SerializerSettings;
             jsonSerializerSettings.Formatting = Formatting.Indented;

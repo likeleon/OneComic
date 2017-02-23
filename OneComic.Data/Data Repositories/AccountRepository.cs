@@ -24,6 +24,11 @@ namespace OneComic.Data
             return context.AccountSet.FirstOrDefault(e => e.AccountId == id);
         }
 
+        protected override void AttachEntity(OneComicContext context, Account entity)
+        {
+            context.AccountSet.Attach(entity);
+        }
+
         public Account GetByLoginEmail(string loginEmail)
         {
             using (var context = new OneComicContext())

@@ -23,5 +23,10 @@ namespace OneComic.Data
         {
             return context.BookSet.FirstOrDefault(b => b.BookId == id);
         }
+
+        protected override void AttachEntity(OneComicContext context, Book entity)
+        {
+            context.BookSet.Attach(entity);
+        }
     }
 }

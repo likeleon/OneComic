@@ -69,7 +69,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Cache.cs" />
     <Compile Include="Utilities\IDictionaryExtensions.cs" />
-    <Compile Include="Utilities\SimpleMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">

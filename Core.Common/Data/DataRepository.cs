@@ -80,7 +80,9 @@ namespace Core.Common.Data
                     if (existingEntity == null)
                         return NotFound();
 
-                    SimpleMapper.PropertyMap(entity, existingEntity);
+                    context.Entry(existingEntity).State = EntityState.Detached;
+                    AttachEntity(context, entity);
+                    context.Entry(entity).State = EntityState.Modified;
 
                     var result = context.SaveChanges();
                     if (result > 0)
@@ -110,6 +112,7 @@ namespace Core.Common.Data
         protected abstract T AddEntity(U context, T entity);
         protected abstract IQueryable<T> GetEntities(U context);
         protected abstract T GetEntity(U context, int id);
+        protected abstract void AttachEntity(U context, T entity);
 
         private RepositoryActionResult<T> Created(T entity)
         {

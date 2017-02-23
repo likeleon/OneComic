@@ -25,6 +25,11 @@ namespace OneComic.Data
             return context.BookmarkSet.FirstOrDefault(b => b.BookId == id);
         }
 
+        protected override void AttachEntity(OneComicContext context, Bookmark entity)
+        {
+            context.BookmarkSet.Attach(entity);
+        }
+
         public IReadOnlyList<Bookmark> GetByAccountId(int accountId)
         {
             using (var context = new OneComicContext())
