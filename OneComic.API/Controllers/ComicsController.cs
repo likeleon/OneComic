@@ -11,6 +11,7 @@ namespace OneComic.API.Controllers
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
+    [RoutePrefix("api/comics")]
     public class ComicsController : ApiController
     {
         private readonly IComicRepository _repository;
@@ -23,6 +24,8 @@ namespace OneComic.API.Controllers
             _mapper = comicMapper;
         }
 
+        [Route("")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             try
@@ -36,6 +39,8 @@ namespace OneComic.API.Controllers
             }
         }
 
+        [Route("{id}")]
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             try
@@ -52,6 +57,7 @@ namespace OneComic.API.Controllers
             }
         }
 
+        [Route("")]
         [HttpPost]
         public IHttpActionResult Post([FromBody]Data.DTO.Comic comicDto)
         {
@@ -73,6 +79,8 @@ namespace OneComic.API.Controllers
             }
         }
 
+        [Route("{id}")]
+        [HttpPut]
         public IHttpActionResult Put(int id, [FromBody]Data.DTO.Comic comicDto)
         {
             try
@@ -97,6 +105,7 @@ namespace OneComic.API.Controllers
             }
         }
 
+        [Route("{id}")]
         [HttpPatch]
         public IHttpActionResult Patch(int id, [FromBody]JsonPatchDocument<Data.DTO.Comic> comicPatchDocument)
         {
@@ -124,6 +133,8 @@ namespace OneComic.API.Controllers
             }
         }
 
+        [Route("{id}")]
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             try

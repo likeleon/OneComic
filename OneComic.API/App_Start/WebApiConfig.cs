@@ -11,10 +11,6 @@ namespace OneComic.API
         {
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(name: "DefaultRouting",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
-
             config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
 
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(

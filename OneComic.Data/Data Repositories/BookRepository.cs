@@ -1,5 +1,6 @@
 ﻿using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 
@@ -9,6 +10,16 @@ namespace OneComic.Data
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public sealed class BookRepository : DataRepository<Book>, IBookRepository
     {
+        private static readonly IReadOnlyList<Book> EmptyBooks = new List<Book>().AsReadOnly();
+
+        private readonly IComicRepository _comicRepository;
+
+        [ImportingConstructor]
+        public BookRepository(IComicRepository comicRepository)
+        {
+            _comicRepository = comicRepository;
+        }
+
         protected override Book AddEntity(OneComicContext context, Book entity)
         {
             return context.BookSet.Add(entity);
@@ -27,6 +38,18 @@ namespace OneComic.Data
         protected override void AttachEntity(OneComicContext context, Book entity)
         {
             context.BookSet.Attach(entity);
+        }
+
+        public IReadOnlyList<Book> GetByComicId(int comicId)
+        {
+            using (var context = new OneComicContext())
+            {
+                var comic = _comicRepository.Get(comicId);
+                if (comic == null)
+                    return EmptyBooks;
+
+                return context.BookSet.Where(book => book.ComicId == comicId).ToList();
+            }
         }
     }
 }
