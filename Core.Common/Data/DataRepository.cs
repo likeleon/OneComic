@@ -1,4 +1,5 @@
 ﻿using Core.Common.Contracts;
+using Core.Common.Extensions;
 using Core.Common.Utilities;
 using System;
 using System.Collections.Generic;
@@ -97,10 +98,10 @@ namespace Core.Common.Data
             }
         }
 
-        public IReadOnlyList<T> Get()
+        public IReadOnlyList<T> Get(string order = null)
         {
             using (var context = new U())
-                return GetEntities(context).ToList();
+                return GetEntities(context).ApplySort(order).ToList();
         }
 
         public T Get(int id)

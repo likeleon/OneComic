@@ -26,11 +26,11 @@ namespace OneComic.API.Controllers
 
         [Route("")]
         [HttpGet]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(string sort = "id")
         {
             try
             {
-                var comics = _repository.Get().Select(_mapper.ToDTO);
+                var comics = _repository.Get(sort).Select(_mapper.ToDTO);
                 return Ok(comics);
             }
             catch (Exception)

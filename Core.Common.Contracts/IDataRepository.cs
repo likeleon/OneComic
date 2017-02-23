@@ -16,7 +16,7 @@ namespace Core.Common.Contracts
 
         RepositoryActionResult<T> Update(T entity);
 
-        IReadOnlyList<T> Get();
+        IReadOnlyList<T> Get(string order = null);
         T Get(int id);
     }
 }
