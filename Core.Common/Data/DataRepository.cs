@@ -1,6 +1,5 @@
 ﻿using Core.Common.Contracts;
 using Core.Common.Extensions;
-using Core.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -98,10 +97,55 @@ namespace Core.Common.Data
             }
         }
 
-        public IReadOnlyList<T> Get(string order = null)
+        public IReadOnlyList<T> Get()
+        {
+            return Get(order: null);
+        }
+
+        public IReadOnlyList<T> Get(string order)
         {
             using (var context = new U())
-                return GetEntities(context).ApplySort(order).ToList();
+            {
+                var query = GetEntities(context);
+
+                if (order != null)
+                    query = query.ApplySort(order);
+
+                return query.ToList();
+            }
+        }
+
+        public DataPage<T> Get(string order, int page, int pageSize)
+        {
+            if (page <= 0)
+                throw new ArgumentOutOfRangeException(nameof(page), "Page should be a positive value");
+
+            if (pageSize <= 0)
+                throw new ArgumentOutOfRangeException(nameof(pageSize), "Page should be a positive value");
+
+            using (var context = new U())
+            {
+                var query = GetEntities(context);
+
+                if (order != null)
+                    query = query.ApplySort(order);
+
+                var totalCount = query.Count();
+
+                var entities = query
+                    .Skip(pageSize * (page - 1))
+                    .Take(pageSize)
+                    .ToList();
+
+                return new DataPage<T>
+                {
+                    CurrentPage = page,
+                    PageSize = pageSize,
+                    TotalCount = totalCount,
+                    TotalPages = (int)Math.Ceiling((double)totalCount / pageSize),
+                    Entities = entities
+                };
+            }
         }
 
         public T Get(int id)

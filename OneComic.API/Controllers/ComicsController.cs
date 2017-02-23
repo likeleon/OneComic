@@ -1,11 +1,15 @@
 ﻿using Core.Common.Contracts;
 using Marvin.JsonPatch;
+using Newtonsoft.Json;
+using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Http;
+using System.Web.Http.Routing;
 
 namespace OneComic.API.Controllers
 {
@@ -14,6 +18,10 @@ namespace OneComic.API.Controllers
     [RoutePrefix("api/comics")]
     public class ComicsController : ApiController
     {
+        public const int MaxPageSize = 50;
+
+        private const string GetComicsRouteName = "ComicsList";
+
         private readonly IComicRepository _repository;
         private readonly IComicMapper _mapper;
 
@@ -24,19 +32,53 @@ namespace OneComic.API.Controllers
             _mapper = comicMapper;
         }
 
-        [Route("")]
+        [Route("", Name = GetComicsRouteName)]
         [HttpGet]
-        public IHttpActionResult Get(string sort = "id")
+        public IHttpActionResult Get(string sort = "comicId", int page = 1, int pageSize = MaxPageSize)
         {
             try
             {
-                var comics = _repository.Get(sort).Select(_mapper.ToDTO);
-                return Ok(comics);
+                if (page <= 0)
+                    return BadRequest();
+
+                pageSize = Math.Min(pageSize, MaxPageSize);
+                if (pageSize <= 0)
+                    return BadRequest();
+
+                var pagedComics = _repository.Get(sort, page, pageSize);
+
+                var header = CreatePaginationHeader(GetComicsRouteName, pagedComics, sort);
+                HttpContext.Current.Response.Headers.Add("X-Pagination", header);
+
+                return Ok(pagedComics.Entities.Select(_mapper.ToDTO));
             }
             catch (Exception)
             {
                 return InternalServerError();
             }
+        }
+
+        private string CreatePaginationHeader(string routeName, DataPage<Comic> page, string sort)
+        {
+            var urlHelper = new UrlHelper(Request);
+
+            var prevLink = string.Empty;
+            if (page.CurrentPage > 1)
+                prevLink = urlHelper.Link(routeName, new { page = page.CurrentPage - 1, pageSize = page.PageSize, sort = sort });
+
+            var nextLink = string.Empty;
+            if (page.CurrentPage < page.TotalPages)
+                nextLink = urlHelper.Link(routeName, new { page = page.CurrentPage + 1, pageSize = page.PageSize, sort = sort });
+
+            var header = new
+            {
+                currentPage = page.CurrentPage,
+                pageSize = page.PageSize,
+                totalCount = page.TotalCount,
+                previousPageLink = prevLink,
+                nextPageLink = nextLink
+            };
+            return JsonConvert.SerializeObject(header);
         }
 
         [Route("{id}")]

@@ -11,8 +11,8 @@ namespace Core.Common.Extensions
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (source == null)
-                return source;
+            if (order == null)
+                throw new ArgumentNullException(nameof(order));
 
             var ordering = order
                 .Split(',')
