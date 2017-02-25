@@ -1,10 +1,9 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Contracts;
+using OneComic.Business.Entities;
 
 namespace OneComic.Data.Contracts
 {
-    public interface IAccountMapper
+    public interface IAccountMapper : IDataMapper<Account, DTO.Account>
     {
-        DTO.Account ToDTO(Account account);
-        Account ToEntity(DTO.Account account);
     }
 }

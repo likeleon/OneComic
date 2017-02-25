@@ -1,5 +1,6 @@
 ﻿using Core.Common.Contracts;
 using Marvin.JsonPatch;
+using OneComic.API.ActionFilters;
 using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System;
@@ -7,6 +8,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Http;
 
 namespace OneComic.API.Controllers
@@ -16,6 +18,9 @@ namespace OneComic.API.Controllers
     [RoutePrefix("api")]
     public class BooksController : ApiController
     {
+        private const int MaxPageSize = 50;
+        private const string BooksForComicName = "BooksForComic";
+
         private readonly IBookRepository _repository;
         private readonly IBookMapper _mapper;
 
@@ -26,21 +31,30 @@ namespace OneComic.API.Controllers
             _mapper = bookMapper;
         }
 
-        [Route("comics/{comicId}/books")]
+        [Route("comics/{comicId}/books", Name = BooksForComicName)]
         [HttpGet]
-        public IHttpActionResult Get(int comicId)
+        [FieldsParameter("fields", typeof(Data.DTO.Book))]
+        [PageParameters("page", "pageSize", MaxPageSize)]
+        public IHttpActionResult Get(
+            int comicId,
+            string[] fields,
+            string sort = "bookId",
+            int page = 1,
+            int pageSize = MaxPageSize)
         {
-            var books = _repository.GetByComicId(comicId);
-            if (books == null)
-                return NotFound();
+            var pagedBooks = _repository.GetByComicId(comicId, sort, page, pageSize);
 
-            return Ok(books.Select(_mapper.ToDTO));
+            HttpContext.Current.Response.AddPaginationHeader(Request, BooksForComicName, pagedBooks, sort);
+
+            var books = _mapper.ToDataShapedObjects(pagedBooks.Entities, fields);
+            return Ok(books);
         }
 
         [Route("comics/{comicId}/books/{id}")]
         [Route("books/{id}")]
         [HttpGet]
-        public IHttpActionResult Get(int id, int? comicId = null)
+        [FieldsParameter("fields", typeof(Data.DTO.Book))]
+        public IHttpActionResult Get(int id, string[] fields, int? comicId = null)
         {
             Book book;
             if (comicId == null)
@@ -56,7 +70,7 @@ namespace OneComic.API.Controllers
             if (book == null)
                 return NotFound();
 
-            return Ok(_mapper.ToDTO(book));
+            return Ok(_mapper.ToDataShapedObject(book, fields));
         }
 
         [Route("books/{id}")]

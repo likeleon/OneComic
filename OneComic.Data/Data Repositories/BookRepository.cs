@@ -1,4 +1,5 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Contracts;
+using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -43,12 +44,24 @@ namespace OneComic.Data
         public IReadOnlyList<Book> GetByComicId(int comicId)
         {
             using (var context = new OneComicContext())
-            {
-                var comic = _comicRepository.Get(comicId);
-                if (comic == null)
-                    return EmptyBooks;
+                return GetBooksByComicIdQuery(context, comicId).ToList();
+        }
 
-                return context.BookSet.Where(book => book.ComicId == comicId).ToList();
+        private IQueryable<Book> GetBooksByComicIdQuery(OneComicContext context, int comicId)
+        {
+            var comic = _comicRepository.Get(comicId);
+            if (comic == null)
+                return Enumerable.Empty<Book>().AsQueryable();
+
+            return context.BookSet.Where(book => book.ComicId == comicId);
+        }
+
+        public DataPage<Book> GetByComicId(int comicId, string order, int page, int pageSize)
+        {
+            using (var context = new OneComicContext())
+            {
+                var query = GetBooksByComicIdQuery(context, comicId);
+                return GetPage(query, order, page, pageSize);
             }
         }
     }

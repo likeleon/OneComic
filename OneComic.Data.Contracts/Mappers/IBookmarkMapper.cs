@@ -1,10 +1,9 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Contracts;
+using OneComic.Business.Entities;
 
 namespace OneComic.Data.Contracts
 {
-    public interface IBookmarkMapper
+    public interface IBookmarkMapper : IDataMapper<Bookmark, DTO.Bookmark>
     {
-        DTO.Bookmark ToDTO(Bookmark bookmark);
-        Bookmark ToEntity(DTO.Bookmark bookmark);
     }
 }

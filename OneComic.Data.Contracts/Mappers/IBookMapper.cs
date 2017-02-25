@@ -1,10 +1,9 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Contracts;
+using OneComic.Business.Entities;
 
 namespace OneComic.Data.Contracts
 {
-    public interface IBookMapper
+    public interface IBookMapper : IDataMapper<Book, DTO.Book>
     {
-        DTO.Book ToDTO(Book book);
-        Book ToEntity(DTO.Book book);
     }
 }

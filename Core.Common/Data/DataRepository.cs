@@ -117,35 +117,39 @@ namespace Core.Common.Data
 
         public DataPage<T> Get(string order, int page, int pageSize)
         {
+            using (var context = new U())
+            {
+                var query = GetEntities(context);
+                return GetPage(query, order, page, pageSize);
+            }
+        }
+
+        protected DataPage<T> GetPage(IQueryable<T> query, string order, int page, int pageSize)
+        {
             if (page <= 0)
                 throw new ArgumentOutOfRangeException(nameof(page), "Page should be a positive value");
 
             if (pageSize <= 0)
                 throw new ArgumentOutOfRangeException(nameof(pageSize), "Page should be a positive value");
 
-            using (var context = new U())
+            if (order != null)
+                query = query.ApplySort(order);
+
+            var totalCount = query.Count();
+
+            var entities = query
+                .Skip(pageSize * (page - 1))
+                .Take(pageSize)
+                .ToList();
+
+            return new DataPage<T>
             {
-                var query = GetEntities(context);
-
-                if (order != null)
-                    query = query.ApplySort(order);
-
-                var totalCount = query.Count();
-
-                var entities = query
-                    .Skip(pageSize * (page - 1))
-                    .Take(pageSize)
-                    .ToList();
-
-                return new DataPage<T>
-                {
-                    CurrentPage = page,
-                    PageSize = pageSize,
-                    TotalCount = totalCount,
-                    TotalPages = (int)Math.Ceiling((double)totalCount / pageSize),
-                    Entities = entities
-                };
-            }
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling((double)totalCount / pageSize),
+                Entities = entities
+            };
         }
 
         public T Get(int id)

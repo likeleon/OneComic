@@ -2,8 +2,8 @@
 
 namespace Core.Common.Contracts
 {
-    public interface IDataMapper<Entity, DTO> 
-        where Entity: class
+    public interface IDataMapper<Entity, DTO>
+        where Entity : class
         where DTO : class
     {
         DTO ToDTO(Entity entity);
