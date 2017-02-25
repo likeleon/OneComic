@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Net;
@@ -34,10 +35,18 @@ namespace OneComic.API.Controllers
 
         [Route("", Name = GetComicsRouteName)]
         [HttpGet]
-        public IHttpActionResult Get(string sort = "comicId", int page = 1, int pageSize = MaxPageSize)
+        public IHttpActionResult Get(
+            string fields = null, 
+            string sort = "comicId", 
+            int page = 1, 
+            int pageSize = MaxPageSize)
         {
             try
             {
+                var fieldList = fields?.ToLower().Split(',').ToList() ?? new List<string>();
+                if (fieldList.Any(field => !_mapper.HasProperty(field)))
+                    return BadRequest();
+
                 if (page <= 0)
                     return BadRequest();
 
@@ -50,7 +59,8 @@ namespace OneComic.API.Controllers
                 var header = CreatePaginationHeader(GetComicsRouteName, pagedComics, sort);
                 HttpContext.Current.Response.Headers.Add("X-Pagination", header);
 
-                return Ok(pagedComics.Entities.Select(_mapper.ToDTO));
+                var comics = pagedComics.Entities.Select(comic => _mapper.ToDataShapedObject(comic, fieldList));
+                return Ok(comics);
             }
             catch (Exception)
             {
