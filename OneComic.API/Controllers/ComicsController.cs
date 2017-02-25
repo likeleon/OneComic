@@ -37,19 +37,13 @@ namespace OneComic.API.Controllers
         [Route("", Name = GetComicsRouteName)]
         [HttpGet]
         [FieldsParameter("fields", typeof(Data.DTO.Comic))]
+        [PageParameters("page", "pageSize", MaxPageSize)]
         public IHttpActionResult Get(
             string[] fields,
             string sort = "comicId",
             int page = 1,
             int pageSize = MaxPageSize)
         {
-            if (page <= 0)
-                return BadRequest();
-
-            pageSize = Math.Min(pageSize, MaxPageSize);
-            if (pageSize <= 0)
-                return BadRequest();
-
             var pagedComics = _repository.Get(sort, page, pageSize);
 
             var header = CreatePaginationHeader(GetComicsRouteName, pagedComics, sort);

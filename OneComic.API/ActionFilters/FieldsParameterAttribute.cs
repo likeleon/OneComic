@@ -3,32 +3,33 @@ using OneComic.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
 namespace OneComic.API.ActionFilters
 {
-    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Method)]
     public sealed class FieldsParameterAttribute : ActionFilterAttribute
     {
-        private readonly string _parameterName;
+        public string ParameterName { get; }
+        public Type DtoType { get; }
+
         private readonly string[] _dtoFields; 
 
         public FieldsParameterAttribute(string parameterName, Type dtoType)
         {
-            _parameterName = parameterName;
+            ParameterName = parameterName;
+            DtoType = dtoType;
 
-            _dtoFields = dtoType.GetDtoFields().ToArray();
+            _dtoFields = DtoType.GetDtoFields().ToArray();
             if (_dtoFields.Length <= 0)
                 throw new Exception("Empty DTO fields");
         }
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (!actionContext.ActionArguments.ContainsKey(_parameterName))
+            if (!actionContext.ActionArguments.ContainsKey(ParameterName))
                 return;
 
             var value = GetParameterValue(actionContext);
@@ -47,25 +48,20 @@ namespace OneComic.API.ActionFilters
             }
             
             if (invalidFields.Count > 0)
-            {
-                var response = actionContext.Request.CreateErrorResponse(
-                    HttpStatusCode.BadRequest,
-                    $"Invalid fields: {invalidFields.JoinWith(", ")}");
-                throw new HttpResponseException(response);
-            }
+                actionContext.ThrowBadRequestResponse($"Invalid fields: {invalidFields.JoinWith(", ")}");
 
-            actionContext.ActionArguments[_parameterName] = fields.ToArray();
+            actionContext.ActionArguments[ParameterName] = fields.ToArray();
         }
 
         private string GetParameterValue(HttpActionContext actionContext)
         {
             var urlParamValues = actionContext.ControllerContext.RouteData.Values;
-            if (urlParamValues.ContainsKey(_parameterName))
-                return (string)urlParamValues[_parameterName];
+            if (urlParamValues.ContainsKey(ParameterName))
+                return (string)urlParamValues[ParameterName];
 
             var queryStrings = actionContext.ControllerContext.Request.RequestUri.ParseQueryString();
-            if (queryStrings[_parameterName] != null)
-                return queryStrings[_parameterName];
+            if (queryStrings[ParameterName] != null)
+                return queryStrings[ParameterName];
 
             return null;
         }
