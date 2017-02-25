@@ -121,7 +121,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionFilters\FieldsParameterFilterAttribute.cs" />
+    <Compile Include="ActionFilters\FieldsParameterAttribute.cs" />
+    <Compile Include="ActionFilters\ValidateActionParametersAttribute.cs" />
+    <Compile Include="ActionFilters\ValidateModelAttribute.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\ComicsController.cs" />

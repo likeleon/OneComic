@@ -4,6 +4,7 @@ using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System;
 using System.ComponentModel.Composition;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -76,11 +77,8 @@ namespace OneComic.API.Controllers
 
         [Route("books")]
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Data.DTO.Book bookDto)
+        public IHttpActionResult Post([FromBody][Required]Data.DTO.Book bookDto)
         {
-            if (bookDto == null)
-                return BadRequest();
-
             var book = _mapper.ToEntity(bookDto);
             var result = _repository.Add(book);
             if (result.State != RepositoryActionState.Created)
@@ -92,11 +90,10 @@ namespace OneComic.API.Controllers
 
         [Route("books/{id}")]
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody]Data.DTO.Book bookDto)
+        public IHttpActionResult Put(
+            int id, 
+            [FromBody][Required]Data.DTO.Book bookDto)
         {
-            if (bookDto == null)
-                return BadRequest();
-
             var book = _mapper.ToEntity(bookDto);
             var result = _repository.Update(book);
             switch (result.State)
@@ -112,11 +109,10 @@ namespace OneComic.API.Controllers
 
         [Route("books/{id}")]
         [HttpPatch]
-        public IHttpActionResult Patch(int id, [FromBody]JsonPatchDocument<Data.DTO.Book> bookPatchDocument)
+        public IHttpActionResult Patch(
+            int id, 
+            [FromBody][Required]JsonPatchDocument<Data.DTO.Book> bookPatchDocument)
         {
-            if (bookPatchDocument == null)
-                return BadRequest();
-
             var book = _repository.Get(id);
             if (book == null)
                 return NotFound();

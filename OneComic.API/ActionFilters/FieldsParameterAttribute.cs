@@ -11,12 +11,13 @@ using System.Web.Http.Filters;
 
 namespace OneComic.API.ActionFilters
 {
-    public sealed class FieldsParameterFilterAttribute : ActionFilterAttribute
+    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+    public sealed class FieldsParameterAttribute : ActionFilterAttribute
     {
         private readonly string _parameterName;
         private readonly string[] _dtoFields; 
 
-        public FieldsParameterFilterAttribute(string parameterName, Type dtoType)
+        public FieldsParameterAttribute(string parameterName, Type dtoType)
         {
             _parameterName = parameterName;
 
@@ -47,9 +48,10 @@ namespace OneComic.API.ActionFilters
             
             if (invalidFields.Count > 0)
             {
-                var message = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest,
+                var response = actionContext.Request.CreateErrorResponse(
+                    HttpStatusCode.BadRequest,
                     $"Invalid fields: {invalidFields.JoinWith(", ")}");
-                throw new HttpResponseException(message);
+                throw new HttpResponseException(response);
             }
 
             actionContext.ActionArguments[_parameterName] = fields.ToArray();

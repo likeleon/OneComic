@@ -5,8 +5,8 @@ using OneComic.API.ActionFilters;
 using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -36,7 +36,7 @@ namespace OneComic.API.Controllers
 
         [Route("", Name = GetComicsRouteName)]
         [HttpGet]
-        [FieldsParameterFilter("fields", typeof(Data.DTO.Comic))]
+        [FieldsParameter("fields", typeof(Data.DTO.Comic))]
         public IHttpActionResult Get(
             string[] fields,
             string sort = "comicId",
@@ -95,11 +95,8 @@ namespace OneComic.API.Controllers
 
         [Route("")]
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Data.DTO.Comic comicDto)
+        public IHttpActionResult Post([FromBody][Required]Data.DTO.Comic comicDto)
         {
-            if (comicDto == null)
-                return BadRequest();
-
             var result = _repository.Add(_mapper.ToEntity(comicDto));
             if (result.State != RepositoryActionState.Created)
                 return BadRequest();
@@ -110,11 +107,10 @@ namespace OneComic.API.Controllers
 
         [Route("{id}")]
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody]Data.DTO.Comic comicDto)
+        public IHttpActionResult Put(
+            int id, 
+            [FromBody][Required]Data.DTO.Comic comicDto)
         {
-            if (comicDto == null)
-                return BadRequest();
-
             var result = _repository.Update(_mapper.ToEntity(comicDto));
             switch (result.State)
             {
@@ -129,11 +125,10 @@ namespace OneComic.API.Controllers
 
         [Route("{id}")]
         [HttpPatch]
-        public IHttpActionResult Patch(int id, [FromBody]JsonPatchDocument<Data.DTO.Comic> comicPatchDocument)
+        public IHttpActionResult Patch(
+            int id, 
+            [FromBody][Required]JsonPatchDocument<Data.DTO.Comic> comicPatchDocument)
         {
-            if (comicPatchDocument == null)
-                return BadRequest();
-
             var comic = _repository.Get(id);
             if (comic == null)
                 return NotFound();

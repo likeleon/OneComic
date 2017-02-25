@@ -1,6 +1,7 @@
 ﻿using Core.Common.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using OneComic.API.ActionFilters;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Web.Http;
@@ -22,6 +23,15 @@ namespace OneComic.API
         {
             config.MapHttpAttributeRoutes();
 
+            AddFilters(config);
+
+            ConfigureFormatters(config);
+
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
+        }
+
+        private static void ConfigureFormatters(HttpConfiguration config)
+        {
             config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
 
             JsonSupportedMediaTypes.Do(config.Formatters.JsonFormatter.SupportedMediaTypes.Add);
@@ -29,8 +39,12 @@ namespace OneComic.API
             var jsonSerializerSettings = config.Formatters.JsonFormatter.SerializerSettings;
             jsonSerializerSettings.Formatting = Formatting.Indented;
             jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        }
 
-            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
+        private static void AddFilters(HttpConfiguration config)
+        {
+            config.Filters.Add(new ValidateActionParametersAttribute());
+            config.Filters.Add(new ValidateModelAttribute());
         }
     }
 }
