@@ -19,6 +19,8 @@ namespace OneComic.API
             var jsonSerializerSettings = config.Formatters.JsonFormatter.SerializerSettings;
             jsonSerializerSettings.Formatting = Formatting.Indented;
             jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
         }
     }
 }

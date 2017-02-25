@@ -36,36 +36,29 @@ namespace OneComic.API.Controllers
         [Route("", Name = GetComicsRouteName)]
         [HttpGet]
         public IHttpActionResult Get(
-            string fields = null, 
-            string sort = "comicId", 
-            int page = 1, 
+            string fields = null,
+            string sort = "comicId",
+            int page = 1,
             int pageSize = MaxPageSize)
         {
-            try
-            {
-                var fieldList = fields?.ToLower().Split(',').ToList() ?? new List<string>();
-                if (fieldList.Any(field => !_mapper.HasProperty(field)))
-                    return BadRequest();
+            var fieldList = fields?.ToLower().Split(',').ToList() ?? new List<string>();
+            if (fieldList.Any(field => !_mapper.HasProperty(field)))
+                return BadRequest();
 
-                if (page <= 0)
-                    return BadRequest();
+            if (page <= 0)
+                return BadRequest();
 
-                pageSize = Math.Min(pageSize, MaxPageSize);
-                if (pageSize <= 0)
-                    return BadRequest();
+            pageSize = Math.Min(pageSize, MaxPageSize);
+            if (pageSize <= 0)
+                return BadRequest();
 
-                var pagedComics = _repository.Get(sort, page, pageSize);
+            var pagedComics = _repository.Get(sort, page, pageSize);
 
-                var header = CreatePaginationHeader(GetComicsRouteName, pagedComics, sort);
-                HttpContext.Current.Response.Headers.Add("X-Pagination", header);
+            var header = CreatePaginationHeader(GetComicsRouteName, pagedComics, sort);
+            HttpContext.Current.Response.Headers.Add("X-Pagination", header);
 
-                var comics = pagedComics.Entities.Select(comic => _mapper.ToDataShapedObject(comic, fieldList));
-                return Ok(comics);
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
-            }
+            var comics = pagedComics.Entities.Select(comic => _mapper.ToDataShapedObject(comic, fieldList));
+            return Ok(comics);
         }
 
         private string CreatePaginationHeader(string routeName, DataPage<Comic> page, string sort)
@@ -95,65 +88,44 @@ namespace OneComic.API.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
-            try
-            {
-                var comic = _repository.Get(id);
-                if (comic == null)
-                    return NotFound();
+            var comic = _repository.Get(id);
+            if (comic == null)
+                return NotFound();
 
-                return Ok(_mapper.ToDTO(comic));
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
-            }
+            return Ok(_mapper.ToDTO(comic));
         }
 
         [Route("")]
         [HttpPost]
         public IHttpActionResult Post([FromBody]Data.DTO.Comic comicDto)
         {
-            try
-            {
-                if (comicDto == null)
-                    return BadRequest();
+            if (comicDto == null)
+                return BadRequest();
 
-                var result = _repository.Add(_mapper.ToEntity(comicDto));
-                if (result.State != RepositoryActionState.Created)
-                    return BadRequest();
+            var result = _repository.Add(_mapper.ToEntity(comicDto));
+            if (result.State != RepositoryActionState.Created)
+                return BadRequest();
 
-                var locationUri = new Uri(Request.RequestUri, result.Entity.ComicId.ToString());
-                return Created(locationUri, _mapper.ToDTO(result.Entity));
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
-            }
+            var locationUri = new Uri(Request.RequestUri, result.Entity.ComicId.ToString());
+            return Created(locationUri, _mapper.ToDTO(result.Entity));
         }
 
         [Route("{id}")]
         [HttpPut]
         public IHttpActionResult Put(int id, [FromBody]Data.DTO.Comic comicDto)
         {
-            try
-            {
-                if (comicDto == null)
-                    return BadRequest();
+            if (comicDto == null)
+                return BadRequest();
 
-                var result = _repository.Update(_mapper.ToEntity(comicDto));
-                switch (result.State)
-                {
-                    case RepositoryActionState.Updated:
-                        return Ok(_mapper.ToDTO(result.Entity));
-                    case RepositoryActionState.NotFound:
-                        return NotFound();
-                    default:
-                        return BadRequest();
-                }
-            }
-            catch (Exception)
+            var result = _repository.Update(_mapper.ToEntity(comicDto));
+            switch (result.State)
             {
-                return InternalServerError();
+                case RepositoryActionState.Updated:
+                    return Ok(_mapper.ToDTO(result.Entity));
+                case RepositoryActionState.NotFound:
+                    return NotFound();
+                default:
+                    return BadRequest();
             }
         }
 
@@ -161,50 +133,36 @@ namespace OneComic.API.Controllers
         [HttpPatch]
         public IHttpActionResult Patch(int id, [FromBody]JsonPatchDocument<Data.DTO.Comic> comicPatchDocument)
         {
-            try
-            {
-                if (comicPatchDocument == null)
-                    return BadRequest();
+            if (comicPatchDocument == null)
+                return BadRequest();
 
-                var comic = _repository.Get(id);
-                if (comic == null)
-                    return NotFound();
+            var comic = _repository.Get(id);
+            if (comic == null)
+                return NotFound();
 
-                var comicDto = _mapper.ToDTO(comic);
-                comicPatchDocument.ApplyTo(comicDto);
+            var comicDto = _mapper.ToDTO(comic);
+            comicPatchDocument.ApplyTo(comicDto);
 
-                var result = _repository.Update(_mapper.ToEntity(comicDto));
-                if (result.State != RepositoryActionState.Updated)
-                    return BadRequest();
+            var result = _repository.Update(_mapper.ToEntity(comicDto));
+            if (result.State != RepositoryActionState.Updated)
+                return BadRequest();
 
-                return Ok(_mapper.ToDTO(result.Entity));
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
-            }
+            return Ok(_mapper.ToDTO(result.Entity));
         }
 
         [Route("{id}")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            try
+            var result = _repository.Remove(id);
+            switch (result.State)
             {
-                var result = _repository.Remove(id);
-                switch (result.State)
-                {
-                    case RepositoryActionState.Deleted:
-                        return StatusCode(HttpStatusCode.NoContent);
-                    case RepositoryActionState.NotFound:
-                        return NotFound();
-                    default:
-                        return BadRequest();
-                }
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
+                case RepositoryActionState.Deleted:
+                    return StatusCode(HttpStatusCode.NoContent);
+                case RepositoryActionState.NotFound:
+                    return NotFound();
+                default:
+                    return BadRequest();
             }
         }
     }
