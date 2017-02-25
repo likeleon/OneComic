@@ -58,6 +58,7 @@
     <Compile Include="Data Repositories\ComicRepository.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Mappers\ComicMapper.cs" />
     <Compile Include="Mappers\BookmarkMapper.cs" />
     <Compile Include="Mappers\BookMapper.cs" />
