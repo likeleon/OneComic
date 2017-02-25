@@ -1,4 +1,5 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Data;
+using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 
@@ -6,9 +7,9 @@ namespace OneComic.Data.Mappers
 {
     [Export(typeof(IBookMapper))]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public sealed class BookMapper : IBookMapper
+    public sealed class BookMapper : DataMapper<Book, DTO.Book>, IBookMapper
     {
-        public DTO.Book ToDTO(Book book)
+        public override DTO.Book ToDTO(Book book)
         {
             return new DTO.Book
             {
@@ -22,7 +23,7 @@ namespace OneComic.Data.Mappers
             };
         }
 
-        public Book ToEntity(DTO.Book book)
+        public override Book ToEntity(DTO.Book book)
         {
             return new Book
             {

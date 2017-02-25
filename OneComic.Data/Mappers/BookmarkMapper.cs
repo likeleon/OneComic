@@ -1,4 +1,5 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Data;
+using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 
@@ -6,9 +7,9 @@ namespace OneComic.Data.Mappers
 {
     [Export(typeof(IBookmarkMapper))]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public sealed class BookmarkMapper : IBookmarkMapper
+    public sealed class BookmarkMapper : DataMapper<Bookmark, DTO.Bookmark>, IBookmarkMapper
     {
-        public DTO.Bookmark ToDTO(Bookmark bookmark)
+        public override DTO.Bookmark ToDTO(Bookmark bookmark)
         {
             return new DTO.Bookmark
             {
@@ -20,7 +21,7 @@ namespace OneComic.Data.Mappers
             };
         }
 
-        public Bookmark ToEntity(DTO.Bookmark bookmark)
+        public override Bookmark ToEntity(DTO.Bookmark bookmark)
         {
             return new Bookmark
             {

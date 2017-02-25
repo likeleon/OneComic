@@ -1,14 +1,9 @@
-﻿using OneComic.Business.Entities;
-using System.Collections.Generic;
+﻿using Core.Common.Contracts;
+using OneComic.Business.Entities;
 
 namespace OneComic.Data.Contracts
 {
-    public interface IComicMapper
+    public interface IComicMapper : IDataMapper<Comic, DTO.Comic>
     {
-        DTO.Comic ToDTO(Comic comic);
-        Comic ToEntity(DTO.Comic comic);
-
-        object ToDataShapedObject(Comic comic, IEnumerable<string> fields);
-        object ToDataShapedObject(DTO.Comic comic, IEnumerable<string> fields);
     }
 }

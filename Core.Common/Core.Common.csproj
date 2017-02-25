@@ -65,7 +65,9 @@
     <Compile Include="Core\NotificationObject.cs" />
     <Compile Include="Core\ObjectBase.cs" />
     <Compile Include="Core\ObjectGraph.cs" />
+    <Compile Include="Data\DataMapper.cs" />
     <Compile Include="Data\DataRepository.cs" />
+    <Compile Include="Data\DataShapingUtils.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\IQueryableExtensions.cs" />

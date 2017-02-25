@@ -38,6 +38,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDataMapper.cs" />
     <Compile Include="Mappers\IAccountMapper.cs" />
     <Compile Include="Mappers\IBookMapper.cs" />
     <Compile Include="Mappers\IComicMapper.cs" />

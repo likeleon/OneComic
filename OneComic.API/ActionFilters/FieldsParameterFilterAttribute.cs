@@ -14,12 +14,15 @@ namespace OneComic.API.ActionFilters
     public sealed class FieldsParameterFilterAttribute : ActionFilterAttribute
     {
         private readonly string _parameterName;
-        private readonly HashSet<string> _dtoProperties; 
+        private readonly string[] _dtoFields; 
 
         public FieldsParameterFilterAttribute(string parameterName, Type dtoType)
         {
             _parameterName = parameterName;
-            _dtoProperties = new HashSet<string>(dtoType.GetDtoProperties().Select(p => p.Name));
+
+            _dtoFields = dtoType.GetDtoFields().ToArray();
+            if (_dtoFields.Length <= 0)
+                throw new Exception("Empty DTO fields");
         }
 
         public override void OnActionExecuting(HttpActionContext actionContext)
@@ -27,24 +30,32 @@ namespace OneComic.API.ActionFilters
             if (!actionContext.ActionArguments.ContainsKey(_parameterName))
                 return;
 
-            var parameter = GetParameter(actionContext);
-            if (parameter.IsNullOrEmpty())
+            var value = GetParameterValue(actionContext);
+            if (value.IsNullOrEmpty())
                 return;
 
-            var fields = parameter.ToLower().Split(',').ToArray();
-
-            var invalidFields = fields.Except(_dtoProperties, StringComparer.InvariantCultureIgnoreCase).ToArray();
-            if (invalidFields.Length > 0)
+            var fields = new List<string>();
+            var invalidFields = new List<string>();
+            foreach (var word in value.ToLower().Split(',').ToArray())
+            {
+                var field = _dtoFields.FirstOrDefault(f => string.Equals(word, f, StringComparison.OrdinalIgnoreCase));
+                if (field != null)
+                    fields.Add(field);
+                else
+                    invalidFields.Add(field);
+            }
+            
+            if (invalidFields.Count > 0)
             {
                 var message = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest,
                     $"Invalid fields: {invalidFields.JoinWith(", ")}");
                 throw new HttpResponseException(message);
             }
 
-            actionContext.ActionArguments[_parameterName] = fields;
+            actionContext.ActionArguments[_parameterName] = fields.ToArray();
         }
 
-        private string GetParameter(HttpActionContext actionContext)
+        private string GetParameterValue(HttpActionContext actionContext)
         {
             var urlParamValues = actionContext.ControllerContext.RouteData.Values;
             if (urlParamValues.ContainsKey(_parameterName))

@@ -1,4 +1,5 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Data;
+using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 
@@ -6,9 +7,9 @@ namespace OneComic.Data.Mappers
 {
     [Export(typeof(IAccountMapper))]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public sealed class AccountMapper : IAccountMapper
+    public sealed class AccountMapper : DataMapper<Account, DTO.Account>, IAccountMapper
     {
-        public DTO.Account ToDTO(Account account)
+        public override DTO.Account ToDTO(Account account)
         {
             return new DTO.Account
             {
@@ -17,7 +18,7 @@ namespace OneComic.Data.Mappers
             };
         }
 
-        public Account ToEntity(DTO.Account account)
+        public override Account ToEntity(DTO.Account account)
         {
             return new Account
             {

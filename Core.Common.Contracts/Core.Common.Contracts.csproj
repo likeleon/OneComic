@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataPage.cs" />
     <Compile Include="IAccountOwnedEntity.cs" />
     <Compile Include="IBusinessEngine.cs" />
     <Compile Include="IBusinessEngineFactory.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="IDataRepositoryFactory.cs" />
     <Compile Include="IDirtyCapable.cs" />
     <Compile Include="IIdentifiableEntity.cs" />
+    <Compile Include="IDataMapper.cs" />
     <Compile Include="IServiceContract.cs" />
     <Compile Include="IServiceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

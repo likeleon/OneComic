@@ -56,13 +56,14 @@
     <Compile Include="Data Repositories\BookmarkRepository.cs" />
     <Compile Include="Data Repositories\BookRepository.cs" />
     <Compile Include="Data Repositories\ComicRepository.cs" />
+    <Compile Include="DataMapper.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Mappers\ComicMapper.cs" />
     <Compile Include="Mappers\BookmarkMapper.cs" />
     <Compile Include="Mappers\BookMapper.cs" />
     <Compile Include="Mappers\AccountMapper.cs" />
+    <Compile Include="Mappers\DataShapingUtils.cs" />
     <Compile Include="Migrations\201702201359047_InitialCreate.cs" />
     <Compile Include="Migrations\201702201359047_InitialCreate.Designer.cs">
       <DependentUpon>201702201359047_InitialCreate.cs</DependentUpon>
