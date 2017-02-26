@@ -2,6 +2,7 @@
 using Marvin.JsonPatch;
 using Newtonsoft.Json;
 using OneComic.API.ActionFilters;
+using OneComic.API.ModelBinders;
 using OneComic.Data.Contracts;
 using System;
 using System.ComponentModel.Composition;
@@ -9,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 
 namespace OneComic.API.Controllers
 {
@@ -32,10 +34,9 @@ namespace OneComic.API.Controllers
 
         [Route("", Name = ComicsListName)]
         [HttpGet]
-        [FieldsParameter("fields", typeof(Data.DTO.Comic))]
         [PageParameters("page", "pageSize", MaxPageSize)]
         public IHttpActionResult Get(
-            string[] fields,
+            [ModelBinder(typeof(ComicFieldParamsModelBinder))] FieldParams<Data.DTO.Comic> fields,
             string sort = "comicId",
             int page = 1,
             int pageSize = MaxPageSize)
@@ -44,7 +45,7 @@ namespace OneComic.API.Controllers
 
             HttpContext.Current.Response.AddPaginationHeader(Request, ComicsListName, pagedComics, sort);
 
-            var comics = _mapper.ToDataShapedObjects(pagedComics.Entities, fields);
+            var comics = _mapper.ToDataShapedObjects(pagedComics.Entities, fields?.Fields);
             return Ok(comics);
         }
 

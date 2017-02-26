@@ -1,5 +1,5 @@
-﻿using Core.Common.Extensions;
-using OneComic.Data;
+﻿using Core.Common.Data;
+using Core.Common.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

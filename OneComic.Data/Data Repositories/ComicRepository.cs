@@ -1,6 +1,9 @@
-﻿using OneComic.Business.Entities;
+﻿using Core.Common.Contracts;
+using OneComic.Business.Entities;
 using OneComic.Data.Contracts;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Entity;
 using System.Linq;
 
 namespace OneComic.Data
@@ -26,6 +29,31 @@ namespace OneComic.Data
         protected override void AttachEntity(OneComicContext context, Comic entity)
         {
             context.ComicSet.Attach(entity);
+        }
+
+        public IReadOnlyList<Comic> GetWithBooks()
+        {
+            return GetWithBooks(order: null);
+        }
+
+        public IReadOnlyList<Comic> GetWithBooks(string order)
+        {
+            using (var context = new OneComicContext())
+                return GetWithBooksQuery(context).ToList();
+        }
+
+        private IQueryable<Comic> GetWithBooksQuery(OneComicContext context)
+        {
+            return GetEntities(context).Include(nameof(Comic.Books));
+        }
+
+        public DataPage<Comic> GetWithBooks(string order, int page, int pageSize)
+        {
+            using (var context = new OneComicContext())
+            {
+                var query = GetWithBooksQuery(context);
+                return GetPage(query, order, page, pageSize);
+            }
         }
     }
 }

@@ -63,7 +63,6 @@
     <Compile Include="Mappers\BookmarkMapper.cs" />
     <Compile Include="Mappers\BookMapper.cs" />
     <Compile Include="Mappers\AccountMapper.cs" />
-    <Compile Include="Mappers\DataShapingUtils.cs" />
     <Compile Include="Migrations\201702201359047_InitialCreate.cs" />
     <Compile Include="Migrations\201702201359047_InitialCreate.Designer.cs">
       <DependentUpon>201702201359047_InitialCreate.cs</DependentUpon>

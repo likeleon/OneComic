@@ -132,6 +132,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelBinders\ComicFieldParamsModelBinder.cs" />
+    <Compile Include="ModelBinders\FieldParamsModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\HttpResponseExtensions.cs" />

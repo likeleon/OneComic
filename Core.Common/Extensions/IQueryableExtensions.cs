@@ -12,7 +12,7 @@ namespace Core.Common.Extensions
                 throw new ArgumentNullException(nameof(source));
 
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                return source;
 
             var ordering = order
                 .Split(',')

@@ -105,14 +105,7 @@ namespace Core.Common.Data
         public IReadOnlyList<T> Get(string order)
         {
             using (var context = new U())
-            {
-                var query = GetEntities(context);
-
-                if (order != null)
-                    query = query.ApplySort(order);
-
-                return query.ToList();
-            }
+                return GetEntities(context).ApplySort(order).ToList();
         }
 
         public DataPage<T> Get(string order, int page, int pageSize)
@@ -132,8 +125,7 @@ namespace Core.Common.Data
             if (pageSize <= 0)
                 throw new ArgumentOutOfRangeException(nameof(pageSize), "Page should be a positive value");
 
-            if (order != null)
-                query = query.ApplySort(order);
+            query = query.ApplySort(order);
 
             var totalCount = query.Count();
 
