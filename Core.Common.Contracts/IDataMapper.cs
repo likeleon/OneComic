@@ -11,7 +11,6 @@ namespace Core.Common.Contracts
 
         IEnumerable<string> Fields { get; }
 
-        object ToDataShapedObject(Entity entity, IEnumerable<string> fields);
-        object ToDataShapedObject(DTO dto, IEnumerable<string> fields);
+        object ToDataShapedObject(Entity entity, IDataFields fields);
     }
 }

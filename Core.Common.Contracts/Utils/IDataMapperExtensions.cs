@@ -8,7 +8,7 @@ namespace Core.Common.Contracts
         public static IEnumerable<object> ToDataShapedObjects<Entity, DTO>(
             this IDataMapper<Entity, DTO> mapper,
             IEnumerable<Entity> entities,
-            IEnumerable<string> fields)
+            IDataFields fields)
             where Entity : class
             where DTO : class
         {

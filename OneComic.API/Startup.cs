@@ -1,5 +1,7 @@
 ﻿using Core.Common.API;
+using Core.Common.Data;
 using Microsoft.Owin;
+using OneComic.API.ModelBinders;
 using OneComic.Client.Bootstrapper;
 using OneComic.Data;
 using Owin;
@@ -19,6 +21,9 @@ namespace OneComic.API
             InstallDependencyResolver(configuration);
 
             WebApiConfig.Register(configuration);
+
+            configuration.BindParameter(typeof(DataFields<Data.DTO.Comic>), new ComicFieldsModelBinder());
+            configuration.BindParameter(typeof(DataFields<Data.DTO.Book>), new BookFieldsModelBinder());
             
             app.UseWebApi(configuration);
         }

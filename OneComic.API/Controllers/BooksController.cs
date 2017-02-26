@@ -1,4 +1,5 @@
 ﻿using Core.Common.Contracts;
+using Core.Common.Data;
 using Marvin.JsonPatch;
 using OneComic.API.ActionFilters;
 using OneComic.Business.Entities;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 
 namespace OneComic.API.Controllers
 {
@@ -33,18 +35,17 @@ namespace OneComic.API.Controllers
 
         [Route("comics/{comicId}/books", Name = BooksForComicName)]
         [HttpGet]
-        [FieldsParameter("fields", typeof(Data.DTO.Book))]
         [PageParameters("page", "pageSize", MaxPageSize)]
         public IHttpActionResult Get(
             int comicId,
-            string[] fields,
+            [ModelBinder] DataFields<Data.DTO.Book> fields,
             string sort = "bookId",
             int page = 1,
             int pageSize = MaxPageSize)
         {
             var pagedBooks = _repository.GetByComicId(comicId, sort, page, pageSize);
 
-            HttpContext.Current.Response.AddPaginationHeader(Request, BooksForComicName, pagedBooks, sort);
+            HttpContext.Current.Response.AddPaginationHeader(Request, BooksForComicName, pagedBooks, fields, sort);
 
             var books = _mapper.ToDataShapedObjects(pagedBooks.Entities, fields);
             return Ok(books);
@@ -53,8 +54,10 @@ namespace OneComic.API.Controllers
         [Route("comics/{comicId}/books/{id}")]
         [Route("books/{id}")]
         [HttpGet]
-        [FieldsParameter("fields", typeof(Data.DTO.Book))]
-        public IHttpActionResult Get(int id, string[] fields, int? comicId = null)
+        public IHttpActionResult Get(
+            int id,
+            [ModelBinder] DataFields<Data.DTO.Book> fields,
+            int? comicId = null)
         {
             Book book;
             if (comicId == null)

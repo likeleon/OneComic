@@ -1,8 +1,8 @@
 ﻿namespace OneComic.API.ModelBinders
 {
-    public sealed class ComicFieldParamsModelBinder : FieldParamsModelBinder<Data.DTO.Comic>
+    public sealed class ComicFieldsModelBinder : DataFieldsModelBinder<Data.DTO.Comic>
     {
-        public ComicFieldParamsModelBinder()
+        public ComicFieldsModelBinder()
         {
             AddAssociatedType<Data.DTO.Book>(nameof(Business.Entities.Comic.Books));
         }

@@ -1,7 +1,7 @@
 ﻿using Core.Common.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
 using System.Reflection;
 
 namespace Core.Common.Data
@@ -17,24 +17,33 @@ namespace Core.Common.Data
 
         public IEnumerable<string> Fields => _propertyInfoByFieldName.Keys;
 
-        public object ToDataShapedObject(DTO dto, IEnumerable<string> fields)
+        public object ToDataShapedObject(Entity entity, IDataFields fields)
         {
-            if (fields?.Any() != true)
+            var dto = ToDTO(entity);
+            if (fields == null)
                 return dto;
 
             var obj = new ExpandoObject() as IDictionary<string, object>;
-            foreach (var field in fields)
+            foreach (var field in fields.Fields)
             {
                 var value = _propertyInfoByFieldName[field].GetValue(dto);
                 obj.Add(field, value);
             }
 
+            foreach (var kvp in fields.AssociatedFields)
+            {
+                var associationName = kvp.Key;
+                var associatedFields = kvp.Value;
+                var associatedObject = CreateAssociatedObject(entity, associationName, associatedFields);
+                obj.Add(associationName, associatedObject);
+            }
+
             return obj;
         }
 
-        public object ToDataShapedObject(Entity entity, IEnumerable<string> fields)
+        protected virtual object CreateAssociatedObject(Entity entity, string associationName, IDataFields fields)
         {
-            return ToDataShapedObject(ToDTO(entity), fields);
+            throw new NotImplementedException($"Association not supported: {associationName}");
         }
     }
 }

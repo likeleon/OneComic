@@ -65,6 +65,8 @@
     <Compile Include="Core\NotificationObject.cs" />
     <Compile Include="Core\ObjectBase.cs" />
     <Compile Include="Core\ObjectGraph.cs" />
+    <Compile Include="Data\DataFields%271.cs" />
+    <Compile Include="Data\DataFields.cs" />
     <Compile Include="Data\DataMapper.cs" />
     <Compile Include="Data\DataRepository.cs" />
     <Compile Include="Data\DataShapingUtils.cs" />

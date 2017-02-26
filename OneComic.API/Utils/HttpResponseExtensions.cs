@@ -1,4 +1,6 @@
 ﻿using Core.Common.Contracts;
+using Core.Common.Data;
+using Core.Common.Extensions;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Web;
@@ -13,17 +15,38 @@ namespace OneComic.API
             HttpRequestMessage request,
             string routeName,
             DataPage<T> page,
+            IDataFields fields,
             string sort)
         {
             var urlHelper = new UrlHelper(request);
 
+            var fieldsStr = fields?.Flatten()?.JoinWith(",") ?? string.Empty;
+
             var prevLink = string.Empty;
             if (page.CurrentPage > 1)
-                prevLink = urlHelper.Link(routeName, new { page = page.CurrentPage - 1, pageSize = page.PageSize, sort = sort });
+            {
+                var routeValues = new
+                {
+                    page = page.CurrentPage - 1,
+                    pageSize = page.PageSize,
+                    fields = fieldsStr,
+                    sort = sort
+                };
+                prevLink = urlHelper.Link(routeName, routeValues);
+            }
 
             var nextLink = string.Empty;
             if (page.CurrentPage < page.TotalPages)
-                nextLink = urlHelper.Link(routeName, new { page = page.CurrentPage + 1, pageSize = page.PageSize, sort = sort });
+            {
+                var routeValues = new
+                {
+                    page = page.CurrentPage + 1,
+                    pageSize = page.PageSize,
+                    fields = fieldsStr,
+                    sort = sort
+                };
+                nextLink = urlHelper.Link(routeName, routeValues);
+            }
 
             var header = JsonConvert.SerializeObject(new
             {
