@@ -27,6 +27,8 @@ namespace OneComic.API
 
             ConfigureFormatters(config);
 
+            config.MessageHandlers.Add(new CacheCow.Server.CachingHandler(config));
+
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
         }
 
