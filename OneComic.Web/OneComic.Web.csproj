@@ -1124,14 +1124,6 @@
       <Project>{ef8c59f4-92be-4b83-8a02-eed03c93c8fe}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OneComic.Client.Bootstrapper\OneComic.Client.Bootstrapper.csproj">
-      <Project>{9FED08C3-BB4A-46FF-85BB-3DE12CD473F3}</Project>
-      <Name>OneComic.Client.Bootstrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OneComic.Client.Entities\OneComic.Client.Entities.csproj">
-      <Project>{88a83181-a4eb-409e-87e7-9d015a46c002}</Project>
-      <Name>OneComic.Client.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
       <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
       <Name>OneComic.Common</Name>

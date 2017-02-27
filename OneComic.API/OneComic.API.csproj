@@ -181,10 +181,6 @@
       <Project>{387adb00-4f5d-4076-9a70-df67d49daa00}</Project>
       <Name>OneComic.Business.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OneComic.Client.Bootstrapper\OneComic.Client.Bootstrapper.csproj">
-      <Project>{9FED08C3-BB4A-46FF-85BB-3DE12CD473F3}</Project>
-      <Name>OneComic.Client.Bootstrapper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
       <Project>{EA7FEA03-3817-4107-B70B-A218CE1399CD}</Project>
       <Name>OneComic.Data.Contracts</Name>

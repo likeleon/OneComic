@@ -2,7 +2,6 @@
 using Core.Common.Data;
 using Microsoft.Owin;
 using OneComic.API.ModelBinders;
-using OneComic.Client.Bootstrapper;
 using OneComic.Data;
 using Owin;
 using System.ComponentModel.Composition.Hosting;
@@ -34,7 +33,7 @@ namespace OneComic.API
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountRepository).Assembly));
 
-            var container = MefLoader.Init(catalog.Catalogs);
+            var container = new CompositionContainer(catalog);
             var dependencyResolver = new MefAPIDependencyResolver(container);
 
             configuration.DependencyResolver = dependencyResolver;

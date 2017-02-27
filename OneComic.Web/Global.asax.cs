@@ -1,5 +1,4 @@
 ﻿using Core.Common.API;
-using OneComic.Client.Bootstrapper;
 using OneComic.Web.Core;
 using System.ComponentModel.Composition.Hosting;
 using System.Reflection;
@@ -22,7 +21,7 @@ namespace OneComic.Web
 
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
-            var container = MefLoader.Init(catalog.Catalogs);
+            var container = new CompositionContainer(catalog);
 
             DependencyResolver.SetResolver(new MefDependencyResolver(container)); // view controllers
             GlobalConfiguration.Configuration.DependencyResolver = new MefAPIDependencyResolver(container); // web api controller
