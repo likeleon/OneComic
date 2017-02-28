@@ -5,6 +5,7 @@ using OneComic.API.ActionFilters;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace OneComic.API
 {
@@ -28,6 +29,8 @@ namespace OneComic.API
             ConfigureFormatters(config);
 
             config.MessageHandlers.Add(new CacheCow.Server.CachingHandler(config));
+
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
         }

@@ -193,7 +193,6 @@
     <Compile Include="Helpers\OneComicHttpClient.cs" />
     <Compile Include="Models\AccountLoginModel.cs" />
     <Compile Include="Models\AccountRegisterModel.cs" />
-    <Compile Include="Models\ComicsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

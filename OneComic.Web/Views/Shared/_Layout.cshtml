@@ -28,7 +28,7 @@
       var rootPath;
       oc.rootPath = rootPath;
     }(window.OneComic));
-    OneComic.rootPath = '@Url.Content("~")';
+    OneComic.rootPath = '@System.Configuration.ConfigurationManager.AppSettings["OneComicApiAddress"]';
     //alert(OneComic.rootPath);
   </script>
 

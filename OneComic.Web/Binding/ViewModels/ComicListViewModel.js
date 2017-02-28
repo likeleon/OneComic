@@ -3,7 +3,7 @@
   $scope.init = false;
 
   $scope.browseCars = function () {
-    viewModelHelper.apiGet("api/comics", null,
+    viewModelHelper.apiGet("comics", null,
       function (result) {
         $scope.comics = result.data;
         $scope.init = true;
