@@ -178,6 +178,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\API\AccountApiController.cs" />
     <Compile Include="Controllers\API\ComicsApiController.cs" />
+    <Compile Include="Controllers\ComicsController.cs" />
     <Compile Include="Controllers\MVC\AccountController.cs" />
     <Compile Include="Controllers\MVC\HomeController.cs" />
     <Compile Include="Core\ApiControllerBase.cs" />
@@ -189,8 +190,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\OneComicHttpClient.cs" />
     <Compile Include="Models\AccountLoginModel.cs" />
     <Compile Include="Models\AccountRegisterModel.cs" />
+    <Compile Include="Models\ComicsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1086,6 +1089,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_ValidationErrors.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Comics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1127,6 +1131,10 @@
     <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
       <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
       <Name>OneComic.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
+      <Project>{6209E8E4-52F0-41CE-9157-77D32A085755}</Project>
+      <Name>OneComic.Data.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

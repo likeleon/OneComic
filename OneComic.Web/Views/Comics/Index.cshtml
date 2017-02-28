@@ -1,0 +1,21 @@
+﻿@model OneComic.Web.Models.ComicsViewModel
+
+<div data-ng-controller="ComicListViewModel">
+  <h2>BROWSE COMICS</h2>
+  <div ng-show="@Model.Comics.Any()" class="row">
+    <div class="comic-cards-wrapper">
+      <div data-ng-repeat="comic in comics">
+        <div class="comic-card">
+          <a href="">
+            <img class="" ng-src="{{ comic.CoverImage }}" alt="{{ comic.Title }}">
+            <p class="comic-card-title">{{ comic.Title }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="@!Model.Comics.Any()">
+    <h3>NO RESULTS FOUND.</h3>
+  </div>
+</div>
+
