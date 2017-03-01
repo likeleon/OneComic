@@ -1,23 +1,25 @@
 ﻿@section scripts
 {
-    <script src="@Url.Content("~/Binding/ViewModels/ComicListViewModel.js")" type="text/javascript"></script>
+  <script src="@Url.Content("~/Binding/ViewModels/ComicsViewModel.js")" type="text/javascript"></script>
 }
 
-<div data-ng-controller="ComicListViewModel">
-    <h2>BROWSE COMICS</h2>
-    <div ng-show="init && comics.length > 0" class="row">
-        <div class="comic-cards-wrapper">
-            <div data-ng-repeat="comic in comics">
-                <div class="comic-card">
-                    <a href="">
-                        <img class="" ng-src="{{ comic.coverImageUri }}" alt="{{ comic.title }}">
-                        <p class="comic-card-title">{{ comic.title }}</p>
-                    </a>
-                </div>
-            </div>
+<div data-ng-controller="ComicsViewModel">
+  <div ng-show="init && comics.length > 0">
+    <div class="comic-cards-wrapper row">
+      <div data-ng-repeat="comic in comics">
+        <div class="comic-card">
+          <a href="">
+            <img class="" ng-src="{{ comic.coverImageUri }}" alt="{{ comic.title }}">
+            <p class="comic-card-title">{{ comic.title }}</p>
+          </a>
         </div>
+      </div>
     </div>
-    <div ng-show="init && comics.length <= 0">
-        <h3>NO RESULTS FOUND.</h3>
+    <div class="row text-center">
+      <ul uib-pagination ng-change="pageChanged()" items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage" max-size="10" force-ellipses="true" boundary-link-numbers="true" direction-links="false"></ul>
     </div>
+  </div>
+  <div ng-show="init && comics.length <= 0">
+    <h3>NO RESULTS FOUND.</h3>
+  </div>
 </div>

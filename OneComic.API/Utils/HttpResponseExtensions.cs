@@ -10,6 +10,8 @@ namespace OneComic.API
 {
     public static class HttpResponseExtensions
     {
+        public const string PaginationHeaderName = "X-Pagination";
+
         public static void AddPaginationHeader<T>(
             this HttpResponse response,
             HttpRequestMessage request,
@@ -56,7 +58,7 @@ namespace OneComic.API
                 previousPageLink = prevLink,
                 nextPageLink = nextLink
             });
-            response.Headers.Add("X-Pagination", header);
+            response.Headers.Add(PaginationHeaderName, header);
         }
     }
 }

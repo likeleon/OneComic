@@ -145,7 +145,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Binding\ViewModels\ComicListViewModel.js" />
+    <Content Include="Binding\ViewModels\ComicsViewModel.js" />
     <Content Include="Content\bootstrap.cyborg.css" />
     <Content Include="Content\bootstrap.cyborg.min.css" />
     <Content Include="Content\font-awesome.css" />

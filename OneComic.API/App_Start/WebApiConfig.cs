@@ -25,14 +25,26 @@ namespace OneComic.API
             config.MapHttpAttributeRoutes();
 
             AddFilters(config);
-
             ConfigureFormatters(config);
-
-            config.MessageHandlers.Add(new CacheCow.Server.CachingHandler(config));
-
-            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+            EnableCaching(config);
+            EnableCors(config);
 
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
+        }
+
+        private static void EnableCaching(HttpConfiguration config)
+        {
+            config.MessageHandlers.Add(new CacheCow.Server.CachingHandler(config));
+        }
+
+        private static void EnableCors(HttpConfiguration config)
+        {
+            var corsAttribute = new EnableCorsAttribute(
+                origins: "*",
+                headers: "*",
+                methods: "*",
+                exposedHeaders: HttpResponseExtensions.PaginationHeaderName);
+            config.EnableCors(corsAttribute);
         }
 
         private static void ConfigureFormatters(HttpConfiguration config)
