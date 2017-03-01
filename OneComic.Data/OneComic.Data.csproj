@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201702201359047_InitialCreate.Designer.cs">
       <DependentUpon>201702201359047_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703010245339_AddCoverImage.cs" />
+    <Compile Include="Migrations\201703010245339_AddCoverImage.Designer.cs">
+      <DependentUpon>201703010245339_AddCoverImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OneComicContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +104,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702201359047_InitialCreate.resx">
       <DependentUpon>201702201359047_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703010245339_AddCoverImage.resx">
+      <DependentUpon>201703010245339_AddCoverImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

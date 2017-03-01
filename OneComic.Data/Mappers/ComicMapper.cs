@@ -26,6 +26,7 @@ namespace OneComic.Data.Mappers
             return new DTO.Comic
             {
                 ComicId = comic.ComicId,
+                CoverImageUri = new Uri(comic.CoverImageUri),
                 Title = comic.Title
             };
         }
@@ -35,6 +36,7 @@ namespace OneComic.Data.Mappers
             return new Comic
             {
                 ComicId = comic.ComicId,
+                CoverImageUri = comic.CoverImageUri.AbsoluteUri,
                 Title = comic.Title
             };
         }
