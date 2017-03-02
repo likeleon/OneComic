@@ -43,8 +43,6 @@
   <ItemGroup>
     <Compile Include="DataPage.cs" />
     <Compile Include="IAccountOwnedEntity.cs" />
-    <Compile Include="IBusinessEngine.cs" />
-    <Compile Include="IBusinessEngineFactory.cs" />
     <Compile Include="IDataFields.cs" />
     <Compile Include="IDataRepository.cs" />
     <Compile Include="IDataRepositoryFactory.cs" />

@@ -1068,10 +1068,6 @@
       <Project>{ef8c59f4-92be-4b83-8a02-eed03c93c8fe}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OneComic.Common\OneComic.Common.csproj">
-      <Project>{EECFBF40-ACE5-4B4A-83D2-C3EA4D3E7B18}</Project>
-      <Name>OneComic.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
       <Project>{6209E8E4-52F0-41CE-9157-77D32A085755}</Project>
       <Name>OneComic.Data.DTO</Name>
