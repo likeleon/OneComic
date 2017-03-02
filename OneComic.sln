@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.API", "OneComic.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.API", "Core.Common.API\Core.Common.API.csproj", "{29CFA744-A09D-44F4-8DD2-949B8FD6F6E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneComic.Admin", "OneComic.Admin\OneComic.Admin.csproj", "{DFF02ACA-9E6D-4F8A-AB42-943D37146FF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{29CFA744-A09D-44F4-8DD2-949B8FD6F6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29CFA744-A09D-44F4-8DD2-949B8FD6F6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29CFA744-A09D-44F4-8DD2-949B8FD6F6E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF02ACA-9E6D-4F8A-AB42-943D37146FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF02ACA-9E6D-4F8A-AB42-943D37146FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF02ACA-9E6D-4F8A-AB42-943D37146FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF02ACA-9E6D-4F8A-AB42-943D37146FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
