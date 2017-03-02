@@ -1,7 +1,7 @@
-﻿using Core.Common.Core;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OneComic.API.ActionFilters;
+using OneComic.Core;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Web.Http;

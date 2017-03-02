@@ -1,6 +1,4 @@
-﻿using Core.Common.API;
-using Core.Common.Data;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using OneComic.API.ModelBinders;
 using OneComic.Data;
 using Owin;

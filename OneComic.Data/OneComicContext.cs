@@ -1,5 +1,5 @@
-﻿using Core.Common.Contracts;
-using OneComic.Business.Entities;
+﻿using OneComic.Business.Entities;
+using OneComic.Core;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;

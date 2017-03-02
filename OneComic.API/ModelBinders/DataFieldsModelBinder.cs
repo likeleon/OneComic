@@ -1,6 +1,5 @@
-﻿using Core.Common.Contracts;
-using Core.Common.Data;
-using Core.Common.Extensions;
+﻿using OneComic.Core;
+using OneComic.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

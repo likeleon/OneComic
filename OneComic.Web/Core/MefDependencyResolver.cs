@@ -1,4 +1,4 @@
-﻿using Core.Common.Extensions;
+﻿using OneComic.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;

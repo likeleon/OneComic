@@ -1,6 +1,4 @@
-﻿using Core.Common.Contracts;
-using OneComic.Business.Entities;
-using OneComic.Data.Contracts;
+﻿using OneComic.Business.Entities;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -9,7 +7,7 @@ namespace OneComic.Data
 {
     [Export(typeof(IBookRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public sealed class BookRepository : DataRepository<Book>, IBookRepository
+    public sealed class BookRepository : DataRepository<Book, OneComicContext>, IBookRepository
     {
         private static readonly IReadOnlyList<Book> EmptyBooks = new List<Book>().AsReadOnly();
 

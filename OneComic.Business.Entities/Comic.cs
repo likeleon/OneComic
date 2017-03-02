@@ -1,4 +1,4 @@
-﻿using Core.Common.Contracts;
+﻿using OneComic.Core;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

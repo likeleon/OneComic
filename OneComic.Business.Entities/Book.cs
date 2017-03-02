@@ -1,4 +1,4 @@
-﻿using Core.Common.Contracts;
+﻿using OneComic.Core;
 
 namespace OneComic.Business.Entities
 {

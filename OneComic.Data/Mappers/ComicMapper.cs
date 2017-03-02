@@ -1,13 +1,8 @@
-﻿using Core.Common.Data;
-using OneComic.Business.Entities;
-using OneComic.Data.Contracts;
-using System.ComponentModel.Composition;
-using System.Collections.Generic;
+﻿using OneComic.Business.Entities;
 using System;
-using Core.Common.Contracts;
-using System.Linq;
+using System.ComponentModel.Composition;
 
-namespace OneComic.Data.Mappers
+namespace OneComic.Data
 {
     [Export(typeof(IComicMapper))]
     [PartCreationPolicy(CreationPolicy.Shared)]

@@ -1,9 +1,7 @@
-﻿using Core.Common.Contracts;
-using Core.Common.Data;
-using Marvin.JsonPatch;
+﻿using Marvin.JsonPatch;
 using OneComic.API.ActionFilters;
 using OneComic.Business.Entities;
-using OneComic.Data.Contracts;
+using OneComic.Data;
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;

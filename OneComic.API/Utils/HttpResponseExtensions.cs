@@ -1,7 +1,6 @@
-﻿using Core.Common.Contracts;
-using Core.Common.Data;
-using Core.Common.Extensions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using OneComic.Core;
+using OneComic.Data;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http.Routing;

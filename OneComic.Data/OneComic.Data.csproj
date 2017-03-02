@@ -43,6 +43,10 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,13 +60,29 @@
     <Compile Include="Data Repositories\BookmarkRepository.cs" />
     <Compile Include="Data Repositories\BookRepository.cs" />
     <Compile Include="Data Repositories\ComicRepository.cs" />
-    <Compile Include="DataMapper.cs" />
-    <Compile Include="DataRepository.cs" />
-    <Compile Include="DataRepositoryFactory.cs" />
+    <Compile Include="Data Repositories\IAccountRepository.cs" />
+    <Compile Include="Data Repositories\IBookmarkRepository.cs" />
+    <Compile Include="Data Repositories\IBookRepository.cs" />
+    <Compile Include="Data Repositories\IComicRepository.cs" />
+    <Compile Include="DataFields\DataFields%271.cs" />
+    <Compile Include="DataFields\DataFields.cs" />
+    <Compile Include="Mappers\DataMapper.cs" />
+    <Compile Include="DataPage.cs" />
+    <Compile Include="Data Repositories\DataRepository.cs" />
+    <Compile Include="DataShapingUtils.cs" />
+    <Compile Include="DataFields\IDataFields.cs" />
+    <Compile Include="Mappers\IDataMapper.cs" />
+    <Compile Include="Mappers\IDataMapperExtensions.cs" />
+    <Compile Include="Data Repositories\IDataRepository.cs" />
+    <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="Mappers\ComicMapper.cs" />
     <Compile Include="Mappers\BookmarkMapper.cs" />
     <Compile Include="Mappers\BookMapper.cs" />
     <Compile Include="Mappers\AccountMapper.cs" />
+    <Compile Include="Mappers\IAccountMapper.cs" />
+    <Compile Include="Mappers\IBookMapper.cs" />
+    <Compile Include="Mappers\IBookmarkMapper.cs" />
+    <Compile Include="Mappers\IComicMapper.cs" />
     <Compile Include="Migrations\201702201359047_InitialCreate.cs" />
     <Compile Include="Migrations\201702201359047_InitialCreate.Designer.cs">
       <DependentUpon>201702201359047_InitialCreate.cs</DependentUpon>
@@ -74,27 +94,21 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OneComicContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data Repositories\RepositoryActionResult.cs" />
+    <Compile Include="Data Repositories\RepositoryActionState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
-      <Project>{1D3FC099-5A43-4811-A665-83D2F29EA530}</Project>
-      <Name>Core.Common.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{EF8C59F4-92BE-4B83-8A02-EED03C93C8FE}</Project>
-      <Name>Core.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
       <Project>{387ADB00-4F5D-4076-9A70-DF67D49DAA00}</Project>
       <Name>OneComic.Business.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
-      <Project>{ea7fea03-3817-4107-b70b-a218ce1399cd}</Project>
-      <Name>OneComic.Data.Contracts</Name>
+    <ProjectReference Include="..\OneComic.Core\OneComic.Core.csproj">
+      <Project>{732BCBDD-C2FA-4932-83D6-AAD45548E54B}</Project>
+      <Name>OneComic.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
       <Project>{6209e8e4-52f0-41ce-9157-77d32a085755}</Project>

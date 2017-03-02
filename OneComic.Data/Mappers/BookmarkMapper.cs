@@ -1,9 +1,7 @@
-﻿using Core.Common.Data;
-using OneComic.Business.Entities;
-using OneComic.Data.Contracts;
+﻿using OneComic.Business.Entities;
 using System.ComponentModel.Composition;
 
-namespace OneComic.Data.Mappers
+namespace OneComic.Data
 {
     [Export(typeof(IBookmarkMapper))]
     [PartCreationPolicy(CreationPolicy.Shared)]

@@ -1,5 +1,4 @@
 ﻿using OneComic.Business.Entities;
-using OneComic.Data.Contracts;
 using System.ComponentModel.Composition;
 using System.Linq;
 
@@ -7,7 +6,7 @@ namespace OneComic.Data
 {
     [Export(typeof(IAccountRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public sealed class AccountRepository : DataRepository<Account>, IAccountRepository
+    public sealed class AccountRepository : DataRepository<Account, OneComicContext>, IAccountRepository
     {
         protected override Account AddEntity(OneComicContext context, Account entity)
         {

@@ -1,6 +1,4 @@
-﻿using Core.Common.Contracts;
-using OneComic.Business.Entities;
-using OneComic.Data.Contracts;
+﻿using OneComic.Business.Entities;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data.Entity;
@@ -9,7 +7,7 @@ using System.Linq;
 namespace OneComic.Data
 {
     [Export(typeof(IComicRepository))]
-    public sealed class ComicRepository : DataRepository<Comic>, IComicRepository
+    public sealed class ComicRepository : DataRepository<Comic, OneComicContext>, IComicRepository
     {
         protected override Comic AddEntity(OneComicContext context, Comic entity)
         {

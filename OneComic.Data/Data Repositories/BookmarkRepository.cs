@@ -1,5 +1,4 @@
 ﻿using OneComic.Business.Entities;
-using OneComic.Data.Contracts;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -8,7 +7,7 @@ namespace OneComic.Data
 {
     [Export(typeof(IBookmarkRepository))]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public sealed class BookmarkRepository : DataRepository<Bookmark>, IBookmarkRepository
+    public sealed class BookmarkRepository : DataRepository<Bookmark, OneComicContext>, IBookmarkRepository
     {
         protected override Bookmark AddEntity(OneComicContext context, Bookmark entity)
         {

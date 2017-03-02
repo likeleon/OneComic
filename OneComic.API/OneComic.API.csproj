@@ -152,6 +152,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Utils\MefAPIDependencyResolver.cs" />
     <Compile Include="ModelBinders\BookFieldsModelBinder.cs" />
     <Compile Include="ModelBinders\ComicFieldsModelBinder.cs" />
     <Compile Include="ModelBinders\DataFieldsModelBinder.cs" />
@@ -174,25 +175,13 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Common.API\Core.Common.API.csproj">
-      <Project>{29CFA744-A09D-44F4-8DD2-949B8FD6F6E2}</Project>
-      <Name>Core.Common.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
-      <Project>{1d3fc099-5a43-4811-a665-83d2f29ea530}</Project>
-      <Name>Core.Common.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{EF8C59F4-92BE-4B83-8A02-EED03C93C8FE}</Project>
-      <Name>Core.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
       <Project>{387adb00-4f5d-4076-9a70-df67d49daa00}</Project>
       <Name>OneComic.Business.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OneComic.Data.Contracts\OneComic.Data.Contracts.csproj">
-      <Project>{EA7FEA03-3817-4107-B70B-A218CE1399CD}</Project>
-      <Name>OneComic.Data.Contracts</Name>
+    <ProjectReference Include="..\OneComic.Core\OneComic.Core.csproj">
+      <Project>{732bcbdd-c2fa-4932-83d6-aad45548e54b}</Project>
+      <Name>OneComic.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
       <Project>{6209E8E4-52F0-41CE-9157-77D32A085755}</Project>
