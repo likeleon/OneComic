@@ -4,7 +4,7 @@
     {
         public ComicFieldsModelBinder()
         {
-            AddAssociatedType<Data.DTO.Book>(nameof(Business.Entities.Comic.Books));
+            AddAssociatedType<Data.DTO.Book>(nameof(Data.Entities.Comic.Books));
         }
     }
 }

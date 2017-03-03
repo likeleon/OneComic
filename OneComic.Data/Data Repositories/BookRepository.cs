@@ -1,4 +1,4 @@
-﻿using OneComic.Business.Entities;
+﻿using OneComic.Data.Entities;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using OneComic.Core;
 using System.Collections.Generic;
 
-namespace OneComic.Business.Entities
+namespace OneComic.Data.Entities
 {
     public class Account : IIdentifiableEntity, IAccountOwnedEntity
     {

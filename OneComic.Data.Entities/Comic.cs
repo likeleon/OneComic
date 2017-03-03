@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OneComic.Business.Entities
+namespace OneComic.Data.Entities
 {
     public class Comic : IIdentifiableEntity
     {

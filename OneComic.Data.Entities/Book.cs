@@ -1,6 +1,6 @@
 ﻿using OneComic.Core;
 
-namespace OneComic.Business.Entities
+namespace OneComic.Data.Entities
 {
     public class Book : IIdentifiableEntity
     {

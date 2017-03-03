@@ -102,10 +102,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
-      <Project>{387ADB00-4F5D-4076-9A70-DF67D49DAA00}</Project>
-      <Name>OneComic.Business.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OneComic.Core\OneComic.Core.csproj">
       <Project>{732BCBDD-C2FA-4932-83D6-AAD45548E54B}</Project>
       <Name>OneComic.Core</Name>
@@ -113,6 +109,10 @@
     <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
       <Project>{6209e8e4-52f0-41ce-9157-77d32a085755}</Project>
       <Name>OneComic.Data.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Data.Entities\OneComic.Data.Entities.csproj">
+      <Project>{09a97d1f-1b1e-473f-b0b0-96b4a3e0226a}</Project>
+      <Name>OneComic.Data.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

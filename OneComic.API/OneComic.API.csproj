@@ -175,10 +175,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OneComic.Business.Entities\OneComic.Business.Entities.csproj">
-      <Project>{387adb00-4f5d-4076-9a70-df67d49daa00}</Project>
-      <Name>OneComic.Business.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OneComic.Core\OneComic.Core.csproj">
       <Project>{732bcbdd-c2fa-4932-83d6-aad45548e54b}</Project>
       <Name>OneComic.Core</Name>
@@ -186,6 +182,10 @@
     <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
       <Project>{6209E8E4-52F0-41CE-9157-77D32A085755}</Project>
       <Name>OneComic.Data.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Data.Entities\OneComic.Data.Entities.csproj">
+      <Project>{09a97d1f-1b1e-473f-b0b0-96b4a3e0226a}</Project>
+      <Name>OneComic.Data.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\OneComic.Data\OneComic.Data.csproj">
       <Project>{0cbe9daa-0e5b-47b4-b8e3-7d3ceca27006}</Project>

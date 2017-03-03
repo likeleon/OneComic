@@ -1,7 +1,7 @@
 ﻿using OneComic.Core;
 using System;
 
-namespace OneComic.Business.Entities
+namespace OneComic.Data.Entities
 {
     public class Bookmark : IIdentifiableEntity, IAccountOwnedEntity
     {

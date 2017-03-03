@@ -1,7 +1,7 @@
 ﻿using Marvin.JsonPatch;
 using Newtonsoft.Json;
 using OneComic.API.ActionFilters;
-using OneComic.Business.Entities;
+using OneComic.Data.Entities;
 using OneComic.Data;
 using System;
 using System.ComponentModel.Composition;
