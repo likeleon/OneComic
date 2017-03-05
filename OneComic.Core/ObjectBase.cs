@@ -78,12 +78,12 @@ namespace OneComic.Core
                 ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        public bool HasErrors => _errors.Count > 0;
+        public bool HasErrors => _errors?.Count > 0;
 
         public IEnumerable GetErrors(string propertyName)
         {
-            string[] errors;
-            _errors.TryGetValue(propertyName, out errors);
+            string[] errors = null;
+            _errors?.TryGetValue(propertyName, out errors);
             return errors;
         }
         #endregion

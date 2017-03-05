@@ -7,8 +7,10 @@ namespace OneComic.Admin.MainWindow
     [PartCreationPolicy(CreationPolicy.Shared)]
     public sealed class MainWindowViewModel : Conductor<IScreen>.Collection.OneActive
     {
+        public string Title => "One Comic Desktop";
+
         [ImportingConstructor]
-        public MainWindowViewModel([ImportMany]IMainScreenItem[] items)
+        public MainWindowViewModel([ImportMany]IMainScreenTabItem[] items)
         {
             Items.AddRange(items);
         }

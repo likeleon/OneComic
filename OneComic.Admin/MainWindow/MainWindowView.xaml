@@ -7,9 +7,10 @@
                    xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                    xmlns:cal="http://www.caliburnproject.org"
                    mc:Ignorable="d"
-                   Title="One Comic Desktop"
-                   Height="350"
-                   Width="525">
+                   Title="{Binding Title}"
+                   WindowStartupLocation="CenterScreen"
+                   Width="1024"
+                   Height="768">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

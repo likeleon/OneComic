@@ -88,7 +88,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="IMainScreenItem.cs" />
+    <Compile Include="Library\BookViewModel.cs" />
+    <Compile Include="Library\ComicViewModel.cs" />
+    <Compile Include="MainWindow\IMainScreenTabItem.cs" />
     <Compile Include="Library\LibraryView.xaml.cs">
       <DependentUpon>LibraryView.xaml</DependentUpon>
     </Compile>
@@ -126,6 +128,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OneComic.Core\OneComic.Core.csproj">
+      <Project>{732BCBDD-C2FA-4932-83D6-AAD45548E54B}</Project>
+      <Name>OneComic.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OneComic.Data.DTO\OneComic.Data.DTO.csproj">
+      <Project>{6209E8E4-52F0-41CE-9157-77D32A085755}</Project>
+      <Name>OneComic.Data.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
