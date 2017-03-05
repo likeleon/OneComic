@@ -1,10 +1,11 @@
-﻿<metro:MetroWindow x:Class="OneComic.Admin.MainWindow"
+﻿<metro:MetroWindow x:Class="OneComic.Admin.MainWindow.MainWindowView"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:local="clr-namespace:OneComic.Admin"
                    xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                   xmlns:cal="http://www.caliburnproject.org"
                    mc:Ignorable="d"
                    Title="One Comic Desktop"
                    Height="350"
@@ -22,7 +23,5 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-
-    </Grid>
+    <TabControl x:Name="Items" />
 </metro:MetroWindow>
