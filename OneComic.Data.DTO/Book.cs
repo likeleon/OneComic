@@ -1,9 +1,12 @@
-﻿namespace OneComic.Data.DTO
+﻿using System;
+
+namespace OneComic.Data.DTO
 {
     public sealed class Book
     {
         public int BookId { get; set; }
         public int ComicId { get; set; }
+        public Uri CoverImageUri { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Author { get; set; }

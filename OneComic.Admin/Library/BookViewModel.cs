@@ -7,8 +7,6 @@ namespace OneComic.Admin.Library
     {
         public Book Book { get; }
 
-        public bool IsExpanded { get; set; }
-
         public BookViewModel(Book book)
         {
             Book = book;

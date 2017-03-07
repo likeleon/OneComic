@@ -1,4 +1,5 @@
 ﻿using OneComic.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace OneComic.Data.Entities
 {
@@ -9,6 +10,9 @@ namespace OneComic.Data.Entities
         public int ComicId { get; set; }
 
         public virtual Comic Comic { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        public string CoverImageUri { get; set; }
 
         public string Title { get; set; }
 

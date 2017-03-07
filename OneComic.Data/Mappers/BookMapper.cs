@@ -1,4 +1,5 @@
 ﻿using OneComic.Data.Entities;
+using System;
 using System.ComponentModel.Composition;
 
 namespace OneComic.Data
@@ -13,6 +14,7 @@ namespace OneComic.Data
             {
                 BookId = book.BookId,
                 ComicId = book.ComicId,
+                CoverImageUri = new Uri(book.CoverImageUri),
                 Title = book.Title,
                 Description = book.Description,
                 Author = book.Author,
@@ -27,6 +29,7 @@ namespace OneComic.Data
             {
                 BookId = book.BookId,
                 ComicId = book.ComicId,
+                CoverImageUri = book.CoverImageUri.AbsoluteUri,
                 Title = book.Title,
                 Description = book.Description,
                 Author = book.Author,
