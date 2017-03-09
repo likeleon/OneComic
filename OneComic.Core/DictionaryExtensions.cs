@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OneComic.Core
@@ -6,7 +7,7 @@ namespace OneComic.Core
     public static class DictionaryExtensions
     {
         public static IEnumerable<TKey> GetDiffKeys<TKey, TValue>(
-            IReadOnlyDictionary<TKey, TValue> dict1,
+            ReadOnlyDictionary<TKey, TValue> dict1,
             IReadOnlyDictionary<TKey, TValue> dict2)
         {
             var allKeys = dict1.Keys.Concat(dict2.Keys);
