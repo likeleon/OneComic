@@ -1,4 +1,5 @@
 ﻿using Marvin.HttpCache;
+using Newtonsoft.Json;
 using OneComic.Core;
 using OneComic.Data.DTO;
 using System;
@@ -14,10 +15,10 @@ namespace OneComic.API.Client
     {
         private readonly HttpClient _client;
 
-        public OneComicClient(Uri serverBaseAddress)
+        public OneComicClient(string serverBaseAddress)
         {
             _client = new HttpClient(CreateHttpCacheHandler());
-            _client.BaseAddress = serverBaseAddress;
+            _client.BaseAddress = new Uri(serverBaseAddress);
 
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(
@@ -32,18 +33,18 @@ namespace OneComic.API.Client
             };
         }
 
-        public async Task<Comic[]> GetComics(IEnumerable<string> fields)
+        public async Task<Comic[]> GetComics(IEnumerable<string> fields = null)
         {
             var dictionary = new Dictionary<string, string>();
-            if (fields.Any())
+            if (fields?.Any() == true)
                 dictionary.Add("fields", fields.JoinWith(","));
 
             var query = MakeUri("comics", dictionary);
             var response = await _client.GetAsync(query);
             response.EnsureSuccessStatusCode();
 
-            var content = response.Content.ReadAsStringAsync();
-            // TODO
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Comic[]>(content);
         }
 
         private static string MakeUri(string path, IReadOnlyDictionary<string, string> query)

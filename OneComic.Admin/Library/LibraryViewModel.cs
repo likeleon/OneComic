@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
+using Microsoft.VisualStudio.Language.Intellisense;
 using OneComic.Admin.MainWindow;
+using OneComic.API.Client;
 using OneComic.Data.DTO;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace OneComic.Admin.Library
     [PartCreationPolicy(CreationPolicy.Shared)]
     public sealed class LibraryViewModel : Screen, IMainScreenTabItem
     {
+        private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api/");
         private object _selectedItem;
 
         public override string DisplayName
@@ -21,8 +24,8 @@ namespace OneComic.Admin.Library
             set { }
         }
 
-        public IEnumerable<ComicViewModel> Comics { get; }
-        public IEnumerable<BookViewModel> Books { get; }
+        public BulkObservableCollection<ComicViewModel> Comics { get; } = new BulkObservableCollection<ComicViewModel>();
+        public BulkObservableCollection<BookViewModel> Books { get; } = new BulkObservableCollection<BookViewModel>();
 
         public ComicViewModel SelectedComic => SelectedItem as ComicViewModel;
 
@@ -38,11 +41,20 @@ namespace OneComic.Admin.Library
 
         public LibraryViewModel()
         {
-            //if (Execute.InDesignMode)
+            if (Execute.InDesignMode)
             {
-                Comics = LoadDesignModeData().ToArray();
+                Comics.AddRange(LoadDesignModeData());
                 SelectedItem = Comics.Last();
             }
+        }
+
+        protected override async void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
+
+            var comics = await _client.GetComics(Enumerable.Empty<String>());
+            var comicViewModels = comics.Select(comic => new ComicViewModel(comic));
+            Comics.AddRange(comicViewModels);
         }
 
         private IEnumerable<ComicViewModel> LoadDesignModeData()
