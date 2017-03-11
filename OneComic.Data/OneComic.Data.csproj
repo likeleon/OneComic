@@ -91,6 +91,10 @@
     <Compile Include="Migrations\201703010245339_AddCoverImage.Designer.cs">
       <DependentUpon>201703010245339_AddCoverImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703110252199_AddBookCoverImageUri.cs" />
+    <Compile Include="Migrations\201703110252199_AddBookCoverImageUri.Designer.cs">
+      <DependentUpon>201703110252199_AddBookCoverImageUri.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OneComicContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703010245339_AddCoverImage.resx">
       <DependentUpon>201703010245339_AddCoverImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703110252199_AddBookCoverImageUri.resx">
+      <DependentUpon>201703110252199_AddBookCoverImageUri.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Microsoft.VisualStudio.Language.Intellisense;
 using OneComic.Admin.MainWindow;
+using OneComic.Admin.Services;
 using OneComic.API.Client;
 using OneComic.Data.DTO;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace OneComic.Admin.Library
 {
@@ -15,6 +17,7 @@ namespace OneComic.Admin.Library
     [PartCreationPolicy(CreationPolicy.Shared)]
     public sealed class LibraryViewModel : Screen, IMainScreenTabItem
     {
+        private readonly IMessageBoxService _messageBoxService;
         private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api/");
         private object _selectedItem;
 
@@ -48,11 +51,26 @@ namespace OneComic.Admin.Library
             }
         }
 
+        [ImportingConstructor]
+        public LibraryViewModel(IMessageBoxService messageBoxService)
+        {
+            _messageBoxService = messageBoxService;
+        }
+
         protected override async void OnViewReady(object view)
         {
             base.OnViewReady(view);
 
-            var comics = await _client.GetComics(Enumerable.Empty<String>());
+            Comic[] comics = null;
+            try
+            {
+                comics = await _client.GetComics(Enumerable.Empty<string>());
+            }
+            catch (Exception e)
+            {
+                _messageBoxService.Show(e.Message, "API Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             var comicViewModels = comics.Select(comic => new ComicViewModel(comic));
             Comics.AddRange(comicViewModels);
         }

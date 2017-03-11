@@ -18,12 +18,14 @@ namespace OneComic.Data
 
         public override DTO.Comic ToDTO(Comic comic)
         {
-            return new DTO.Comic
+            var dto = new DTO.Comic
             {
                 ComicId = comic.ComicId,
-                CoverImageUri = new Uri(comic.CoverImageUri),
                 Title = comic.Title
             };
+            if (comic.CoverImageUri != null)
+                dto.CoverImageUri = new Uri(comic.CoverImageUri);
+            return dto;
         }
 
         public override Comic ToEntity(DTO.Comic comic)
@@ -31,7 +33,7 @@ namespace OneComic.Data
             return new Comic
             {
                 ComicId = comic.ComicId,
-                CoverImageUri = comic.CoverImageUri.AbsoluteUri,
+                CoverImageUri = comic.CoverImageUri?.AbsoluteUri,
                 Title = comic.Title
             };
         }
