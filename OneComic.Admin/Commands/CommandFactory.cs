@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace OneComic.Admin.Commands
@@ -26,6 +27,26 @@ namespace OneComic.Admin.Commands
         public ICommand Create<T>(Action<T> execute, Func<T, bool> canExecute)
         {
             return new DelegateCommand<T>(execute, canExecute);
+        }
+
+        public IAsyncCommand CreateAsync(Func<Task> execute)
+        {
+            return new AsyncCommand(execute, null);
+        }
+
+        public IAsyncCommand CreateAsync(Func<Task> execute, Func<bool> canExecute)
+        {
+            return new AsyncCommand(execute, canExecute);
+        }
+
+        public IAsyncCommand CreateAsync<T>(Func<T, Task> execute)
+        {
+            return new AsyncCommand<T>(execute, null);
+        }
+
+        public IAsyncCommand CreateAsync<T>(Func<T, Task> execute, Func<T, bool> canExecute)
+        {
+            return new AsyncCommand<T>(execute, canExecute);
         }
     }
 }

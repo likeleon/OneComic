@@ -10,7 +10,7 @@ namespace OneComic.Admin.Commands
         public DelegateCommand(Action<T> execute, Func<T, bool> canExecute)
         {
             _execute = execute;
-            _canExecute = canExecute;
+            _canExecute = canExecute ?? (_ => true);
         }
 
         public override bool CanExecute(object parameter)

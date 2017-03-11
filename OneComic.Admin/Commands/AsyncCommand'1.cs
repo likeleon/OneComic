@@ -4,24 +4,24 @@ using System.Threading.Tasks;
 
 namespace OneComic.Admin.Commands
 {
-    public sealed class AsyncCommand : DelegateCommandBase, IAsyncCommand, INotifyPropertyChanged
+    public sealed class AsyncCommand<T> : DelegateCommandBase, IAsyncCommand, INotifyPropertyChanged
     {
-        private readonly Func<Task> _execute;
-        private readonly Func<bool> _canExecute;
+        private readonly Func<T, Task> _execute;
+        private readonly Func<T, bool> _canExecute;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public NotifyTask Execution { get; private set; }
 
-        public AsyncCommand(Func<Task> execute, Func<bool> canExecute)
+        public AsyncCommand(Func<T, Task> execute, Func<T, bool> canExecute)
         {
             _execute = execute;
-            _canExecute = canExecute ?? (() => true);
+            _canExecute = canExecute ?? (_ => true);
         }
 
         public override bool CanExecute(object parameter)
         {
-            return !IsExecuting && _canExecute?.Invoke() == true;
+            return !IsExecuting && _canExecute?.Invoke((T)parameter) == true;
         }
 
         public async override void Execute(object parameter)
@@ -32,7 +32,7 @@ namespace OneComic.Admin.Commands
         public async Task ExecuteAsync(object parameter)
         {
             var tcs = new TaskCompletionSource<object>();
-            Execution = NotifyTask.Create(DoExecuteAsync(tcs.Task, _execute));
+            Execution = NotifyTask.Create(DoExecuteAsync(tcs.Task, _execute, parameter));
 
             RaiseCanExecuteChanged();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Execution)));
@@ -48,10 +48,10 @@ namespace OneComic.Admin.Commands
 
         public bool IsExecuting => Execution?.IsNotCompleted == true;
 
-        private static async Task DoExecuteAsync(Task precondition, Func<Task> executeAsync)
+        private static async Task DoExecuteAsync(Task precondition, Func<T, Task> executeAsync, object parameter)
         {
             await precondition;
-            await executeAsync();
+            await executeAsync((T)parameter);
         }
 
     }

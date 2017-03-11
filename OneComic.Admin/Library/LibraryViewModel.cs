@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Microsoft.VisualStudio.Language.Intellisense;
+using OneComic.Admin.Commands;
 using OneComic.Admin.MainWindow;
 using OneComic.Admin.Services;
 using OneComic.API.Client;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace OneComic.Admin.Library
@@ -18,7 +20,7 @@ namespace OneComic.Admin.Library
     public sealed class LibraryViewModel : Screen, IMainScreenTabItem
     {
         private readonly IMessageBoxService _messageBoxService;
-        private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api/");
+        private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api2/");
         private object _selectedItem;
 
         public override string DisplayName
@@ -42,6 +44,8 @@ namespace OneComic.Admin.Library
             }
         }
 
+        public IAsyncCommand GetComicsCommand { get; }
+
         public LibraryViewModel()
         {
             if (Execute.InDesignMode)
@@ -52,25 +56,28 @@ namespace OneComic.Admin.Library
         }
 
         [ImportingConstructor]
-        public LibraryViewModel(IMessageBoxService messageBoxService)
+        public LibraryViewModel(
+            IMessageBoxService messageBoxService, 
+            ICommandFactory commandFactory)
         {
             _messageBoxService = messageBoxService;
+
+            GetComicsCommand = commandFactory.CreateAsync(GetComics);
         }
 
         protected override async void OnViewReady(object view)
         {
             base.OnViewReady(view);
 
-            Comic[] comics = null;
-            try
-            {
-                comics = await _client.GetComics(Enumerable.Empty<string>());
-            }
-            catch (Exception e)
-            {
-                _messageBoxService.Show(e.Message, "API Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            if (GetComicsCommand.CanExecute(null))
+                await GetComicsCommand.ExecuteAsync(null);
+        }
+
+        private async Task GetComics()
+        {
+            Comics.Clear();
+
+            var comics = await _client.GetComics(Enumerable.Empty<string>());
             var comicViewModels = comics.Select(comic => new ComicViewModel(comic));
             Comics.AddRange(comicViewModels);
         }
