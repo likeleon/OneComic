@@ -5,15 +5,19 @@ namespace OneComic.Admin.Commands
 {
     public abstract class DelegateCommandBase : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public abstract bool CanExecute(object parameter);
 
         public abstract void Execute(object parameter);
 
-        public void RaiseCanExecuteChanged()
+        protected void RaiseCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }
