@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\TreeViewSelectedItemBindingBehavior.cs" />
     <Compile Include="Commands\AsyncCommand%271.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
@@ -157,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Refresh-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Delete-20.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

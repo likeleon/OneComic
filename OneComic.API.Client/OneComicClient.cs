@@ -59,6 +59,12 @@ namespace OneComic.API.Client
             return JsonConvert.DeserializeObject<Comic>(responseContent);
         }
 
+        public async Task DeleteComic(int comicId)
+        {
+            var response = await _client.DeleteAsync("comics/" + comicId);
+            response.EnsureSuccessStatusCode();
+        }
+
         private static string MakeUri(string path, IReadOnlyDictionary<string, string> query)
         {
             if (!query.Any())

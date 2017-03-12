@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:mtroctrls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:metrodialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:behaviors="clr-namespace:OneComic.Admin.Behaviors"
              xmlns:converters="clr-namespace:OneComic.Admin.Converters"
              xmlns:local="clr-namespace:OneComic.Admin.Library"
              mc:Ignorable="d"
@@ -45,6 +47,9 @@
                   Background="Transparent"
                   Margin="3"
                   Visibility="{Binding GetComicsCommand.Execution.IsSuccessfullyCompleted, Converter={StaticResource BoolToVisibilityConverter}}">
+            <i:Interaction.Behaviors>
+                <behaviors:TreeViewSelectedItemBindingBehavior SelectedItem="{Binding SelectedComic}" />
+            </i:Interaction.Behaviors>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Books}">
                     <TextBlock Text="{Binding Comic.Title}" />
@@ -87,6 +92,14 @@
                     ToolTip="Add a new comic"
                     Margin="3">
                 <Image Source="/OneComic.Admin;component/Resources/Plus-20.png"
+                       Width="20"
+                       Height="20" />
+            </Button>
+            <Button Style="{StaticResource CircleButtonStyle}"
+                    Command="{Binding DeleteComicCommand}"
+                    ToolTip="Delete selected comic"
+                    Margin="3">
+                <Image Source="/OneComic.Admin;component/Resources/Delete-20.png"
                        Width="20"
                        Height="20" />
             </Button>

@@ -10,11 +10,9 @@ using OneComic.Data.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Dynamic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace OneComic.Admin.Library
 {
@@ -25,7 +23,7 @@ namespace OneComic.Admin.Library
         private readonly IDialogCoordinator _dialogCoordinator;
         private readonly IMessageBoxService _messageBoxService;
         private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api/");
-        private object _selectedItem;
+        private ComicViewModel _selectedComic;
 
         public override string DisplayName
         {
@@ -36,27 +34,26 @@ namespace OneComic.Admin.Library
         public BulkObservableCollection<ComicViewModel> Comics { get; } = new BulkObservableCollection<ComicViewModel>();
         public BulkObservableCollection<BookViewModel> Books { get; } = new BulkObservableCollection<BookViewModel>();
 
-        public ComicViewModel SelectedComic => SelectedItem as ComicViewModel;
-
-        public object SelectedItem
+        public ComicViewModel SelectedComic
         {
-            get { return _selectedItem; }
+            get { return _selectedComic; }
             set
             {
-                if (Set(ref _selectedItem, value))
+                if (Set(ref _selectedComic, value))
                     NotifyOfPropertyChange(nameof(SelectedComic));
             }
         }
 
         public IAsyncCommand GetComicsCommand { get; }
         public IAsyncCommand AddComicCommand { get; }
+        public IAsyncCommand DeleteComicCommand { get; }
 
         public LibraryViewModel()
         {
             if (Execute.InDesignMode)
             {
                 Comics.AddRange(LoadDesignModeData());
-                SelectedItem = Comics.Last();
+                SelectedComic = Comics.Last();
             }
         }
 
@@ -71,6 +68,7 @@ namespace OneComic.Admin.Library
 
             GetComicsCommand = commandFactory.CreateAsync(GetComics);
             AddComicCommand = commandFactory.CreateAsync(AddComic);
+            DeleteComicCommand = commandFactory.CreateAsync(DeleteComic, CanDeleteComic);
         }
 
         protected override async void OnViewReady(object view)
@@ -100,6 +98,22 @@ namespace OneComic.Admin.Library
             comic = await _client.AddComic(comic);
             Comics.Add(new ComicViewModel(comic));
         }
+
+        private async Task DeleteComic()
+        {
+            var dialogResult = await _dialogCoordinator.ShowMessageAsync(
+                context: this, 
+                title: "Delete a comic", 
+                message: $"Delete comic '{SelectedComic.Comic.Title}'?", 
+                style: MessageDialogStyle.AffirmativeAndNegative);
+            if (dialogResult != MessageDialogResult.Affirmative)
+                return;
+
+            await _client.DeleteComic(SelectedComic.Comic.ComicId);
+            Comics.Remove(SelectedComic);
+        }
+
+        private bool CanDeleteComic() => SelectedComic != null;
 
         private IEnumerable<ComicViewModel> LoadDesignModeData()
         {
