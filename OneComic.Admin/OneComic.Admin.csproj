@@ -152,7 +152,9 @@
       <Name>OneComic.Data.DTO</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Plus-20.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Refresh-20.png" />
   </ItemGroup>

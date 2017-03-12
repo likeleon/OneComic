@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using MahApps.Metro.Controls.Dialogs;
 using OneComic.Admin.MainWindow;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace OneComic.Admin
 
             var batch = new CompositionBatch();
             batch.AddExportedValue<IWindowManager>(new WindowManager());
+            batch.AddExportedValue<IDialogCoordinator>(new DialogCoordinator());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
             batch.AddExportedValue(_container);
 

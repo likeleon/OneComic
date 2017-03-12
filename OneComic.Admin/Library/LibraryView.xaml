@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:mahctrls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mtroctrls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:metrodialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
              xmlns:converters="clr-namespace:OneComic.Admin.Converters"
              xmlns:local="clr-namespace:OneComic.Admin.Library"
              mc:Ignorable="d"
+             metrodialog:DialogParticipation.Register="{Binding}"
              d:DesignHeight="400"
              d:DesignWidth="600"
              d:DataContext="{d:DesignInstance Type=local:LibraryViewModel, IsDesignTimeCreatable=True}"
@@ -15,10 +17,19 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.Buttons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.TextBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.TreeView.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <Style x:Key="CircleButtonStyle"
+                   TargetType="{x:Type Button}"
+                   BasedOn="{StaticResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
+                <Setter Property="Height"
+                        Value="48" />
+                <Setter Property="Width"
+                        Value="48" />
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -52,9 +63,9 @@
                 </Style>
             </TreeView.ItemContainerStyle>
         </TreeView>
-        <mahctrls:ProgressRing Width="40"
+        <mtroctrls:ProgressRing Width="40"
                                Height="40"
-                               Visibility="{Binding GetComicsCommand.IsExecuting, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                               Visibility="{Binding GetComicsCommand.IsExecuting, Converter={StaticResource BoolToVisibilityConverter}}" />
         <TextBlock Text="{Binding GetComicsCommand.Execution.ErrorMessage}"
                    Foreground="Red"
                    VerticalAlignment="Center"
@@ -63,15 +74,21 @@
                    Margin="3" />
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1">
-            <Button Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}"
+            <Button Style="{StaticResource CircleButtonStyle}"
                     Command="{Binding GetComicsCommand}"
-                    ToolTip="Refresh Comics"
-                    Width="48"
-                    Height="48"
+                    ToolTip="Refresh comic list"
                     Margin="3">
                 <Image Source="/OneComic.Admin;component/Resources/Refresh-20.png"
-                        Width="20"
-                        Height="20" />
+                       Width="20"
+                       Height="20" />
+            </Button>
+            <Button Style="{StaticResource CircleButtonStyle}"
+                    Command="{Binding AddComicCommand}"
+                    ToolTip="Add a new comic"
+                    Margin="3">
+                <Image Source="/OneComic.Admin;component/Resources/Plus-20.png"
+                       Width="20"
+                       Height="20" />
             </Button>
         </StackPanel>
         <GridSplitter Grid.Column="1"
@@ -80,9 +97,9 @@
                       VerticalAlignment="Stretch"
                       ShowsPreview="True"
                       Width="5"
-                      Background="{DynamicResource AccentColorBrush3}"/>
+                      Background="{DynamicResource AccentColorBrush3}" />
         <ContentControl DataContext="{Binding SelectedItem}"
                         Grid.Column="1"
-                        Margin="3"/>
+                        Margin="3" />
     </Grid>
 </UserControl>

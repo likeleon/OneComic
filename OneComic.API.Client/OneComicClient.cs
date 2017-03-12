@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OneComic.API.Client
@@ -45,6 +46,17 @@ namespace OneComic.API.Client
 
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<Comic[]>(content);
+        }
+
+        public async Task<Comic> AddComic(Comic comic)
+        {
+            var jsonContent = JsonConvert.SerializeObject(comic);
+            var content = new StringContent(jsonContent, Encoding.Unicode, "application/json");
+            var response = await _client.PostAsync("comics", content);
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<Comic>(responseContent);
         }
 
         private static string MakeUri(string path, IReadOnlyDictionary<string, string> query)
