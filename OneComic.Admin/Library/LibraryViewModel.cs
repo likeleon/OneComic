@@ -11,7 +11,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace OneComic.Admin.Library
 {
@@ -20,7 +19,7 @@ namespace OneComic.Admin.Library
     public sealed class LibraryViewModel : Screen, IMainScreenTabItem
     {
         private readonly IMessageBoxService _messageBoxService;
-        private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api2/");
+        private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api/");
         private object _selectedItem;
 
         public override string DisplayName

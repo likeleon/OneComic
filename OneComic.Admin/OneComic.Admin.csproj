@@ -82,6 +82,7 @@
     <Compile Include="Commands\IAsyncCommand.cs" />
     <Compile Include="Commands\ICommandFactory.cs" />
     <Compile Include="Commands\NotifyTask.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
     <Page Include="Library\LibraryView.xaml">
@@ -151,8 +152,9 @@
       <Name>OneComic.Data.DTO</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\Edit-32.png" />
+    <Resource Include="Resources\Refresh-20.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
