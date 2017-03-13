@@ -23,7 +23,6 @@ namespace OneComic.Admin.Library
         private readonly IDialogCoordinator _dialogCoordinator;
         private readonly IMessageBoxService _messageBoxService;
         private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api/");
-        private ComicViewModel _selectedComic;
 
         public override string DisplayName
         {
@@ -32,21 +31,28 @@ namespace OneComic.Admin.Library
         }
 
         public BulkObservableCollection<ComicViewModel> Comics { get; } = new BulkObservableCollection<ComicViewModel>();
-        public BulkObservableCollection<BookViewModel> Books { get; } = new BulkObservableCollection<BookViewModel>();
 
-        public ComicViewModel SelectedComic
+        public ComicViewModel SelectedComic => SelectedItem as ComicViewModel;
+        public BookViewModel SelectedBook => SelectedItem as BookViewModel;
+
+        private object _selectedItem;
+
+        public object SelectedItem
         {
-            get { return _selectedComic; }
+            get { return _selectedItem; }
             set
             {
-                if (Set(ref _selectedComic, value))
+                if (Set(ref _selectedItem, value))
+                {
                     NotifyOfPropertyChange(nameof(SelectedComic));
+                    NotifyOfPropertyChange(nameof(SelectedBook));
+                }
             }
         }
 
         public IAsyncCommand GetComicsCommand { get; }
         public IAsyncCommand AddComicCommand { get; }
-        public IAsyncCommand DeleteComicCommand { get; }
+        public IAsyncCommand DeleteSelectedItemCommand { get; }
         public IAsyncCommand AddBookCommand { get; }
 
         public LibraryViewModel()
@@ -54,7 +60,7 @@ namespace OneComic.Admin.Library
             if (Execute.InDesignMode)
             {
                 Comics.AddRange(LoadDesignModeData());
-                SelectedComic = Comics.Last();
+                SelectedItem = Comics.Last();
             }
         }
 
@@ -69,7 +75,7 @@ namespace OneComic.Admin.Library
 
             GetComicsCommand = commandFactory.CreateAsync(GetComics);
             AddComicCommand = commandFactory.CreateAsync(AddComic);
-            DeleteComicCommand = commandFactory.CreateAsync(DeleteComic, () => SelectedComic != null);
+            DeleteSelectedItemCommand = commandFactory.CreateAsync(DeleteSelectedItem, () => SelectedItem != null);
             AddBookCommand = commandFactory.CreateAsync(AddBook, () => SelectedComic != null);
         }
 
@@ -85,25 +91,21 @@ namespace OneComic.Admin.Library
         {
             Comics.Clear();
 
-            try
+            var comicViewModels = new List<ComicViewModel>();
+
+            var comics = await _client.GetComics(Enumerable.Empty<string>());
+            foreach (var comic in comics)
             {
-                Comics.BeginBulkOperation();
+                var comicViewModel = new ComicViewModel(comic);
 
-                var comics = await _client.GetComics(Enumerable.Empty<string>());
-                foreach (var comic in comics)
-                {
-                    var comicViewModel = new ComicViewModel(comic);
+                var books = await _client.GetBooks(comic.ComicId);
+                var bookViewModels = books.Select(book => new BookViewModel(book, comicViewModel));
+                comicViewModel.Books.AddRange(bookViewModels);
 
-                    var books = await _client.GetBooks(comic.ComicId);
-                    comicViewModel.Books.AddRange(books.Select(book => new BookViewModel(book)));
-
-                    Comics.Add(comicViewModel);
-                }
+                comicViewModels.Add(comicViewModel);
             }
-            finally
-            {
-                Comics.EndBulkOperation();
-            }
+
+            Comics.AddRange(comicViewModels);
         }
 
         private async Task AddComic()
@@ -117,18 +119,34 @@ namespace OneComic.Admin.Library
             Comics.Add(new ComicViewModel(comic));
         }
 
-        private async Task DeleteComic()
+        private async Task DeleteSelectedItem()
         {
-            var dialogResult = await _dialogCoordinator.ShowMessageAsync(
-                context: this, 
-                title: "Delete a comic", 
-                message: $"Delete comic '{SelectedComic.Comic.Title}'?", 
-                style: MessageDialogStyle.AffirmativeAndNegative);
-            if (dialogResult != MessageDialogResult.Affirmative)
-                return;
+            if (SelectedComic != null)
+            {
+                var dialogResult = await _dialogCoordinator.ShowMessageAsync(
+                    context: this,
+                    title: "Delete a comic",
+                    message: $"Delete comic '{SelectedComic.Comic.Title}'?",
+                    style: MessageDialogStyle.AffirmativeAndNegative);
+                if (dialogResult != MessageDialogResult.Affirmative)
+                    return;
 
-            await _client.DeleteComic(SelectedComic.Comic.ComicId);
-            Comics.Remove(SelectedComic);
+                await _client.DeleteComic(SelectedComic.Comic.ComicId);
+                Comics.Remove(SelectedComic);
+            }
+            else if (SelectedBook != null)
+            {
+                var dialogResult = await _dialogCoordinator.ShowMessageAsync(
+                    context: this,
+                    title: "Delete a book",
+                    message: $"Delete book '{SelectedBook.Book.Title}'?",
+                    style: MessageDialogStyle.AffirmativeAndNegative);
+                if (dialogResult != MessageDialogResult.Affirmative)
+                    return;
+
+                await _client.DeleteBook(SelectedBook.Book.BookId);
+                SelectedBook.ParentComicViewModel.Books.Remove(SelectedBook);
+            }
         }
 
         private async Task AddBook()
@@ -137,9 +155,13 @@ namespace OneComic.Admin.Library
             if (bookTitle.IsNullOrEmpty())
                 return;
 
-            var book = new Book { Title = bookTitle };
+            var book = new Book
+            {
+                ComicId = SelectedComic.Comic.ComicId,
+                Title = bookTitle
+            };
             book = await _client.AddBook(book);
-            SelectedComic.Books.Add(new BookViewModel(book));
+            SelectedComic.Books.Add(new BookViewModel(book, SelectedComic));
         }
 
         private IEnumerable<ComicViewModel> LoadDesignModeData()
@@ -163,7 +185,7 @@ namespace OneComic.Admin.Library
                         CoverImageUri = new Uri("http://misc.ridibooks.com/cover/1019000311/xxlarge"),
                         Title = $"은혼 {i} - {j + 1}권"
                     };
-                    var bookViewModel = new BookViewModel(book);
+                    var bookViewModel = new BookViewModel(book, comicViewModel);
                     comicViewModel.Books.Add(bookViewModel);
                 }
                 yield return comicViewModel;

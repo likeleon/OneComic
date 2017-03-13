@@ -32,7 +32,7 @@
                 <Setter Property="Width"
                         Value="48" />
             </Style>
-            <Style x:Key="CircleDropDownButton"
+            <Style x:Key="CircleDropDownButtonStyle"
                    TargetType="{x:Type metroctrls:DropDownButton}"
                    BasedOn="{StaticResource {x:Type metroctrls:DropDownButton}}">
                 <Setter Property="ArrowVisibility"
@@ -64,7 +64,7 @@
                   Margin="3"
                   Visibility="{Binding GetComicsCommand.Execution.IsSuccessfullyCompleted, Converter={StaticResource BoolToVisibilityConverter}}">
             <i:Interaction.Behaviors>
-                <behaviors:TreeViewSelectedItemBindingBehavior SelectedItem="{Binding SelectedComic}" />
+                <behaviors:TreeViewSelectedItemBindingBehavior SelectedItem="{Binding SelectedItem}" />
             </i:Interaction.Behaviors>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Books}">
@@ -103,7 +103,7 @@
                        Width="20"
                        Height="20" />
             </Button>
-            <metroctrls:DropDownButton Style="{StaticResource CircleDropDownButton}"
+            <metroctrls:DropDownButton Style="{StaticResource CircleDropDownButtonStyle}"
                                        Margin="3">
                 <metroctrls:DropDownButton.Icon>
                     <Image Source="/OneComic.Admin;component/Resources/Plus-20.png"
@@ -118,8 +118,8 @@
                 </metroctrls:DropDownButton.Items>
             </metroctrls:DropDownButton>
             <Button Style="{StaticResource CircleButtonStyle}"
-                    Command="{Binding DeleteComicCommand}"
-                    ToolTip="Delete selected comic"
+                    Command="{Binding DeleteSelectedItemCommand}"
+                    ToolTip="Delete selected comic or book"
                     Margin="3">
                 <Image Source="/OneComic.Admin;component/Resources/Delete-20.png"
                        Width="20"

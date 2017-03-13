@@ -49,6 +49,12 @@ namespace OneComic.API.Client
             return await DeserializeResponse<Comic>(response);
         }
 
+        public async Task DeleteComic(int comicId)
+        {
+            var response = await _client.DeleteAsync($"comics/{comicId}");
+            response.EnsureSuccessStatusCode();
+        }
+
         public async Task<Book[]> GetBooks(int comicId, IEnumerable<string> fields = null)
         {
             var query = new Dictionary<string, string>().WithFields(fields);
@@ -64,9 +70,9 @@ namespace OneComic.API.Client
             return await DeserializeResponse<Book>(response);
         }
 
-        public async Task DeleteComic(int comicId)
+        public async Task DeleteBook(int bookId)
         {
-            var response = await _client.DeleteAsync($"comics/{comicId}");
+            var response = await _client.DeleteAsync($"books/{bookId}");
             response.EnsureSuccessStatusCode();
         }
 

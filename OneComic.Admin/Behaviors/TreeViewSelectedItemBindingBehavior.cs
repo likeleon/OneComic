@@ -116,7 +116,9 @@ namespace OneComic.Admin.Behaviors
 
                 if (subContainer == null)
                     continue;
-                
+
+                bool subContainerWasExpanded = subContainer.IsExpanded;
+
                 // Search the next level for the object.
                 TreeViewItem resultContainer = GetTreeViewItem(subContainer, item);
                 if (resultContainer != null)
@@ -124,7 +126,8 @@ namespace OneComic.Admin.Behaviors
 
                 // The object is not under this TreeViewItem
                 // so collapse it.
-                subContainer.IsExpanded = false;
+                if (!subContainerWasExpanded)
+                    subContainer.IsExpanded = false;
             }
 
             return null;
