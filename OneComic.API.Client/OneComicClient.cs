@@ -36,32 +36,37 @@ namespace OneComic.API.Client
 
         public async Task<Comic[]> GetComics(IEnumerable<string> fields = null)
         {
-            var dictionary = new Dictionary<string, string>();
-            if (fields?.Any() == true)
-                dictionary.Add("fields", fields.JoinWith(","));
-
-            var query = MakeUri("comics", dictionary);
-            var response = await _client.GetAsync(query);
-            response.EnsureSuccessStatusCode();
-
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Comic[]>(content);
+            var query = new Dictionary<string, string>().WithFields(fields);
+            var requestUri = MakeUri("comics", query);
+            var response = await _client.GetAsync(requestUri);
+            return await DeserializeResponse<Comic[]>(response);
         }
 
         public async Task<Comic> AddComic(Comic comic)
         {
-            var jsonContent = JsonConvert.SerializeObject(comic);
-            var content = new StringContent(jsonContent, Encoding.Unicode, "application/json");
+            var content = SerializeToJsonContent(comic);
             var response = await _client.PostAsync("comics", content);
-            response.EnsureSuccessStatusCode();
+            return await DeserializeResponse<Comic>(response);
+        }
 
-            var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Comic>(responseContent);
+        public async Task<Book[]> GetBooks(int comicId, IEnumerable<string> fields = null)
+        {
+            var query = new Dictionary<string, string>().WithFields(fields);
+            var requestUri = MakeUri($"comics/{comicId}/books", query);
+            var response = await _client.GetAsync(requestUri);
+            return await DeserializeResponse<Book[]>(response);
+        }
+
+        public async Task<Book> AddBook(Book book)
+        {
+            var content = SerializeToJsonContent(book);
+            var response = await _client.PostAsync("books", content);
+            return await DeserializeResponse<Book>(response);
         }
 
         public async Task DeleteComic(int comicId)
         {
-            var response = await _client.DeleteAsync("comics/" + comicId);
+            var response = await _client.DeleteAsync($"comics/{comicId}");
             response.EnsureSuccessStatusCode();
         }
 
@@ -72,6 +77,20 @@ namespace OneComic.API.Client
 
             var queryString = query.Select(kvp => $"{kvp.Key}={kvp.Value}").JoinWith("&");
             return $"{path}?{queryString}";
+        }
+
+        private static StringContent SerializeToJsonContent(object obj)
+        {
+            var jsonContent = JsonConvert.SerializeObject(obj);
+            return new StringContent(jsonContent, Encoding.Unicode, "application/json");
+        }
+
+        private static async Task<T> DeserializeResponse<T>(HttpResponseMessage response)
+        {
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(responseContent);
         }
     }
 }

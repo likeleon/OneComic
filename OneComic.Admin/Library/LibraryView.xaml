@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:mtroctrls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:metroctrls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:metrodialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
              xmlns:behaviors="clr-namespace:OneComic.Admin.Behaviors"
              xmlns:converters="clr-namespace:OneComic.Admin.Converters"
@@ -27,6 +27,22 @@
             <Style x:Key="CircleButtonStyle"
                    TargetType="{x:Type Button}"
                    BasedOn="{StaticResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
+                <Setter Property="Height"
+                        Value="48" />
+                <Setter Property="Width"
+                        Value="48" />
+            </Style>
+            <Style x:Key="CircleDropDownButton"
+                   TargetType="{x:Type metroctrls:DropDownButton}"
+                   BasedOn="{StaticResource {x:Type metroctrls:DropDownButton}}">
+                <Setter Property="ArrowVisibility"
+                        Value="Collapsed" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="ButtonStyle"
+                        Value="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" />
+                <Setter Property="FocusVisualStyle"
+                        Value="{DynamicResource MahApps.Metro.Styles.MetroCircleFocusVisual}" />
                 <Setter Property="Height"
                         Value="48" />
                 <Setter Property="Width"
@@ -68,7 +84,7 @@
                 </Style>
             </TreeView.ItemContainerStyle>
         </TreeView>
-        <mtroctrls:ProgressRing Width="40"
+        <metroctrls:ProgressRing Width="40"
                                Height="40"
                                Visibility="{Binding GetComicsCommand.IsExecuting, Converter={StaticResource BoolToVisibilityConverter}}" />
         <TextBlock Text="{Binding GetComicsCommand.Execution.ErrorMessage}"
@@ -87,14 +103,20 @@
                        Width="20"
                        Height="20" />
             </Button>
-            <Button Style="{StaticResource CircleButtonStyle}"
-                    Command="{Binding AddComicCommand}"
-                    ToolTip="Add a new comic"
-                    Margin="3">
-                <Image Source="/OneComic.Admin;component/Resources/Plus-20.png"
-                       Width="20"
-                       Height="20" />
-            </Button>
+            <metroctrls:DropDownButton Style="{StaticResource CircleDropDownButton}"
+                                       Margin="3">
+                <metroctrls:DropDownButton.Icon>
+                    <Image Source="/OneComic.Admin;component/Resources/Plus-20.png"
+                           Width="20"
+                           Height="20" />
+                </metroctrls:DropDownButton.Icon>
+                <metroctrls:DropDownButton.Items>
+                    <MenuItem Header="Add comic"
+                              Command="{Binding AddComicCommand}" />
+                    <MenuItem Header="Add book"
+                              Command="{Binding AddBookCommand}" />
+                </metroctrls:DropDownButton.Items>
+            </metroctrls:DropDownButton>
             <Button Style="{StaticResource CircleButtonStyle}"
                     Command="{Binding DeleteComicCommand}"
                     ToolTip="Delete selected comic"

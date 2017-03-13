@@ -47,6 +47,7 @@ namespace OneComic.Admin.Library
         public IAsyncCommand GetComicsCommand { get; }
         public IAsyncCommand AddComicCommand { get; }
         public IAsyncCommand DeleteComicCommand { get; }
+        public IAsyncCommand AddBookCommand { get; }
 
         public LibraryViewModel()
         {
@@ -68,7 +69,8 @@ namespace OneComic.Admin.Library
 
             GetComicsCommand = commandFactory.CreateAsync(GetComics);
             AddComicCommand = commandFactory.CreateAsync(AddComic);
-            DeleteComicCommand = commandFactory.CreateAsync(DeleteComic, CanDeleteComic);
+            DeleteComicCommand = commandFactory.CreateAsync(DeleteComic, () => SelectedComic != null);
+            AddBookCommand = commandFactory.CreateAsync(AddBook, () => SelectedComic != null);
         }
 
         protected override async void OnViewReady(object view)
@@ -83,9 +85,25 @@ namespace OneComic.Admin.Library
         {
             Comics.Clear();
 
-            var comics = await _client.GetComics(Enumerable.Empty<string>());
-            var comicViewModels = comics.Select(comic => new ComicViewModel(comic));
-            Comics.AddRange(comicViewModels);
+            try
+            {
+                Comics.BeginBulkOperation();
+
+                var comics = await _client.GetComics(Enumerable.Empty<string>());
+                foreach (var comic in comics)
+                {
+                    var comicViewModel = new ComicViewModel(comic);
+
+                    var books = await _client.GetBooks(comic.ComicId);
+                    comicViewModel.Books.AddRange(books.Select(book => new BookViewModel(book)));
+
+                    Comics.Add(comicViewModel);
+                }
+            }
+            finally
+            {
+                Comics.EndBulkOperation();
+            }
         }
 
         private async Task AddComic()
@@ -113,7 +131,16 @@ namespace OneComic.Admin.Library
             Comics.Remove(SelectedComic);
         }
 
-        private bool CanDeleteComic() => SelectedComic != null;
+        private async Task AddBook()
+        {
+            var bookTitle = await _dialogCoordinator.ShowInputAsync(this, "Add a new book", "Book Title");
+            if (bookTitle.IsNullOrEmpty())
+                return;
+
+            var book = new Book { Title = bookTitle };
+            book = await _client.AddBook(book);
+            SelectedComic.Books.Add(new BookViewModel(book));
+        }
 
         private IEnumerable<ComicViewModel> LoadDesignModeData()
         {

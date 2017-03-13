@@ -1,6 +1,6 @@
-﻿using OneComic.Core;
+﻿using Microsoft.VisualStudio.Language.Intellisense;
+using OneComic.Core;
 using OneComic.Data.DTO;
-using System.Collections.ObjectModel;
 
 namespace OneComic.Admin.Library
 {
@@ -8,7 +8,7 @@ namespace OneComic.Admin.Library
     {
         public Comic Comic { get; }
 
-        public ObservableCollection<BookViewModel> Books { get; } = new ObservableCollection<BookViewModel>();
+        public BulkObservableCollection<BookViewModel> Books { get; } = new BulkObservableCollection<BookViewModel>();
 
         public ComicViewModel(Comic comic)
         {
