@@ -85,8 +85,8 @@
             </TreeView.ItemContainerStyle>
         </TreeView>
         <metroctrls:ProgressRing Width="40"
-                               Height="40"
-                               Visibility="{Binding GetComicsCommand.IsExecuting, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                 Height="40"
+                                 Visibility="{Binding GetComicsCommand.IsExecuting, Converter={StaticResource BoolToVisibilityConverter}}" />
         <TextBlock Text="{Binding GetComicsCommand.Execution.ErrorMessage}"
                    Foreground="Red"
                    VerticalAlignment="Center"
@@ -133,8 +133,43 @@
                       ShowsPreview="True"
                       Width="5"
                       Background="{DynamicResource AccentColorBrush3}" />
-        <ContentControl DataContext="{Binding SelectedItem}"
+        <ContentControl Content="{Binding SelectedItem}"
                         Grid.Column="1"
-                        Margin="3" />
+                        Margin="3">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type local:ComicViewModel}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Title" 
+                               Margin="3"/>
+                        <TextBox Grid.Column="1"
+                                 Text="{Binding Comic.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
+                                 Margin="3"
+                                 VerticalAlignment="Center"/>
+                        <Label Content="Cover Image"
+                               Grid.Row="1"
+                               Margin="3"/>
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1">
+                            <TextBox metroctrls:TextBoxHelper.SelectAllOnFocus="True"
+                                     Text="{Binding Comic.CoverImageUri, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
+                                     Margin="3"/>
+                            <Image Source="{Binding Comic.CoverImageUri}"
+                                   Width="180"
+                                   Margin="3" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
 </UserControl>
