@@ -1,8 +1,22 @@
-﻿namespace OneComic.Data.DTO
+﻿using OneComic.Core;
+
+namespace OneComic.Data.DTO
 {
-    public sealed class Account
+    public sealed class Account : ObjectBase
     {
-        public int AccountId { get; set; }
-        public string LoginEmail { get; set; }
+        private int _accountId;
+        private string _loginEmail;
+
+        public int AccountId
+        {
+            get { return _accountId; }
+            set { Set(ref _accountId, value); }
+        }
+
+        public string LoginEmail
+        {
+            get { return _loginEmail; }
+            set { Set(ref _loginEmail, value); }
+        }
     }
 }
