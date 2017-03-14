@@ -54,6 +54,7 @@ namespace OneComic.Admin.Library
         public IAsyncCommand AddComicCommand { get; }
         public IAsyncCommand DeleteSelectedItemCommand { get; }
         public IAsyncCommand AddBookCommand { get; }
+        public IAsyncCommand SaveSelectedItemCommand { get; }
 
         public LibraryViewModel()
         {
@@ -77,6 +78,7 @@ namespace OneComic.Admin.Library
             AddComicCommand = commandFactory.CreateAsync(AddComic);
             DeleteSelectedItemCommand = commandFactory.CreateAsync(DeleteSelectedItem, () => SelectedItem != null);
             AddBookCommand = commandFactory.CreateAsync(AddBook, () => SelectedComic != null);
+            SaveSelectedItemCommand = commandFactory.CreateAsync(SaveSelectedItem, CanSaveSelectedItem);
         }
 
         protected override async void OnViewReady(object view)
@@ -162,6 +164,18 @@ namespace OneComic.Admin.Library
             };
             book = await _client.AddBook(book);
             SelectedComic.Books.Add(new BookViewModel(book, SelectedComic));
+        }
+
+        private async Task SaveSelectedItem()
+        {
+            if (SelectedComic != null)
+                await _client.SaveComic(SelectedComic.Comic);
+        }
+
+        private bool CanSaveSelectedItem()
+        {
+            return SelectedComic?.Comic?.IsDirty == true ||
+                SelectedBook?.Book?.IsDirty == true;
         }
 
         private IEnumerable<ComicViewModel> LoadDesignModeData()

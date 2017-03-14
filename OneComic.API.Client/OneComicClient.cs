@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Marvin.JsonPatch;
+using Newtonsoft.Json;
 using OneComic.Core;
 using OneComic.Data.DTO;
 using System;
@@ -65,6 +66,17 @@ namespace OneComic.API.Client
         {
             var response = await _client.DeleteAsync($"books/{bookId}");
             response.EnsureSuccessStatusCode();
+        }
+
+        public async Task<Comic> SaveComic(Comic comic)
+        {
+            var patchDoc = new JsonPatchDocument<Comic>();
+            patchDoc.Replace(c => c.CoverImageUri, comic.CoverImageUri);
+            patchDoc.Replace(c => c.Title, comic.Title);
+
+            var content = SerializeToJsonContent(patchDoc);
+            var response = await _client.PatchAsync($"comics/{comic.ComicId}", content);
+            return await DeserializeResponse<Comic>(response);
         }
 
         private static string MakeUri(string path, IReadOnlyDictionary<string, string> query)

@@ -171,5 +171,18 @@
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FlowDirection="RightToLeft">
+            <Button Style="{StaticResource CircleButtonStyle}"
+                    Command="{Binding SaveSelectedItemCommand}"
+                    ToolTip="Save selected comic or book"
+                    Margin="3">
+                <Image Source="/OneComic.Admin;component/Resources/Save-20.png"
+                       Width="20"
+                       Height="20" />
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>
