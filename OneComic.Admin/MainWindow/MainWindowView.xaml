@@ -8,8 +8,8 @@
                    GlowBrush="{DynamicResource AccentColorBrush}"
                    Title="{Binding Title}"
                    WindowStartupLocation="CenterScreen"
-                   Width="1024"
-                   Height="768">
+                   Width="800"
+                   Height="600">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
