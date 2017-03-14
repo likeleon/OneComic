@@ -44,6 +44,12 @@
     <Compile Include="Comic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OneComic.Core\OneComic.Core.csproj">
+      <Project>{732BCBDD-C2FA-4932-83D6-AAD45548E54B}</Project>
+      <Name>OneComic.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,6 +1,8 @@
-{
+﻿{
   "supports": {},
-  "dependencies": {},
+  "dependencies": {
+    "FluentValidation": "6.2.1"
+  },
   "frameworks": {
     ".NETPortable,Version=v4.6,Profile=Profile44": {}
   }
