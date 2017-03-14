@@ -1,5 +1,4 @@
-﻿using Marvin.HttpCache;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OneComic.Core;
 using OneComic.Data.DTO;
 using System;
@@ -18,20 +17,12 @@ namespace OneComic.API.Client
 
         public OneComicClient(string serverBaseAddress)
         {
-            _client = new HttpClient(CreateHttpCacheHandler());
+            _client = new HttpClient();
             _client.BaseAddress = new Uri(serverBaseAddress);
 
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-        }
-
-        private static HttpMessageHandler CreateHttpCacheHandler()
-        {
-            return new HttpCacheHandler
-            {
-                InnerHandler = new HttpClientHandler()
-            };
         }
 
         public async Task<Comic[]> GetComics(IEnumerable<string> fields = null)
