@@ -79,6 +79,20 @@ namespace OneComic.API.Client
             return await DeserializeResponse<Comic>(response);
         }
 
+        public async Task<Book> SaveBook(Book book)
+        {
+            var patchDoc = new JsonPatchDocument<Book>();
+            patchDoc.Replace(b => b.CoverImageUri, book.CoverImageUri);
+            patchDoc.Replace(b => b.Title, book.Title);
+            patchDoc.Replace(b => b.Description, book.Description);
+            patchDoc.Replace(b => b.Author, book.Author);
+            patchDoc.Replace(b => b.Translator, book.Translator);
+
+            var content = SerializeToJsonContent(patchDoc);
+            var response = await _client.PatchAsync($"books/{book.BookId}", content);
+            return await DeserializeResponse<Book>(response);
+        }
+
         private static string MakeUri(string path, IReadOnlyDictionary<string, string> query)
         {
             if (!query.Any())

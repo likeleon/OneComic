@@ -164,9 +164,68 @@
                                      Text="{Binding Comic.CoverImageUri, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
                                      Margin="3"/>
                             <Image Source="{Binding Comic.CoverImageUri}"
+                                   HorizontalAlignment="Left"
                                    Width="180"
                                    Margin="3" />
                         </StackPanel>
+                    </Grid>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:BookViewModel}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Title"
+                               Margin="3" />
+                        <TextBox Grid.Column="1"
+                                 Text="{Binding Book.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                                 Margin="3"
+                                 VerticalAlignment="Center" />
+                        <Label Grid.Row="1"
+                               Content="Cover Image"
+                               Margin="3" />
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1">
+                            <TextBox metroctrls:TextBoxHelper.SelectAllOnFocus="True"
+                                     Text="{Binding Book.CoverImageUri, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                                     Margin="3" />
+                            <Image Source="{Binding Book.CoverImageUri}"
+                                   HorizontalAlignment="Left"
+                                   Width="180"
+                                   Margin="3" />
+                        </StackPanel>
+                        <Label Grid.Row="2"
+                               Content="Description"
+                               Margin="3"/>
+                        <TextBox Grid.Row="2"
+                                 Grid.Column="1"
+                                 Text="{Binding Book.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                                 Margin="3"
+                                 VerticalAlignment="Center" />
+                        <Label Grid.Row="3"
+                               Content="Author"
+                               Margin="3" />
+                        <TextBox Grid.Row="3"
+                                 Grid.Column="1"
+                                 Text="{Binding Book.Author, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                                 Margin="3"
+                                 VerticalAlignment="Center" />
+                        <Label Grid.Row="4"
+                               Content="Translator"
+                               Margin="3"/>
+                        <TextBox Grid.Row="4 "
+                                 Grid.Column="1"
+                                 Text="{Binding Book.Translator, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                                 Margin="3"
+                                 VerticalAlignment="Center" />
                     </Grid>
                 </DataTemplate>
             </ContentControl.Resources>

@@ -170,6 +170,8 @@ namespace OneComic.Admin.Library
         {
             if (SelectedComic != null)
                 await _client.SaveComic(SelectedComic.Comic);
+            else if (SelectedBook != null)
+                await _client.SaveBook(SelectedBook.Book);
         }
 
         private bool CanSaveSelectedItem()
