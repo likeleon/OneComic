@@ -232,7 +232,10 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Pages"
-                                 metroctrls:ControlsHelper.HeaderFontSize="18" />
+                                 metroctrls:ControlsHelper.HeaderFontSize="18">
+                            <DataGrid ItemsSource="{Binding Book.PageUris}"
+                                      SelectedItem="{Binding SelectedBookPageUri}" />
+                        </TabItem>
                     </TabControl>
                 </DataTemplate>
             </ContentControl.Resources>

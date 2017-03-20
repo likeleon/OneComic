@@ -13,7 +13,7 @@ namespace OneComic.Data.DTO
         private string _description;
         private string _author;
         private string _translator;
-        private int _pageCount;
+        private string _pageUris;
 
         public int BookId
         {
@@ -57,10 +57,10 @@ namespace OneComic.Data.DTO
             set { Set(ref _translator, value); }
         }
 
-        public int PageCount
+        public string PageUris
         {
-            get { return _pageCount; }
-            set { Set(ref _pageCount, value); }
+            get { return _pageUris; }
+            set { Set(ref _pageUris, value); }
         }
 
         private sealed class BookValidator : AbstractValidator<Book>

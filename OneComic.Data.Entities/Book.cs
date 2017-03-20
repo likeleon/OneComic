@@ -22,7 +22,7 @@ namespace OneComic.Data.Entities
 
         public string Translator { get; set; }
 
-        public int PageCount { get; set; }
+        public string PageUris { get; set; }
 
         public int EntityId => BookId;
     }

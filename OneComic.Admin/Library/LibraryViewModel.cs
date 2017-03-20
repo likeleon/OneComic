@@ -24,6 +24,9 @@ namespace OneComic.Admin.Library
         private readonly IMessageBoxService _messageBoxService;
         private readonly OneComicClient _client = new OneComicClient("https://localhost:44304/api/");
 
+        private Uri _selectedBookUri;
+        private object _selectedItem;
+
         public override string DisplayName
         {
             get { return "LIBARARY"; }
@@ -34,8 +37,6 @@ namespace OneComic.Admin.Library
 
         public ComicViewModel SelectedComic => SelectedItem as ComicViewModel;
         public BookViewModel SelectedBook => SelectedItem as BookViewModel;
-
-        private object _selectedItem;
 
         public object SelectedItem
         {
@@ -48,6 +49,12 @@ namespace OneComic.Admin.Library
                     NotifyOfPropertyChange(nameof(SelectedBook));
                 }
             }
+        }
+
+        public Uri SelectedBookUri
+        {
+            get { return _selectedBookUri; }
+            set { Set(ref _selectedBookUri, value); }
         }
 
         public IAsyncCommand GetComicsCommand { get; }

@@ -18,7 +18,7 @@ namespace OneComic.Data
                 Description = book.Description,
                 Author = book.Author,
                 Translator = book.Translator,
-                PageCount = book.PageCount
+                PageUris = book.PageUris
             };
             if (book.CoverImageUri != null)
                 dto.CoverImageUri = new Uri(book.CoverImageUri);
@@ -36,7 +36,7 @@ namespace OneComic.Data
                 Description = book.Description,
                 Author = book.Author,
                 Translator = book.Translator,
-                PageCount = book.PageCount
+                PageUris = book.PageUris
             };
         }
     }
